@@ -24,7 +24,7 @@ namespace Content.Server.Spawners.Components
         [DataField("intervalSeconds")]
         public int IntervalSeconds { get; set; } = 60;
 
-        private EntityUid _recentlySpawned;
+        //private EntityUid _recentlySpawned;
 
         /*
         [ViewVariables(VVAccess.ReadWrite)]
@@ -77,7 +77,7 @@ namespace Content.Server.Spawners.Components
             for (int i = 0; i < number; i++)
             {
                 var entity = _robustRandom.Pick(Prototypes);
-                _recentlySpawned = IoCManager.Resolve<IEntityManager>().SpawnEntity(entity, IoCManager.Resolve<IEntityManager>().GetComponent<TransformComponent>(Owner).Coordinates);
+                IoCManager.Resolve<IEntityManager>().SpawnEntity(entity, IoCManager.Resolve<IEntityManager>().GetComponent<TransformComponent>(Owner).Coordinates);
                 _entMan.DeleteEntity(Owner);
             }
         }

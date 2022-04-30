@@ -41,6 +41,22 @@
       layer:
       - Opaque
       - Impassable
+  - type: Gatherable
+    whitelist:
+      tags:
+        - Hatchet
+    loot:
+      - id: SteelOre1
+  - type: Damageable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
 
 - type: entity
   parent: BaseTree

@@ -70,6 +70,7 @@
   - type: Tag
     tags:
     - BotanyHatchet
+    - Hatchet
   - type: Sharp
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/hatchet.rsi
@@ -83,6 +84,10 @@
         Piercing: 5
   - type: Item
     sprite: Objects/Tools/Hydroponics/hatchet.rsi
+  - type: GatheringTool
+    damage:
+      types:
+        Piercing: 25
 
 - type: entity
   name: spade

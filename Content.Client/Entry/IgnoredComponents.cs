@@ -7,7 +7,7 @@ namespace Content.Client.Entry
         {
             "AirlockPainter",
             "AmmoBox",
-            "Pickaxe",
+            "GatheringTool",
             "IngestionBlocker",
             "Charger",
             "CloningPod",
@@ -48,7 +48,7 @@ namespace Content.Client.Entry
             "DiseaseZombie",
             "DiseaseBuildup",
             "ZombieTransfer",
-            "Mineable",
+            "Gatherable",
             "RangedMagazine",
             "Ammo",
             "AiController",

@@ -178,6 +178,9 @@
   id: Handcuffs
 
 - type: Tag
+  id: Hatchet
+
+- type: Tag
   id: HideContextMenu
 
 - type: Tag
@@ -242,6 +245,9 @@
 
 - type: Tag
   id: Plastic
+  
+- type: Tag
+  id: Pickaxe
 
 - type: Tag
   id: Pill
