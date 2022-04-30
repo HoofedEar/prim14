@@ -1,6 +1,7 @@
 <p align="center"> <img alt="Space Station 14" width="880" height="300" src="https://raw.githubusercontent.com/space-wizards/asset-dump/de329a7898bb716b9d5ba9a0cd07f38e61f1ed05/github-logo.svg" /></p>
 
-PrimitiveStation is a fork of Space Station 14, primarily focusing on a more primitive setting, while still technically taking place on a station in outer space.
+PrimitiveStation is a fork of Space Station 14.
+An entirely self contained station that houses a primitive society. No electricity, computers or machines. They must survive off of the flora, hunt wild animals, make tools, and survive. Will they work together, or splinter into gangs fighting for territory? Nanotrasen has provided this experiment with a near infinite budget, thus ensuring the station will forever have it’s own working atmosphere and gravity. The Syndicate has no knowledge of the location of this station. But, watch out for Blood Cultists.
 
 ## Links
 
