@@ -27,7 +27,8 @@ public sealed class GatherableSystem : EntitySystem
 
     private void OnInteractUsing(EntityUid uid, GatherableComponent component, InteractUsingEvent args)
     {
-        if (!TryComp<GatheringToolComponent>(args.Used, out var tool))
+        if (!TryComp<GatheringToolComponent>(args.Used, out var tool) ||
+            component.ToolWhitelist?.IsValid(args.Used) == false)
             return;
 
         if (tool.GatheringEntities.TryGetValue(uid, out var cancelToken))
