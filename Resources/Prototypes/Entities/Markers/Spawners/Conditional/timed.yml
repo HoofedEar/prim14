@@ -34,3 +34,23 @@
       intervalSeconds: 30
       minimumEntitiesSpawned: 2
       maximumEntitiesSpawned: 4
+
+- type: entity
+  name: Tree Renewable Spawner
+  id: TreeRenewableSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: blue
+        - texture: Objects/Decoration/Flora/flora_trees.rsi/tree01.png
+    - type: RenewableSpawner
+      prototypes:
+        - FloraTree01
+        - FloraTree02
+        - FloraTree03
+        - FloraTree04
+        - FloraTree05
+        - FloraTree06
+      chance: 1.0
+      intervalSeconds: 10
