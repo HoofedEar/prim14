@@ -106,6 +106,21 @@
     Botanist: [ 1, 1 ]
 
 - type: gameMap
+  id: autumn
+  mapName: 'Autumn'
+  mapNameTemplate: '{0} Autumn {1}'
+  nameGenerator:
+    !type:NanotrasenNameGenerator
+    prefixCreator: '14'
+  mapPath: /Maps/autumn.yml
+  votable: false
+  minPlayers: 0
+  maxPlayers: 8
+  overflowJobs: []
+  availableJobs:
+    Assistant: [ 1, 1 ]
+
+- type: gameMap
   id: NSSPillar
   mapName: 'NSS Pillar v5.3'
   mapNameTemplate: '{0} NSSPillar {1}'
