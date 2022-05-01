@@ -12,6 +12,19 @@
   heatCapacity: 10000
 
 - type: tile
+  id: ground
+  name: ground
+  texture: ironsand1
+  base_turfs:
+    - lattice
+  is_subfloor: true
+  footstep_sounds:
+    collection: footstep_asteroid
+  friction: 0.5
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
   id: lattice
   name: lattice
   texture: lattice

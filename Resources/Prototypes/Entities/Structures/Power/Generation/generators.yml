@@ -163,6 +163,14 @@
   components:
   - type: PowerSupplier
     supplyRate: 3000
+    
+- type: entity
+  parent: BaseGenerator
+  id: GeneratorBasic10
+  suffix: Basic, 50kW
+  components:
+    - type: PowerSupplier
+      supplyRate: 50000
 
 - type: entity
   parent: BaseGenerator
