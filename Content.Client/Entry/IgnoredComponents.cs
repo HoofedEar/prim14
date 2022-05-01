@@ -339,7 +339,8 @@ namespace Content.Client.Entry
             "DoorRemote",
             "InteractionPopup",
             "HealthAnalyzer",
-            "RenewableSpawner"
+            "RenewableSpawner",
+            "Digging"
         };
     }
 }

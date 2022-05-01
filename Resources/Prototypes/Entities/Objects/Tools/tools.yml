@@ -280,6 +280,10 @@
         Blunt: 10
   - type: Item
     sprite: Objects/Tools/shovel.rsi
+  - type: Tool
+    qualities:
+      - Digging
+  - type: Digging
 
 - type: entity
   name: omnitool
