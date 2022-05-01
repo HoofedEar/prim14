@@ -4,14 +4,20 @@ using Content.Server.Tools.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Tools.Components;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Robust.Shared.Map;
+using YamlDotNet.Core;
 
 namespace Content.Server.Tools;
 
 public sealed partial class ToolSystem
 {
     //[Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
-
+    
+    private EntityUid _whichIs;
+    private bool _isThere;
+    private bool _isSeedy;
+    
     private void InitializeDigging()
     {
         SubscribeLocalEvent<DiggingComponent, AfterInteractEvent>(OnDiggingAfterInteract);
@@ -28,30 +34,20 @@ public sealed partial class ToolSystem
         
         var tile = mapGrid.GetTileRef(args.Coordinates);
         var coordinates = mapGrid.GridTileToLocal(tile.GridIndices);
-        var gridId = EntityManager.GetComponent<TransformComponent>(component.Owner).GridID;
         
-        // Check if place_free (unobstructed?)
-        
-        var lookup = Get<EntityLookupSystem>();
+        // Check that some soil already exists
 
-        var isThere = false;
-        EntityUid whichIs = default;
-
-        foreach (var entity in lookup.GetEntitiesIntersecting(gridId, tile.GridIndices))
-        {
-            if (EntityManager.HasComponent<PlantHolderComponent>(entity))
-            {
-                isThere = true;
-                whichIs = entity;
-                break;
-            }
-        }
-        
-        if (!isThere)
+        if (!_isThere)
             EntityManager.SpawnEntity("hydroponicsSoil", coordinates);
-        else
+        else if (_isThere && !_isSeedy)
         {
-            EntityManager.DeleteEntity(whichIs);
+            EntityManager.DeleteEntity(_whichIs);
+            _isThere = false;
+            _whichIs = default;
+        }
+        else if (_isThere && _isSeedy)
+        {
+            _isSeedy = false;
         }
     }
 
@@ -91,6 +87,27 @@ public sealed partial class ToolSystem
 
         var token = new CancellationTokenSource();
         component.CancelToken = token;
+        
+        var gridId = EntityManager.GetComponent<TransformComponent>(component.Owner).GridID;
+        var lookup = Get<EntityLookupSystem>();
+
+        foreach (var entity in lookup.GetEntitiesIntersecting(gridId, tile.GridIndices))
+        {
+            if (!EntityManager.HasComponent<PlantHolderComponent>(entity)) 
+                continue;
+            
+            if (TryComp<PlantHolderComponent>(entity, out var holder) && holder.Seed != null)
+            {
+                _isSeedy = true;
+                _isThere = true;
+                return false;
+            }
+            
+            _isSeedy = false;
+            _isThere = true;
+            _whichIs = entity;
+            break;
+        }
 
         UseTool(
             component.Owner,
@@ -107,7 +124,6 @@ public sealed partial class ToolSystem
             doAfterEventTarget: component.Owner,
             cancelToken: token.Token);
 
-        
         return true;
     }
 
