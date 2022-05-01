@@ -297,7 +297,6 @@
       proper: true
   - type: StandingState
   - type: NoSlip
-  - type: MovementIgnoreGravity
 
 
 - type: entity
