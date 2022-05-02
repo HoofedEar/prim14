@@ -340,7 +340,7 @@ namespace Content.Client.Entry
             "InteractionPopup",
             "HealthAnalyzer",
             "RenewableSpawner",
-            "Digging"
+            "Raking"
         };
     }
 }

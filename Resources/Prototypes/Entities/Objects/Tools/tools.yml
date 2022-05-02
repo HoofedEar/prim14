@@ -297,10 +297,10 @@
         Blunt: 10
   - type: Item
     sprite: Objects/Tools/rake.rsi
-  - type: Digging
+  - type: Raking
   - type: Tool
     qualities:
-      - Digging #don't ask
+      - Raking #don't ask
 
 - type: entity
   name: omnitool

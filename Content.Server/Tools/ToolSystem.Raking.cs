@@ -18,13 +18,13 @@ public sealed partial class ToolSystem
     private bool _isThere;
     private bool _isSeedy;
     
-    private void InitializeDigging()
+    private void InitializeRaking()
     {
-        SubscribeLocalEvent<DiggingComponent, AfterInteractEvent>(OnDiggingAfterInteract);
-        SubscribeLocalEvent<DiggingComponent, DiggingCompleteEvent>(OnDiggingComplete);
+        SubscribeLocalEvent<RakingComponent, AfterInteractEvent>(OnRakingAfterInteract);
+        SubscribeLocalEvent<RakingComponent, RakingCompleteEvent>(OnRakingComplete);
     }
 
-    private void OnDiggingComplete(EntityUid uid, DiggingComponent component, DiggingCompleteEvent args)
+    private void OnRakingComplete(EntityUid uid, RakingComponent component, RakingCompleteEvent args)
     {
         component.CancelToken = null;
         //args.Coordinates.PryTile(EntityManager, _mapManager);
@@ -51,15 +51,15 @@ public sealed partial class ToolSystem
         }
     }
 
-    private void OnDiggingAfterInteract(EntityUid uid, DiggingComponent component, AfterInteractEvent args)
+    private void OnRakingAfterInteract(EntityUid uid, RakingComponent component, AfterInteractEvent args)
     {
         if (args.Handled || !args.CanReach) return;
 
-        if (TryDigging(args.User, component, args.ClickLocation))
+        if (TryRaking(args.User, component, args.ClickLocation))
             args.Handled = true;
     }
 
-    private bool TryDigging(EntityUid user, DiggingComponent component, EntityCoordinates clickLocation)
+    private bool TryRaking(EntityUid user, RakingComponent component, EntityCoordinates clickLocation)
     {
         if (component.CancelToken != null)
         {
@@ -116,7 +116,7 @@ public sealed partial class ToolSystem
             0f,
             component.Delay,
             new [] {component.QualityNeeded},
-            new DiggingCompleteEvent
+            new RakingCompleteEvent
             {
                 Coordinates = clickLocation,
             },
@@ -127,7 +127,7 @@ public sealed partial class ToolSystem
         return true;
     }
 
-    private sealed class DiggingCompleteEvent : EntityEventArgs
+    private sealed class RakingCompleteEvent : EntityEventArgs
     {
         public EntityCoordinates Coordinates { get; init; }
     }

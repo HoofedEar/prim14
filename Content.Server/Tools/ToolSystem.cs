@@ -39,7 +39,7 @@ namespace Content.Server.Tools
             InitializeTilePrying();
             InitializeWelders();
             InitializeMultipleTools();
-            InitializeDigging();
+            InitializeRaking();
 
             SubscribeLocalEvent<ToolDoAfterComplete>(OnDoAfterComplete);
             SubscribeLocalEvent<ToolDoAfterCancelled>(OnDoAfterCancelled);
