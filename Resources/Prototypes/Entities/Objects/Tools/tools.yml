@@ -300,7 +300,7 @@
   - type: Raking
   - type: Tool
     qualities:
-      - Raking #don't ask
+      - Raking
 
 - type: entity
   name: omnitool

@@ -46,3 +46,10 @@
   toolName: tool-quality-slicing-tool-name
   spawn: KitchenKnife
   icon: Objects/Weapons/Melee/kitchen_knife.rsi/icon.png
+
+- type: tool
+  id: Raking
+  name: tool-quality-raking-name
+  toolName: tool-quality-raking-tool-name
+  spawn: Rake
+  icon: Objects/Tools/rake.rsi/icon.png
