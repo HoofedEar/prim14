@@ -1,7 +1,7 @@
 ﻿- type: tile
   id: plating
   name: plating
-  texture: plating
+  texture: dirt
   base_turfs:
   - lattice
   is_subfloor: true
@@ -14,9 +14,9 @@
 - type: tile
   id: ground
   name: ground
-  texture: ironsand1
+  texture: dirt
   base_turfs:
-    - lattice
+  - lattice
   is_subfloor: true
   footstep_sounds:
     collection: footstep_asteroid
