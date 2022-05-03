@@ -1,0 +1,28 @@
+- type: entity
+  name: wooden hatchet
+  parent: BaseItem
+  id: ToolWoodenHatchet
+  description: A sharp enough hatchet, makes cutting wood a lot easier.
+  components:
+  - type: Tag
+    tags:
+    - BotanyHatchet
+    - Hatchet
+  - type: Sharp
+  - type: Sprite
+    sprite: Prim\Tools\woodenhatchet.rsi
+    state: icon
+    netsync: false
+  - type: ItemCooldown
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 10
+        Piercing: 5
+  - type: Item
+    sprite: Prim\Tools\woodenhatchet.rsi
+  - type: GatheringTool
+    timeMultiplier: 6
+    damage:
+      types:
+        Piercing: 100

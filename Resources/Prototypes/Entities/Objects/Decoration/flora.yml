@@ -46,7 +46,7 @@
       tags:
         - Hatchet
     loot:
-      - id: SteelOre1
+      - id: Log
   - type: Damageable
     damageContainer: Inorganic
   - type: Destructible
