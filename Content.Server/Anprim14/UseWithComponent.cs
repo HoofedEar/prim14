@@ -1,7 +1,7 @@
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
 
-namespace Content.Server.UseWith;
+namespace Content.Server.Anprim14;
 
 [RegisterComponent]
 [Friend(typeof(UseWithSystem))]

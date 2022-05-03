@@ -1,6 +1,6 @@
 ﻿using Robust.Shared.Serialization;
 
-namespace Content.Shared.Administration;
+namespace Content.Shared.Anprim14;
 
 [Serializable, NetSerializable]
 public abstract class SharedDayNightCycleSystem : EntitySystem

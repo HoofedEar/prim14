@@ -6,10 +6,10 @@
   components:
   - type: Sprite
     netsync: false
-    sprite: Prim/Materials/logs.rsi
+    sprite: Anprim14/Materials/logs.rsi
     state: icon
   - type: Item
-    sprite: Prim/Materials/logs.rsi
+    sprite: Anprim14/Materials/logs.rsi
     state: icon
   - type: MeleeWeapon
     damage:

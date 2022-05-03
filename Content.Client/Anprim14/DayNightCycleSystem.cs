@@ -1,7 +1,8 @@
 ﻿using Content.Shared.Administration;
+using Content.Shared.Anprim14;
 using Robust.Client.Graphics;
 
-namespace Content.Client.Administration;
+namespace Content.Client.Anprim14;
 
 public sealed class DayNightCycleSystem : SharedDayNightCycleSystem
 {

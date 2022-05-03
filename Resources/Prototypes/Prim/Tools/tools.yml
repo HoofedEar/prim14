@@ -10,7 +10,7 @@
     - Hatchet
   - type: Sharp
   - type: Sprite
-    sprite: Prim/Tools/woodenhatchet.rsi
+    sprite: Anprim14/Tools/woodenhatchet.rsi
     state: icon
     netsync: false
   - type: ItemCooldown
@@ -20,7 +20,7 @@
         Slash: 10
         Piercing: 5
   - type: Item
-    sprite: Prim/Tools/woodenhatchet.rsi
+    sprite: Anprim14/Tools/woodenhatchet.rsi
   - type: GatheringTool
     timeMultiplier: 6
     damage:

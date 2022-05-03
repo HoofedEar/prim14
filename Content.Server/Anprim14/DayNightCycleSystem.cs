@@ -1,9 +1,10 @@
 ﻿using Content.Shared.Administration;
+using Content.Shared.Anprim14;
 using JetBrains.Annotations;
 using Robust.Server.Player;
 using Robust.Shared.Enums;
 
-namespace Content.Server.Administration;
+namespace Content.Server.Anprim14;
 
 [UsedImplicitly]
 public sealed class DayNightCycleSystem : SharedDayNightCycleSystem
