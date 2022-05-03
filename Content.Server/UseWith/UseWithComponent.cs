@@ -1,7 +1,5 @@
-using Content.Server.Botany.Systems;
+using Content.Shared.Storage;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.UseWith;
 
@@ -9,11 +7,11 @@ namespace Content.Server.UseWith;
 [Friend(typeof(UseWithSystem))]
 public sealed class UseWithComponent : Component
 {
-    [DataField("spawnedPrototype", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string SpawnedPrototype = "MaterialWoodPlank1";
+    [DataField("results")]
+    public List<EntitySpawnEntry> Results = new();
 
     [DataField("spawnCount")] 
-    public int SpawnCount = 2;
+    public int SpawnCount;
     
     [ViewVariables]
     [DataField("whitelist")] 

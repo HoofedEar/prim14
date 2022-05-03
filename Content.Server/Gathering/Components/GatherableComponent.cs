@@ -16,7 +16,7 @@ public sealed class GatherableComponent : Component
     public EntityWhitelist? ToolWhitelist;
 
     /// <summary>
-    /// Whitelist for specifying the kind of tools can be used on a resource
+    /// Loot table for the resource
     /// </summary>
     [DataField("loot")] public List<EntitySpawnEntry> Loot = new();
 

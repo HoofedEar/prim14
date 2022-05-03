@@ -16,7 +16,8 @@
       types:
         Blunt: 10
   - type: UseWith
-    spawnedPrototype: MaterialWoodPlank1
+    results:
+    - id: MaterialWoodPlank1
     spawnCount: 6
     whitelist:
       tags:

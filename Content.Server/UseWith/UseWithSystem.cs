@@ -1,10 +1,12 @@
 ﻿using Content.Shared.Interaction;
-using Content.Shared.Random.Helpers;
+using Content.Shared.Storage;
+using Robust.Shared.Random;
 
 namespace Content.Server.UseWith;
 
 public sealed class UseWithSystem : EntitySystem
 {
+    [Dependency] private readonly IRobustRandom _random = null!;
     public override void Initialize()
     {
         base.Initialize();
@@ -18,8 +20,10 @@ public sealed class UseWithSystem : EntitySystem
         
         for (var i = 0; i < component.SpawnCount; i++)
         {
-            var result = Spawn(component.SpawnedPrototype, Transform(uid).Coordinates);
-            result.RandomOffset(0.25f);
+            var getResult = EntitySpawnCollection.GetSpawns(component.Results, _random)[0];
+            var playerPos = Transform(uid).MapPosition;
+            var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
+            Spawn(getResult, spawnPos);
         }
 
         QueueDel(uid);
