@@ -1,8 +1,7 @@
 using Content.Shared.Storage;
 using Content.Shared.Whitelist;
-using Robust.Shared.Prototypes;
 
-namespace Content.Server.Gathering.Components;
+namespace Content.Server.Anprim14.Gathering.Components;
 
 [RegisterComponent]
 [Friend(typeof(GatherableSystem))]

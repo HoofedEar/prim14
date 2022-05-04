@@ -2,7 +2,7 @@ using System.Threading;
 using Content.Shared.Damage;
 using Content.Shared.Sound;
 
-namespace Content.Server.Gathering.Components
+namespace Content.Server.Anprim14.Gathering.Components
 {
     /// <summary>
     ///     When interacting with an <see cref="GatherableComponent"/> allows it to spawn entities.

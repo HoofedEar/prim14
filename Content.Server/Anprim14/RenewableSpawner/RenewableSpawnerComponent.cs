@@ -4,7 +4,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
-namespace Content.Server.Anprim14
+namespace Content.Server.Anprim14.RenewableSpawner
 {
     [RegisterComponent]
     public sealed class RenewableSpawnerComponent : Component, ISerializationHooks

@@ -3,7 +3,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Storage;
 using Robust.Shared.Random;
 
-namespace Content.Server.Anprim14;
+namespace Content.Server.Anprim14.UseWith;
 
 public sealed class UseWithSystem : EntitySystem
 {
