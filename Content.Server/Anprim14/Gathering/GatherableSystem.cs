@@ -4,6 +4,7 @@ using Content.Server.DoAfter;
 using Content.Shared.Damage;
 using Content.Shared.Interaction;
 using Content.Shared.Storage;
+using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
@@ -16,6 +17,8 @@ public sealed class GatherableSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly IRobustRandom _random = null!;
 
+    readonly TagSystem _tagSystem = Get<TagSystem>();
+    private int _tagPos = 0;
     public override void Initialize()
     {
         base.Initialize();
@@ -29,6 +32,11 @@ public sealed class GatherableSystem : EntitySystem
     {
         if (!TryComp<GatheringToolComponent>(args.Used, out var tool) ||
             component.ToolWhitelist?.IsValid(args.Used) == false)
+            return;
+
+        // when using ordered loot, tags and ordered loot must be the same size
+        if (component.OrderedLoot && 
+            component.OrderedLootList.Count != component.ToolWhitelist?.Tags?.Count)
             return;
 
         if (tool.GatheringEntities.TryGetValue(uid, out var cancelToken))
@@ -68,11 +76,30 @@ public sealed class GatherableSystem : EntitySystem
         SoundSystem.Play(Filter.Pvs(ev.Resource, entityManager: EntityManager), tool.GatheringSound.GetSound(), ev.Resource);
         tool.GatheringEntities.Remove(ev.Resource);
 
-        var spawnLoot = EntitySpawnCollection.GetSpawns(component.Loot, _random);
-        var playerPos = Transform(ev.Player).MapPosition;
-        var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
-        EntityManager.SpawnEntity(spawnLoot[0], spawnPos);
-        tool.GatheringEntities.Remove(uid);
+        if (component.OrderedLoot)
+        {
+            for (var i = 0; i < component.ToolWhitelist?.Tags?.Count; i++)
+            {
+                if (_tagSystem.HasTag(tool.Owner, component.ToolWhitelist?.Tags?[i] ?? string.Empty))
+                {
+                    _tagPos = i;
+                }
+            }
+            
+            var spawnLoot = component.OrderedLootList[_tagPos];
+            var playerPos = Transform(ev.Player).MapPosition;
+            var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
+            EntityManager.SpawnEntity(spawnLoot, spawnPos);
+            tool.GatheringEntities.Remove(uid);
+        }
+        else
+        {
+            var spawnLoot = EntitySpawnCollection.GetSpawns(component.Loot, _random);
+            var playerPos = Transform(ev.Player).MapPosition;
+            var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
+            EntityManager.SpawnEntity(spawnLoot[0], spawnPos);
+            tool.GatheringEntities.Remove(uid);
+        }
     }
 
     private void OnDoafterCancel(GatheringDoafterCancel ev)

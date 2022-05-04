@@ -6,8 +6,15 @@
   - type: Sprite
     state: rocksolid01
   - type: Gatherable
+    useOrderedLoot: true
     whitelist:
       tags:
+        - SharpStick
+        - FishingPole
         - FishingRod
-    loot:
-      - id: Log
+        - FishingCage
+    orderedLoot:
+      - Bream
+      - Cod
+      - Salmon
+      - Lobster
