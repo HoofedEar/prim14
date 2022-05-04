@@ -6,7 +6,6 @@
   components:
   - type: Tag
     tags:
-    - BotanyHatchet
     - Hatchet
   - type: Sharp
   - type: Sprite
@@ -21,6 +20,26 @@
         Piercing: 5
   - type: Item
     sprite: Anprim14/Tools/woodenhatchet.rsi
+  - type: GatheringTool
+    timeMultiplier: 6
+    damage:
+      types:
+        Piercing: 100
+
+- type: entity
+  name: fishing rod
+  parent: BaseItem
+  id: ToolFishingRod
+  description: A very simple fishing rod. Better than using your hands.
+  components:
+  - type: Tag
+    tags:
+    - FishingRod
+  - type: Sprite
+    sprite: Anprim14/Tools/fishingrod.rsi
+    state: icon
+    netsync: false
+  - type: ItemCooldown
   - type: GatheringTool
     timeMultiplier: 6
     damage:

@@ -1,0 +1,13 @@
+- type: entity
+  parent: BaseRock
+  id: BaseFishingWater
+  name: Fishing Test
+  components:
+  - type: Sprite
+    state: rocksolid01
+  - type: Gatherable
+    whitelist:
+      tags:
+        - FishingRod
+    loot:
+      - id: Log
