@@ -1,0 +1,7 @@
+﻿- type: entity
+  parent: BaseGenerator
+  id: GeneratorBasic50
+  suffix: Basic, 50kW
+  components:
+    - type: PowerSupplier
+      supplyRate: 50000

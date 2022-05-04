@@ -1893,7 +1893,7 @@ entities:
   - canCollide: False
     type: Physics
 - uid: 124
-  type: GeneratorBasic10
+  type: GeneratorBasic50
   components:
   - pos: -2.5,10.5
     parent: 83
