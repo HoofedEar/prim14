@@ -342,6 +342,9 @@
 
 - type: Tag
   id: Wall
+  
+- type: Tag
+  id: Water
 
 - type: Tag
   id: Window
