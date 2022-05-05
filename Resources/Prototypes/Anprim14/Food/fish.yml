@@ -1,0 +1,66 @@
+# Raw fish base
+
+- type: entity
+  name: raw fish base
+  parent: FoodBase
+  id: RawFishBase
+  description: It would be wise to cook this first
+  abstract: true
+  components:
+  - type: Tag
+    tags:
+    - RawFish
+  - type: Sprite
+    sprite: Anprim14/Food/fish.rsi
+    scale: 0.6, 0.6
+  - type: SolutionContainerManager
+    solutions:
+      food:
+        maxVol: 8
+        reagents:
+          - ReagentId: Nutriment
+            Quantity: 2
+          - ReagentId: Toxin
+            Quantity: 6
+
+# Raw fish
+
+- type: entity
+  name: raw cod
+  parent: RawFishBase
+  id: RawCod
+  components:
+  - type: Sprite
+    state: cod
+
+- type: entity
+  name: raw salmon
+  parent: RawFishBase
+  id: RawSalmon
+  components:
+  - type: Sprite
+    state: salmon
+
+- type: entity
+  name: raw bream
+  parent: RawFishBase
+  id: RawBream
+  components:
+  - type: Sprite
+    state: bream
+
+- type: entity
+  name: raw lobster
+  parent: RawFishBase
+  id: RawLobster
+  components:
+  - type: Sprite
+    state: lobster
+
+- type: entity
+  name: raw shrimp
+  parent: RawFishBase
+  id: RawShrimp
+  components:
+  - type: Sprite
+    state: shrimp

@@ -23,7 +23,7 @@
   - type: Physics
     bodyType: Static
   - type: Sprite
-    netsync: true
+    netsync: false
     sprite: Anprim14/Effects/deepwater.rsi
     state: deepwater
   - type: Icon
