@@ -34,11 +34,6 @@ public sealed class GatherableSystem : EntitySystem
             component.ToolWhitelist?.IsValid(args.Used) == false)
             return;
 
-        // when using ordered loot, tags and ordered loot must be the same size
-        if (component.OrderedLoot && 
-            component.OrderedLootList.Count != component.ToolWhitelist?.Tags?.Count)
-            return;
-
         if (tool.GatheringEntities.TryGetValue(uid, out var cancelToken))
         {
             cancelToken.Cancel();
@@ -76,21 +71,17 @@ public sealed class GatherableSystem : EntitySystem
         SoundSystem.Play(Filter.Pvs(ev.Resource, entityManager: EntityManager), tool.GatheringSound.GetSound(), ev.Resource);
         tool.GatheringEntities.Remove(ev.Resource);
 
-        if (component.OrderedLoot)
+        if (component.UseOrderedLoot)
         {
-            for (var i = 0; i < component.ToolWhitelist?.Tags?.Count; i++)
+            foreach (var pair in component.OrderedLoot)
             {
-                if (_tagSystem.HasTag(tool.Owner, component.ToolWhitelist?.Tags?[i] ?? string.Empty))
-                {
-                    _tagPos = i;
-                }
+                if (!_tagSystem.HasTag(tool.Owner, pair.Key)) continue;
+                var spawnLoot = EntitySpawnCollection.GetSpawns(pair.Value, _random);
+                var playerPos = Transform(ev.Player).MapPosition;
+                var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
+                EntityManager.SpawnEntity(spawnLoot[0], spawnPos);
+                tool.GatheringEntities.Remove(uid);
             }
-            
-            var spawnLoot = component.OrderedLootList[_tagPos];
-            var playerPos = Transform(ev.Player).MapPosition;
-            var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
-            EntityManager.SpawnEntity(spawnLoot, spawnPos);
-            tool.GatheringEntities.Remove(uid);
         }
         else
         {

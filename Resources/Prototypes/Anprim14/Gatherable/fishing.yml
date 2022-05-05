@@ -9,12 +9,10 @@
     useOrderedLoot: true
     whitelist:
       tags:
-        - SharpStick
-        - FishingPole
+        - Hatchet
         - FishingRod
-        - FishingCage
     orderedLoot:
-      - Bream
-      - Cod
-      - Salmon
-      - Lobster
+      Hatchet:
+        - id: Log
+      FishingRod:
+        - id: GoldOre1 

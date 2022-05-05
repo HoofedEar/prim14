@@ -13,7 +13,7 @@ public sealed class GatherableComponent : Component
     /// Bool if we are using an ordered loot table
     /// </summary>
     [DataField("useOrderedLoot")] 
-    public bool OrderedLoot;
+    public bool UseOrderedLoot;
     
     
     /// <summary>
@@ -42,8 +42,8 @@ public sealed class GatherableComponent : Component
     /// - id: Log
     /// </summary>
     /// , customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))
-    [DataField("orderedLoot")]
-    public List<string> OrderedLootList = new();
+    [DataField("orderedLoot")] 
+    public Dictionary<string, List<EntitySpawnEntry>> OrderedLoot = new();
 
     public float BaseMineTime = 1.0f;
 }
