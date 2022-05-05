@@ -346,7 +346,8 @@ namespace Content.Client.Entry
             "HealthAnalyzer",
             "RenewableSpawner",
             "Raking",
-            "UseWith"
+            "UseWith",
+            "ReleaseFish"
         };
     }
 }

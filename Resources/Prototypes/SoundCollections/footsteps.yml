@@ -94,7 +94,7 @@
 - type: soundCollection
   id: footstep_grass
   files:
-  - /Audio/Effects/Footsteps/grass1.ogg
-  - /Audio/Effects/Footsteps/grass2.ogg
-  - /Audio/Effects/Footsteps/grass3.ogg
-  - /Audio/Effects/Footsteps/grass4.ogg
+  - /Audio/Anprim14/Footsteps/grass1.ogg
+  - /Audio/Anprim14/Footsteps/grass2.ogg
+  - /Audio/Anprim14/Footsteps/grass3.ogg
+  - /Audio/Anprim14/Footsteps/grass4.ogg

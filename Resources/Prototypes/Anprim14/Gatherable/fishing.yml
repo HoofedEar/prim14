@@ -9,6 +9,7 @@
   - type: Tag
     tags:
     - Water
+  - type: ReleaseFish
   - type: Fixtures
     fixtures:
     - shape:
