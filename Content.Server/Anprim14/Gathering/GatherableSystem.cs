@@ -16,8 +16,7 @@ public sealed class GatherableSystem : EntitySystem
     [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly IRobustRandom _random = null!;
-
-    readonly TagSystem _tagSystem = Get<TagSystem>();
+    [Dependency] private readonly TagSystem _tagSystem = Get<TagSystem>();
 
     public override void Initialize()
     {
