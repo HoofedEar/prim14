@@ -1,0 +1,13 @@
+- type: constructionGraph
+  id: WoodenHatchet
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: hatchet
+          steps:
+            - material: WoodPlank
+              amount: 5
+              doAfter: 4
+    - node: hatchet
+      entity: ToolWoodenHatchet

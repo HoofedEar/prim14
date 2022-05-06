@@ -25,22 +25,54 @@
     damage:
       types:
         Piercing: 100
+  - type: Construction
+    graph: WoodenHatchet
+    node: hatchet
 
 - type: entity
-  name: fishing rod
+  name: fishing pole
   parent: BaseItem
-  id: ToolFishingRod
+  id: ToolFishingPole
   description: A very simple fishing rod. Better than using your hands.
   components:
   - type: Tag
     tags:
-    - FishingRod
+    - FishingPole
   - type: Sprite
-    sprite: Anprim14/Tools/fishingrod.rsi
+    sprite: Anprim14/Tools/fishingpole.rsi
     state: icon
     netsync: false
   - type: ItemCooldown
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 5
   - type: GatheringTool
+    timeMultiplier: 6
+    damage:
+      types:
+        Piercing: 100
+
+- type: entity
+  name: sharpened stick
+  parent: BaseItem
+  id: ToolSharpenedStick
+  description: A decently sharp stick.
+  components:
+  - type: Tag
+    tags:
+    - SharpStick
+  - type: Sprite
+    sprite: Anprim14/Tools/sharpstick.rsi
+    state: icon
+    netsync: false
+  - type: ItemCooldown
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 5
+  - type: GatheringTool
+    sound: /Audio/Anprim14/Effects/watersplash.ogg
     timeMultiplier: 6
     damage:
       types:

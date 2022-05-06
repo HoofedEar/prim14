@@ -306,6 +306,9 @@
 
 - type: Tag
   id: SecwayKeys
+  
+- type: Tag
+  id: SharpStick
 
 - type: Tag
   id: Sheet
