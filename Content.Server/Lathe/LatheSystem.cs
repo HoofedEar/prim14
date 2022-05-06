@@ -31,27 +31,43 @@ namespace Content.Server.Lathe
         }
 
         // These queues are to add/remove COMPONENTS to the lathes
-        private Queue<EntityUid> ProducingAddQueue = new();
-        private Queue<EntityUid> ProducingRemoveQueue = new();
-        private Queue<EntityUid> InsertingAddQueue = new();
-        private Queue<EntityUid> InsertingRemoveQueue = new();
+        // ReSharper disable once FieldCanBeMadeReadOnly.Local
+        private Queue<EntityUid> _producingAddQueue = new();
+        // ReSharper disable once FieldCanBeMadeReadOnly.Local
+        private Queue<EntityUid> _producingRemoveQueue = new();
+        // ReSharper disable once FieldCanBeMadeReadOnly.Local
+        private Queue<EntityUid> _insertingAddQueue = new();
+        // ReSharper disable once FieldCanBeMadeReadOnly.Local
+        private Queue<EntityUid> _insertingRemoveQueue = new();
 
         public override void Update(float frameTime)
         {
-            foreach (var uid in ProducingAddQueue)
+            foreach (var uid in _producingAddQueue)
+            {
                 EnsureComp<LatheProducingComponent>(uid);
-            ProducingAddQueue.Clear();
-            foreach (var uid in ProducingRemoveQueue)
-                RemComp<LatheProducingComponent>(uid);
-            ProducingRemoveQueue.Clear();
-            foreach (var uid in InsertingAddQueue)
-                EnsureComp<LatheInsertingComponent>(uid);
-            InsertingAddQueue.Clear();
-            foreach (var uid in InsertingRemoveQueue)
-                RemComp<LatheInsertingComponent>(uid);
-            InsertingRemoveQueue.Clear();
+            }
 
-            foreach (var (insertingComp, lathe) in EntityQuery<LatheInsertingComponent, LatheComponent>(false))
+            _producingAddQueue.Clear();
+            foreach (var uid in _producingRemoveQueue)
+            {
+                RemComp<LatheProducingComponent>(uid);
+            }
+
+            _producingRemoveQueue.Clear();
+            foreach (var uid in _insertingAddQueue)
+            {
+                EnsureComp<LatheInsertingComponent>(uid);
+            }
+
+            _insertingAddQueue.Clear();
+            foreach (var uid in _insertingRemoveQueue)
+            {
+                RemComp<LatheInsertingComponent>(uid);
+            }
+
+            _insertingRemoveQueue.Clear();
+
+            foreach (var (_, lathe) in EntityQuery<LatheInsertingComponent, LatheComponent>())
             {
                 if (lathe.InsertionAccumulator < lathe.InsertionTime)
                 {
@@ -60,10 +76,10 @@ namespace Content.Server.Lathe
                 }
                 lathe.InsertionAccumulator = 0;
                 UpdateInsertingAppearance(lathe.Owner, false);
-                InsertingRemoveQueue.Enqueue(lathe.Owner);
+                _insertingRemoveQueue.Enqueue(lathe.Owner);
             }
 
-            foreach (var (producingComp, lathe) in EntityQuery<LatheProducingComponent, LatheComponent>(false))
+            foreach (var (_, lathe) in EntityQuery<LatheProducingComponent, LatheComponent>())
             {
                 if (lathe.ProducingRecipe == null)
                     continue;
@@ -74,7 +90,7 @@ namespace Content.Server.Lathe
                 }
                 lathe.ProducingAccumulator = 0;
 
-                FinishProducing(lathe.ProducingRecipe, lathe, true);
+                FinishProducing(lathe.ProducingRecipe, lathe);
             }
         }
 
@@ -142,7 +158,7 @@ namespace Content.Server.Lathe
             _prototypeManager.TryIndex(lastMat, out MaterialPrototype? matProto);
 
             EntityManager.QueueDeleteEntity(args.Used);
-            InsertingAddQueue.Enqueue(uid);
+            _insertingAddQueue.Enqueue(uid);
             _popupSystem.PopupEntity(Loc.GetString("machine-insert-item", ("machine", uid),
                 ("item", args.Used)), uid, Filter.Entities(args.User));
             if (matProto != null)
@@ -156,7 +172,7 @@ namespace Content.Server.Lathe
         /// This handles the checks to start producing an item, and
         /// starts up the sound and visuals
         /// </summary>
-        private void Produce(LatheComponent component, LatheRecipePrototype recipe, bool SkipCheck = false)
+        private void Produce(LatheComponent component, LatheRecipePrototype recipe, bool skipCheck = false)
         {
             if (!component.CanProduce(recipe)
                 || !TryComp(component.Owner, out MaterialStorageComponent? storage))
@@ -165,7 +181,7 @@ namespace Content.Server.Lathe
                 return;
             }
 
-            if (!SkipCheck && HasComp<LatheProducingComponent>(component.Owner))
+            if (!skipCheck && HasComp<LatheProducingComponent>(component.Owner))
             {
                 FinishProducing(recipe, component, false);
                 return;
@@ -193,7 +209,7 @@ namespace Content.Server.Lathe
                 SoundSystem.Play(Filter.Pvs(component.Owner), component.ProducingSound.GetSound(), component.Owner);
             }
             UpdateRunningAppearance(component.Owner, true);
-            ProducingAddQueue.Enqueue(component.Owner);
+            _producingAddQueue.Enqueue(component.Owner);
         }
 
         /// <summary>
@@ -212,7 +228,7 @@ namespace Content.Server.Lathe
                 Produce(component, component.Queue.Dequeue(), true);
                 return;
             }
-            ProducingRemoveQueue.Enqueue(component.Owner);
+            _producingRemoveQueue.Enqueue(component.Owner);
             UpdateRunningAppearance(component.Owner, false);
         }
 
@@ -255,13 +271,16 @@ namespace Content.Server.Lathe
                 case LatheQueueRecipeMessage msg:
                     _prototypeManager.TryIndex(msg.ID, out LatheRecipePrototype? recipe);
                     if (recipe != null!)
+                    {
                         for (var i = 0; i < msg.Quantity; i++)
                         {
                             component.Queue.Enqueue(recipe);
                             component.UserInterface?.SendMessage(new LatheFullQueueMessage(GetIdQueue(component)));
                         }
-                        if (!HasComp<LatheProducingComponent>(component.Owner) && component.Queue.Count > 0)
-                            Produce(component, component.Queue.Dequeue());
+                    }
+
+                    if (!HasComp<LatheProducingComponent>(component.Owner) && component.Queue.Count > 0)
+                        Produce(component, component.Queue.Dequeue());
 
                     break;
                 case LatheSyncRequestMessage _:

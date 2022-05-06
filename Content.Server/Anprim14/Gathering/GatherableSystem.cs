@@ -18,7 +18,7 @@ public sealed class GatherableSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = null!;
 
     readonly TagSystem _tagSystem = Get<TagSystem>();
-    private int _tagPos = 0;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -106,13 +106,14 @@ public sealed class GatherableSystem : EntitySystem
         public EntityUid Tool;
         public EntityUid Resource;
     }
+
+    private sealed class GatheringDoafterSuccess : EntityEventArgs
+    {
+        public EntityUid Tool;
+        public EntityUid Resource;
+        public EntityUid Player;
+    }
 }
 
-// grumble grumble
-public sealed class GatheringDoafterSuccess : EntityEventArgs
-{
-    public EntityUid Tool;
-    public EntityUid Resource;
-    public EntityUid Player;
-}
+
 
