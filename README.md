@@ -5,7 +5,7 @@ This fork focuses on a primitive/Iron Age setting, with emphasis on survival and
 
 ## Links
 
-[Website](https://anprim14.io) | [Discord](https://wiki.anprim14.io) | [Forum]() 
+[Website](https://anprim14.io) | [Wiki](https://wiki.anprim14.io) 
 
 ## Building
 
