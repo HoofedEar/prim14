@@ -10,6 +10,8 @@ namespace Content.Server.Anprim14.TimedCooker;
 
 public sealed class TimedCookerSystem : EntitySystem
 {
+    // TODO later on add checks for regent stuff (spices and such)
+    
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;

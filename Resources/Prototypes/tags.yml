@@ -152,6 +152,9 @@
 
 - type: Tag
   id: FirelockElectronics
+  
+- type: Tag
+  id: FishingPole
 
 - type: Tag
   id: FishingRod
