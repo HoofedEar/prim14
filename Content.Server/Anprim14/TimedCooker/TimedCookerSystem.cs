@@ -55,6 +55,18 @@ public sealed class TimedCookerSystem : EntitySystem
             return;
         }
         
+        // Make sure it has a valid recipe
+        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
+            return;
+        }
+            
+        
+        if (cookable.Recipe == null || 
+            !_prototypeManager.TryIndex(cookable.Recipe, out TimedCookerRecipePrototype? recipe))
+            return;
+        
         // Attempt to insert the item
         if (!component.Container.Insert(args.Used))
             return;
@@ -65,15 +77,10 @@ public sealed class TimedCookerSystem : EntitySystem
             SoundSystem.Play(Filter.Pvs(component.Owner, entityManager: EntityManager), component.InsertingSound.GetSound(), component.Owner);
         }
 
-        // Make sure it has a valid recipe
-        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
-            return;
         
-        if (cookable.Recipe == null || 
-            !_prototypeManager.TryIndex(cookable.Recipe, out TimedCookerRecipePrototype? recipe))
-            return;
+        
 
-        //Queue it upppp
+        //Queue it up
         if (cookable.Recipe != null)
         {
             component.Queue.Enqueue(recipe);
@@ -119,7 +126,7 @@ public sealed class TimedCookerSystem : EntitySystem
             {
                 if (cooker.Queue.Count > 0)
                 {
-                    Produce(cooker, cooker.Queue.Dequeue(), true);
+                    Produce(cooker, cooker.Queue.Dequeue());
                     return;
                 }
             }
@@ -153,7 +160,7 @@ public sealed class TimedCookerSystem : EntitySystem
         // Continue to next in queue if there are items left
         if (component.Queue.Count > 0)
         {
-            Produce(component, component.Queue.Dequeue(), true);
+            Produce(component, component.Queue.Dequeue());
             return;
         }
         _producingRemoveQueue.Enqueue(component.Owner);
@@ -162,7 +169,7 @@ public sealed class TimedCookerSystem : EntitySystem
     /// <summary>
     /// This handles the checks to start producing an item
     /// </summary>
-    private void Produce(TimedCookerComponent component, TimedCookerRecipePrototype recipe, bool skipCheck = false)
+    private void Produce(TimedCookerComponent component, TimedCookerRecipePrototype recipe)
     {
         component.ProducingRecipe = recipe;
         _producingAddQueue.Enqueue(component.Owner);
