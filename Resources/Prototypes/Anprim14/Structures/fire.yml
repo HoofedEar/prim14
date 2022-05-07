@@ -1,0 +1,13 @@
+﻿# Firepit example - can also be for a basic furnace
+- type: entity
+  parent: BaseRock
+  id: TestFirePit
+  name: firepit
+  description: pretend there are flames here. woosh
+  components:
+  - type: Sprite
+    state: rocksolid01
+  - type: TimedCooker
+    whitelist:
+      id:
+        - Raw

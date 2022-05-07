@@ -1,4 +1,3 @@
-using Content.Server.UserInterface;
 using Content.Shared.Lathe;
 using Content.Shared.Research.Prototypes;
 using Robust.Server.GameObjects;
@@ -34,15 +33,15 @@ namespace Content.Server.Lathe.Components
         public float InsertionTime = 0.79f; // 0.01 off for animation timing
         /// <summary>
         /// Update accumulator for the insertion time
-        /// </suummary>
+        /// </summary>
         [DataField("insertionAccumulator")]
-        public float InsertionAccumulator = 0f;
+        public float InsertionAccumulator;
         /// <summary>
         /// Production accumulator for the production time.
         /// </summary>
         [ViewVariables]
         [DataField("producingAccumulator")]
-        public float ProducingAccumulator = 0f;
+        public float ProducingAccumulator;
 
         /// <summary>
         /// The sound that plays when the lathe is producing an item, if any
@@ -56,7 +55,7 @@ namespace Content.Server.Lathe.Components
         [DataField("insertingSound")]
         public SoundSpecifier? InsertingSound;
 
-        /// <summmary>
+        /// <summary>
         /// The lathe's UI.
         /// </summary>
         [ViewVariables] public BoundUserInterface? UserInterface;

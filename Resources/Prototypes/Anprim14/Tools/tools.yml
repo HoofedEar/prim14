@@ -33,7 +33,7 @@
   name: fishing pole
   parent: BaseItem
   id: ToolFishingPole
-  description: A very simple fishing rod. Better than using your hands.
+  description: A very simple fishing pole. Better than using a stick.
   components:
   - type: Tag
     tags:
@@ -52,6 +52,9 @@
     damage:
       types:
         Piercing: 100
+  - type: Construction
+    graph: FishingPole
+    node: pole
 
 - type: entity
   name: sharpened stick

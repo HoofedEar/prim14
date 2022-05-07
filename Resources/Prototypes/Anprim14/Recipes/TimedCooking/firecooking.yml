@@ -1,0 +1,5 @@
+﻿- type: timedCookerRecipe
+  id: CookedMeat
+  input: FoodMeat
+  result: FoodMeatCooked
+  completetime: 4

@@ -38,6 +38,8 @@
   id: FoodMeat
   description: A slab of raw meat.
   components:
+  - type: TimedCookable
+    recipe: CookedMeat
   - type: Tag
     tags:
     - Raw
