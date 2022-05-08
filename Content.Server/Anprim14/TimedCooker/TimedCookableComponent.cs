@@ -8,5 +8,5 @@ public sealed class TimedCookableComponent : Component
     /// </summary>
     [ViewVariables]
     [DataField("recipe", required: true)] 
-    public string? Recipe = default!;
+    public string? Recipe;
 }

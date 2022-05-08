@@ -49,6 +49,7 @@ public sealed class TimedCookerSystem : EntitySystem
             return;
         }
         
+        // Make sure it's not full
         if (component.Queue.Count >= component.Max - 1)
         {
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-full"), uid, Filter.Entities(args.User));
