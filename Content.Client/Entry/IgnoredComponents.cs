@@ -322,6 +322,10 @@ namespace Content.Client.Entry
             "FireAlarm",
             "AirAlarm",
             "RadarConsole",
+            "RenewableSpawner",
+            "Raking",
+            "UseWith",
+            "ReleaseFish",
             "Guardian",
             "GuardianCreator",
             "GuardianHost",
@@ -341,16 +345,14 @@ namespace Content.Client.Entry
             "ArtifactTimerTrigger",
             "ArtifactHeatTrigger",
             "ArtifactElectricityTrigger",
+            "SurplusBundle",
             "Artifact",
             "RandomArtifactSprite",
             "EnergySword",
             "DoorRemote",
             "InteractionPopup",
             "HealthAnalyzer",
-            "RenewableSpawner",
-            "Raking",
-            "UseWith",
-            "ReleaseFish"
+            "Wires"
         };
     }
 }
