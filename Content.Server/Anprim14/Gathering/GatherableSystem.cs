@@ -47,7 +47,7 @@ public sealed class GatherableSystem : EntitySystem
         cancelToken = new CancellationTokenSource();
         tool.GatheringEntities[uid] = cancelToken;
 
-        var doAfter = new DoAfterEventArgs(args.User, component.BaseMineTime * tool.GatheringTimeMultiplier, cancelToken.Token, uid)
+        var doAfter = new DoAfterEventArgs(args.User, tool.GatheringTime, cancelToken.Token, uid)
         {
             BreakOnDamage = true,
             BreakOnStun = true,
@@ -70,9 +70,9 @@ public sealed class GatherableSystem : EntitySystem
         SoundSystem.Play(Filter.Pvs(ev.Resource, entityManager: EntityManager), tool.GatheringSound.GetSound(), ev.Resource);
         tool.GatheringEntities.Remove(ev.Resource);
 
-        if (component.UseOrderedLoot)
+        if (component.UseMappedLoot && component.MappedLoot != null)
         {
-            foreach (var pair in component.OrderedLoot)
+            foreach (var pair in component.MappedLoot)
             {
                 if (!_tagSystem.HasTag(tool.Owner, pair.Key)) continue;
                 var spawnLoot = EntitySpawnCollection.GetSpawns(pair.Value, _random);
@@ -84,10 +84,14 @@ public sealed class GatherableSystem : EntitySystem
         }
         else
         {
-            var spawnLoot = EntitySpawnCollection.GetSpawns(component.Loot, _random);
-            var playerPos = Transform(ev.Player).MapPosition;
-            var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
-            EntityManager.SpawnEntity(spawnLoot[0], spawnPos);
+            if (component.Loot != null)
+            {
+                var spawnLoot = EntitySpawnCollection.GetSpawns(component.Loot, _random);
+                var playerPos = Transform(ev.Player).MapPosition;
+                var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
+                EntityManager.SpawnEntity(spawnLoot[0], spawnPos);
+            }
+
             tool.GatheringEntities.Remove(uid);
         }
     }

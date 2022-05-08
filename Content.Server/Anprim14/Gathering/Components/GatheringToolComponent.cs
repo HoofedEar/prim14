@@ -10,23 +10,29 @@ namespace Content.Server.Anprim14.Gathering.Components
     [RegisterComponent]
     public sealed class GatheringToolComponent : Component
     {
+        /// <summary>
+        ///     Sound that is made once you completed gathering
+        /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField("sound")]
         public SoundSpecifier GatheringSound { get; set; } = new SoundPathSpecifier("/Audio/Items/Mining/pickaxe.ogg");
 
+        /// <summary>
+        ///     This directly plugs into the time delay for gathering.
+        /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
-        [DataField("timeMultiplier")]
-        public float GatheringTimeMultiplier { get; set; } = 1f;
+        [DataField("gatheringTime")]
+        public float GatheringTime { get; set; } = 1f;
 
         /// <summary>
         ///     What damage should be given to objects when
-        ///     gathered using a tool?
+        ///     gathered using this tool? (0 for infinite gathering)
         /// </summary>
         [DataField("damage", required: true)]
         public DamageSpecifier Damage { get; set; } = default!;
 
         /// <summary>
-        ///     How many entities can this tool gather at once?
+        ///     How many entities can this tool gather from at once?
         /// </summary>
         [ViewVariables(VVAccess.ReadWrite)]
         [DataField("maxEntities")]
