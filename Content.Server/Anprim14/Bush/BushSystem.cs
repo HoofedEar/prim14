@@ -1,11 +1,13 @@
 ﻿using Content.Shared.Anprim14;
 using Content.Shared.Interaction;
 using JetBrains.Annotations;
+using Robust.Shared.Random;
 
 namespace Content.Server.Anprim14.Bush;
 
 public sealed class BushSystem : EntitySystem
 { 
+    [Dependency] private readonly IRobustRandom _random = null!;
     public override void Initialize()
     {
         base.Initialize();
@@ -17,7 +19,9 @@ public sealed class BushSystem : EntitySystem
     public void OnInteractHand(EntityUid uid, BushComponent component, InteractHandEvent args)
     {
         if (!component.Ready) return;
-        UpdateAppearance(uid, false, true);
+        var playerPos = Transform(args.Target).MapPosition;
+        EntityManager.SpawnEntity(component.Loot, playerPos);
+        UpdateAppearance(uid, true, false);
         component.Ready = false;
     }
 
@@ -37,19 +41,19 @@ public sealed class BushSystem : EntitySystem
         }
     }
     
-    private void UpdateAppearance(EntityUid uid, bool isReady, bool isEmpty)
+    private void UpdateAppearance(EntityUid uid, bool isEmpty, bool isReady)
     {
         if (!TryComp<AppearanceComponent>(uid, out var appearance))
             return;
 
-        appearance.SetData(BushVisuals.Ready, isReady);
         appearance.SetData(BushVisuals.Empty, isEmpty);
+        appearance.SetData(BushVisuals.Ready, isReady);
     }
     
     private void OnBushReady(EntityUid uid, BushComponent component, BushReadyEvent args)
     {
         component.Ready = true;
-        UpdateAppearance(uid, true, false);
+        UpdateAppearance(uid, false, true);
     }
     
     private sealed class BushReadyEvent : EntityEventArgs

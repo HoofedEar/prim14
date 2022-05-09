@@ -1,5 +1,4 @@
 ﻿using Content.Shared.Sound;
-using Content.Shared.Storage;
 
 namespace Content.Server.Anprim14.Bush;
 
@@ -12,7 +11,7 @@ public sealed class BushComponent : Component
     /// </summary>
     [ViewVariables]
     [DataField("loot")] 
-    public EntitySpawnEntry? Loot;
+    public string? Loot;
     
     /// <summary>
     /// How many should be spawned?
