@@ -31,12 +31,11 @@
     sprite: Anprim14/Effects/deepwater.rsi
     state: icon
   - type: Gatherable
-    useMappedLoot: true
     whitelist:
       tags:
         - SharpStick
         - FishingPole
-    mappedLoot:
+    loot:
       SharpStick:
         - id: RawCod
       FishingPole:

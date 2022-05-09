@@ -46,6 +46,7 @@
       tags:
         - Hatchet
     loot:
+      Hatchet: 
       - id: Log
   - type: Damageable
     damageContainer: Inorganic
