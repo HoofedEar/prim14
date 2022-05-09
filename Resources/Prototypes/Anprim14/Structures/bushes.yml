@@ -1,0 +1,21 @@
+- type: entity
+  id: BaseBush
+  parent: BaseRock
+  name: BaseBush
+  description: A pretty looking bush that grows berries.
+  placement:
+    mode: SnapgridCenter
+  components:
+    - type: Sprite
+      sprite: Anprim14/Structures/berries.rsi
+      layers:
+        - state: amarbush_1
+          map: [ "enum.BushVisualLayers.Empty"]
+        - state: amarbush_2
+          map: ["enum.BushVisualLayers.Ready"]
+      netsync: false
+    - type: Appearance
+    - type: Bush
+    - type: BushVisuals
+      stateEmpty: amarbush_1
+      stateReady: amarbush_2

@@ -26,7 +26,7 @@ public sealed class BushComponent : Component
     /// </summary>
     [ViewVariables]
     [DataField("respawnTime")]
-    public TimeSpan? RespawnTime = TimeSpan.FromSeconds(5);
+    public float? RespawnTime = 5f;
     
     /// <summary>
     /// The sound played when interacting with the bush
@@ -34,4 +34,7 @@ public sealed class BushComponent : Component
     [ViewVariables]
     [DataField("interactSound")]
     public SoundSpecifier? InteractSound;
+    
+    public float Accumulator;
+    public bool Ready = true;
 }
