@@ -1,7 +1,9 @@
-<p align="center"> <img alt="Space Station 14" width="880" height="300" src="https://raw.githubusercontent.com/space-wizards/asset-dump/de329a7898bb716b9d5ba9a0cd07f38e61f1ed05/github-logo.svg" /></p>
+<p align="center"> <img alt="Space Station 14" width="880" height="300" src="https://github.com/HoofedEar/Anprim14/blob/85661d08cafdfe6661cdd06d6207e6396183976d/Resources/Textures/Logo/anprim-logo.png" /></p>
 
-PrimitiveStation/Anprim 14 is a fork of Space Station 14.  
-This fork focuses on a primitive/Iron Age setting, with emphasis on survival and PvE.
+
+
+Anprim14 is a fork of Space Station 14. 
+This fork focuses on a primitive setting, with emphasis on survival and PvE.
 
 ## Links
 
