@@ -1,0 +1,10 @@
+- type: entity
+  id: BaseBerry
+  parent: BaseItem
+  name: BaseBerry
+  description: yummy!
+  components:
+  - type: Sprite
+    sprite: Anprim14/Structures/berries.rsi
+    state: amarberry
+    scale: 0.8, 0.8
