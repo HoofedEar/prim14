@@ -8,19 +8,13 @@
   "copyright": "ËmoGarbagε#7559",
   "states": [
     {
-      "name": "bream"
+      "name": "stone_1"
     },
     {
-      "name": "cod"
+      "name": "stone_2"
     },
     {
-      "name": "lobster"
-    },
-    {
-      "name": "salmon"
-    },
-    {
-      "name": "shrimp"
+      "name": "stone_3"
     }
   ]
 }
