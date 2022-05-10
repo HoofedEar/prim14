@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA 3.0",
+  "copyright": "https://github.com/Civ13/Civ13/",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": ""
+    },
+    {
+      "name": "potato"
+    },
+    {
+      "name": "seeds"
+    },
+    {
+      "name": "seeds_dark"
+    },
+    {
+      "name": "mushroomseeds"
+    },
+    {
+      "name": "seeds_old"
+    },
+    {
+      "name": "riceseeds"
+    },
+    {
+      "name": "coconut"
+    },
+    {
+      "name": "bambooseeds"
+    }
+  ]
+}

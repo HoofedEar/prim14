@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA 3.0",
+  "copyright": "https://github.com/Civ13/Civ13/",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "death"
+    },
+    {
+      "name": "muzzle"
+    },
+    {
+      "name": "cigoff"
+    },
+    {
+      "name": "cigon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "luckcigon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cigbutt"
+    },
+    {
+      "name": "cigaroff"
+    },
+    {
+      "name": "cigaron"
+    },
+    {
+      "name": "cigar2off"
+    },
+    {
+      "name": "cigar2on"
+    },
+    {
+      "name": "cigarbutt"
+    },
+    {
+      "name": ""
+    },
+    {
+      "name": "cobpipeon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "cobpipeoff"
+    },
+    {
+      "name": "pipeon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "pipeoff"
+    },
+    {
+      "name": "tooth-necklace"
+    },
+    {
+      "name": "luckcigbutt"
+    },
+    {
+      "name": "luckcigoff"
+    },
+    {
+      "name": "skull_mask"
+    },
+    {
+      "name": "plaguedoctor"
+    },
+    {
+      "name": "shemagh1"
+    },
+    {
+      "name": "shemagh0"
+    },
+    {
+      "name": "redkerchief0"
+    },
+    {
+      "name": "greykerchief0"
+    },
+    {
+      "name": "redkerchief1"
+    },
+    {
+      "name": "greykerchief1"
+    },
+    {
+      "name": "samurai1"
+    },
+    {
+      "name": "samurai2"
+    },
+    {
+      "name": "samurai3"
+    },
+    {
+      "name": "french_gasmask"
+    },
+    {
+      "name": "german_gasmask"
+    },
+    {
+      "name": "british_gasmask"
+    },
+    {
+      "name": "painting_woodland"
+    },
+    {
+      "name": "balaclava"
+    },
+    {
+      "name": "shemagh_1"
+    },
+    {
+      "name": "shemagh_2"
+    },
+    {
+      "name": "shemagh_3"
+    },
+    {
+      "name": "shemagh_4"
+    },
+    {
+      "name": "modern_gasmask"
+    },
+    {
+      "name": "woodenmask"
+    },
+    {
+      "name": "chitin_mask"
+    },
+    {
+      "name": "sovietmask"
+    },
+    {
+      "name": "moderngasmask"
+    },
+    {
+      "name": "clownmask",
+      "directions": 4
+    },
+    {
+      "name": "iogplate"
+    },
+    {
+      "name": "joint"
+    },
+    {
+      "name": "jointon",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "military_gasmask"
+    },
+    {
+      "name": "russiamask"
+    },
+    {
+      "name": "sovietbala"
+    },
+    {
+      "name": "salamon"
+    },
+    {
+      "name": "swatmask",
+      "directions": 4
+    },
+    {
+      "name": "assyrian"
+    },
+    {
+      "name": "bossjaw"
+    },
+    {
+      "name": "solitaire"
+    },
+    {
+      "name": "sack"
+    },
+    {
+      "name": "scarecrow_sack"
+    },
+    {
+      "name": "whistle"
+    },
+    {
+      "name": "cowmask"
+    },
+    {
+      "name": "joy"
+    },
+    {
+      "name": "rat"
+    },
+    {
+      "name": "fox"
+    },
+    {
+      "name": "bee"
+    },
+    {
+      "name": "bear"
+    },
+    {
+      "name": "bat"
+    },
+    {
+      "name": "raven"
+    },
+    {
+      "name": "jackal"
+    },
+    {
+      "name": "bumba"
+    },
+    {
+      "name": "glass_pipe",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "mummy_mask"
+    },
+    {
+      "name": "frog"
+    },
+    {
+      "name": "owl"
+    },
+    {
+      "name": "anubis"
+    },
+    {
+      "name": "osiris"
+    },
+    {
+      "name": "pig"
+    },
+    {
+      "name": "sterile"
+    },
+    {
+      "name": "sterile_down"
+    },
+    {
+      "name": "stone_mask"
+    },
+    {
+      "name": "stone_mask_empty"
+    },
+    {
+      "name": "stone_mask_jeweled"
+    },
+    {
+      "name": "ty_necklace"
+    },
+    {
+      "name": "gorilla"
+    },
+    {
+      "name": "african1"
+    },
+    {
+      "name": "t99"
+    },
+    {
+      "name": "russiamask_pmk2"
+    },
+    {
+      "name": "bluekerchief0"
+    },
+    {
+      "name": "bluekerchief1"
+    },
+    {
+      "name": "yellowkerchief0"
+    },
+    {
+      "name": "yellowkerchief1"
+    },
+    {
+      "name": "NecklaceChristianGold"
+    }
+  ]
+}
