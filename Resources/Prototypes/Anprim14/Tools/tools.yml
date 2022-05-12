@@ -85,18 +85,14 @@
   name: blacksmith jug
   parent: BaseItem
   id: ToolBlacksmithJug
-  description: A sharp enough hatchet, makes cutting wood a lot easier.
+  description: A jug that is capable of withstanding immense heat.
   components:
   - type: Sprite
-    sprite: Anprim14/Tools/sharpstick.rsi
+    sprite: Anprim14/Tools/blacksmithjug.rsi
     state: icon
     netsync: false
   - type: BlacksmithJug
-    oreSlot1:
-      whitelist:
-        tags:
-          - Ore
-    oreSlot2:
+    oreSlot:
       whitelist:
         tags:
           - Ore

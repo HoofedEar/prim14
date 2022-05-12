@@ -7,10 +7,10 @@ public sealed class BlacksmithJugComponent : Component
 {
     public const string JugOreSlotId = "Jug-ore";
     public const string JugIngotSlotId = "Jug-ingot";
-
-    [DataField("oreSlot")] 
+    
+    [DataField("oreSlot", required: true)] 
     public ItemSlot OreSlot = new();
 
-    [DataField("ingotSlot")]
+    [DataField("ingotSlot", required: true)]
     public ItemSlot IngotSlot = new();
 }
