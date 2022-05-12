@@ -3,6 +3,7 @@
   parent: BaseRock
   name: BaseBush
   description: A pretty looking bush that grows berries.
+  abstract: true
   placement:
     mode: SnapgridCenter
   components:
@@ -16,7 +17,12 @@
       netsync: false
     - type: Appearance
     - type: Bush
-      loot: BaseBerry
+      loot: FoodGoldenBerry
     - type: BushVisuals
       stateEmpty: amarbush_1
       stateReady: amarbush_2
+
+- type: entity
+  id: BushGoldenBerry
+  parent: BaseBush
+  name: golden berry bush
