@@ -80,3 +80,27 @@
     damage:
       types:
         Piercing: 100
+
+- type: entity
+  name: blacksmith jug
+  parent: BaseItem
+  id: ToolBlacksmithJug
+  description: A sharp enough hatchet, makes cutting wood a lot easier.
+  components:
+  - type: Sprite
+    sprite: Anprim14/Tools/sharpstick.rsi
+    state: icon
+    netsync: false
+  - type: BlacksmithJug
+    oreSlot1:
+      whitelist:
+        tags:
+          - Ore
+    oreSlot2:
+      whitelist:
+        tags:
+          - Ore
+    ingotSlot:
+      whitelist:
+        tags:
+          - Ingot
