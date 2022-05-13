@@ -1,15 +1,16 @@
 ﻿using System.Threading;
-using Content.Server.Anprim14.Gathering.Components;
 using Content.Server.DoAfter;
+using Content.Server.Gatherable.Components;
 using Content.Shared.Damage;
+using Content.Shared.EntityList;
 using Content.Shared.Interaction;
-using Content.Shared.Storage;
 using Content.Shared.Tag;
 using Robust.Shared.Audio;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
-namespace Content.Server.Anprim14.Gathering;
+namespace Content.Server.Gatherable;
 
 public sealed class GatherableSystem : EntitySystem
 {
@@ -17,6 +18,7 @@ public sealed class GatherableSystem : EntitySystem
     [Dependency] private readonly DamageableSystem _damageableSystem = default!;
     [Dependency] private readonly IRobustRandom _random = null!;
     [Dependency] private readonly TagSystem _tagSystem = Get<TagSystem>();
+    [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
 
     public override void Initialize()
     {
@@ -30,15 +32,9 @@ public sealed class GatherableSystem : EntitySystem
     private void OnInteractUsing(EntityUid uid, GatherableComponent component, InteractUsingEvent args)
     {
         if (!TryComp<GatheringToolComponent>(args.Used, out var tool) ||
-            component.ToolWhitelist?.IsValid(args.Used) == false)
+            component.ToolWhitelist?.IsValid(args.Used) == false ||
+            tool.GatheringEntities.TryGetValue(uid, out var cancelToken))
             return;
-
-        if (tool.GatheringEntities.TryGetValue(uid, out var cancelToken))
-        {
-            cancelToken.Cancel();
-            tool.GatheringEntities.Remove(uid);
-            return;
-        }
 
         // Can't gather too many entities at once.
         if (tool.MaxGatheringEntities < tool.GatheringEntities.Count + 1)
@@ -73,17 +69,19 @@ public sealed class GatherableSystem : EntitySystem
 
         // Spawn the loot!
         if (component.MappedLoot == null) return;
-        foreach (var pair in component.MappedLoot)
+
+        var playerPos = Transform(ev.Player).MapPosition;
+
+        foreach (var (tag, table) in component.MappedLoot)
         {
-            if (pair.Key != "All")
+            if (tag != "All")
             {
-                if (!_tagSystem.HasTag(tool.Owner, pair.Key)) continue;
+                if (!_tagSystem.HasTag(tool.Owner, tag)) continue;
             }
-            var spawnLoot = EntitySpawnCollection.GetSpawns(pair.Value, _random);
-            var playerPos = Transform(ev.Player).MapPosition;
+            var getLoot = _prototypeManager.Index<EntityLootTablePrototype>(table);
+            var spawnLoot = getLoot.GetSpawns();
             var spawnPos = playerPos.Offset(_random.NextVector2(0.3f));
-            EntityManager.SpawnEntity(spawnLoot[0], spawnPos);
-            tool.GatheringEntities.Remove(uid);
+            Spawn(spawnLoot[0], spawnPos);
         }
     }
 

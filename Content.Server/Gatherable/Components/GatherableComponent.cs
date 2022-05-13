@@ -1,7 +1,6 @@
-using Content.Shared.Storage;
-using Content.Shared.Whitelist;
+﻿using Content.Shared.Whitelist;
 
-namespace Content.Server.Anprim14.Gathering.Components;
+namespace Content.Server.Gatherable.Components;
 
 [RegisterComponent]
 [Friend(typeof(GatherableSystem))]
@@ -17,7 +16,7 @@ public sealed class GatherableComponent : Component
 
     /// <summary>
     ///     YAML example below
-    ///     (Tag1, Tag2, Entity1, Entity2 are placeholders for example)
+    ///     (Tag1, Tag2, LootTableID1, LootTableID2 are placeholders for example)
     ///     --------------------
     ///     useMappedLoot: true
     ///     whitelist:
@@ -25,11 +24,9 @@ public sealed class GatherableComponent : Component
     ///        - Tag1
     ///        - Tag2
     ///     mappedLoot:
-    ///       Tag1:
-    ///         - id: EntityID1
-    ///       FishingPole:
-    ///         - id: EntityID2
+    ///       Tag1: LootTableID1
+    ///       Tag2: LootTableID2
     /// </summary>
     [DataField("loot")] 
-    public Dictionary<string, List<EntitySpawnEntry>>? MappedLoot = new();
+    public Dictionary<string, string>? MappedLoot = new();
 }
