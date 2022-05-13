@@ -1,0 +1,23 @@
+- type: material
+  id: Tin
+  stack: Steel # TODO replace stack
+  name: tin
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png # TODO replace icon
+
+- type: material
+  id: Copper
+  stack: Steel
+  name: copper
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png
+
+- type: material
+  id: Bronze
+  stack: Steel
+  name: bronze
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png
+
+- type: material
+  id: Iron
+  stack: Steel
+  name: iron
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png

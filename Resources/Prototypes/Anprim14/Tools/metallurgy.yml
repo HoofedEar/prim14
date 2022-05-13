@@ -22,14 +22,42 @@
 
 - type: entity
   parent: BaseItem
-  id: JugMoltenGold
-  name: molten gold
+  id: BaseMoltenJug
+  name: molten jug
+  abstract: true
   description: It's filled with molten gold.
   components:
   - type: Sprite
     sprite: Anprim14/Tools/blacksmithjug.rsi
     state: full
     netsync: false
+
+- type: entity
+  parent: BaseMoltenJug
+  id: JugMoltenGold
+  name: molten gold
+  description: It's filled with molten gold.
+  components:
+  - type: Material
+    materials:
+      Gold: 100
+
+- type: entity
+  parent: BaseMoltenJug
+  id: JugMoltenTin
+  name: molten tin
+  description: It's filled with molten tin.
+  components:
+  - type: Material
+    materials:
+      Gold: 100
+
+- type: entity
+  parent: BaseMoltenJug
+  id: JugMoltenCopper
+  name: molten copper
+  description: It's filled with molten copper.
+  components:
   - type: Material
     materials:
       Gold: 100
