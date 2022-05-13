@@ -5,7 +5,7 @@
   placement:
     mode: SnapgridCenter
   components:
-  - type: TimedCooker
+  - type: Kiln
     whitelist:
       id:
         - BlacksmithJug

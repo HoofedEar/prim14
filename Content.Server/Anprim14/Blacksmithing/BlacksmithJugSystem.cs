@@ -2,7 +2,7 @@
 using Content.Shared.Examine;
 using Content.Shared.Tag;
 
-namespace Content.Server.Anprim14.BlacksmithJug;
+namespace Content.Server.Anprim14.Blacksmithing;
 
 public sealed class BlacksmithJugSystem : EntitySystem
 {
@@ -20,7 +20,7 @@ public sealed class BlacksmithJugSystem : EntitySystem
 
     private void OnComponentInit(EntityUid uid, BlacksmithJugComponent jug, ComponentInit args)
     {
-        _itemSlotsSystem.AddItemSlot(uid, BlacksmithJugComponent.JugOreSlotId, jug.MaterialSlot);
+        _itemSlotsSystem.AddItemSlot(uid, BlacksmithJugComponent.JugMaterialSlotId, jug.MaterialSlot);
     }
 
     private void OnComponentRemove(EntityUid uid, BlacksmithJugComponent jug, ComponentRemove args)

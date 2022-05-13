@@ -17,3 +17,19 @@
         tags:
           - Ore
           - Ingot
+  - type: TimedCookable
+    recipe: BlacksmithJugRecipe
+
+- type: entity
+  parent: BaseItem
+  id: JugMoltenGold
+  name: molten gold
+  description: It's filled with molten gold.
+  components:
+  - type: Sprite
+    sprite: Anprim14/Tools/blacksmithjug.rsi
+    state: full
+    netsync: false
+  - type: Material
+    materials:
+      Gold: 100

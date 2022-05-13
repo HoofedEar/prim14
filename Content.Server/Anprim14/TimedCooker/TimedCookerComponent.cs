@@ -1,12 +1,13 @@
-﻿using Content.Shared.Sound;
+﻿using Content.Server.Anprim14.Blacksmithing;
+using Content.Shared.Sound;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Anprim14.TimedCooker;
 
 [RegisterComponent]
-[Friend(typeof(TimedCookerSystem))]
-public sealed class TimedCookerComponent : Component
+[Friend(typeof(TimedCookerSystem), typeof(KilnSystem))]
+public class TimedCookerComponent : Component
 {
     /// <summary>
     /// Container of entities inside to be processed.
@@ -26,7 +27,7 @@ public sealed class TimedCookerComponent : Component
     /// </summary>
     [ViewVariables]
     [DataField("max")] 
-    public int? Max = 1;
+    public int? Max = 2;
     
     /// <summary>
     /// The sound that plays when finished producing the result
