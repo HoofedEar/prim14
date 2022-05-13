@@ -1,4 +1,4 @@
-<p align="center"> <img alt="Space Station 14" style='height: 100%; width: 100%; object-fit: cover' src="https://github.com/HoofedEar/Anprim14/blob/85661d08cafdfe6661cdd06d6207e6396183976d/Resources/Textures/Logo/anprim-logo.png" /></p>
+<p align="center"> <img alt="Space Station 14" style='height: 75%; width: 75%; object-fit: cover' src="https://github.com/HoofedEar/Anprim14/blob/85661d08cafdfe6661cdd06d6207e6396183976d/Resources/Textures/Logo/anprim-logo.png" /></p>
 
 
 
