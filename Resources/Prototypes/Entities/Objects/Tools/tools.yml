@@ -285,7 +285,7 @@
   name: rake
   parent: BaseItem
   id: Rake
-  description: A large tool used to move soil for planting seeds.
+  description: A tool used to move soil for planting seeds.
   components:
   - type: Sprite
     sprite: Objects/Tools/rake.rsi

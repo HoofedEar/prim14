@@ -1,0 +1,27 @@
+- type: entity
+  id: BaseKiln
+  name: kiln
+  description: Careful not to burn yourself!
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: TimedCooker
+    whitelist:
+      id:
+        - BlacksmithJug
+  - type: Clickable
+  - type: Sprite
+    sprite: Anprim14/Structures/Metallurgy/kiln.rsi
+    state: icon
+    netsync: false
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      - shape:
+          !type:PhysShapeCircle
+          radius: 0.4
+        mass: 500
+        layer:
+          - HalfWallLayer
+          - Opaque

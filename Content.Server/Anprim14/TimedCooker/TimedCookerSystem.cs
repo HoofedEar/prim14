@@ -16,16 +16,10 @@ public sealed class TimedCookerSystem : EntitySystem
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
 
-    public TimedCookerRecipePrototype RecentRecipe = default!;
-    
     // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private Queue<EntityUid> _producingAddQueue = new();
     // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private Queue<EntityUid> _producingRemoveQueue = new();
-    // ReSharper disable once FieldCanBeMadeReadOnly.Local
-    private Queue<EntityUid> _insertingAddQueue = new();
-    // ReSharper disable once FieldCanBeMadeReadOnly.Local
-    private Queue<EntityUid> _insertingRemoveQueue = new();
     public override void Initialize()
     {
         base.Initialize();
@@ -58,10 +52,7 @@ public sealed class TimedCookerSystem : EntitySystem
         
         // Make sure it has a valid recipe
         if (!TryComp(args.Used, out TimedCookableComponent? cookable))
-        {
-            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
-            return;
-        }
+        { return; }
             
         
         if (cookable.Recipe == null || 
@@ -77,10 +68,7 @@ public sealed class TimedCookerSystem : EntitySystem
         {
             SoundSystem.Play(Filter.Pvs(component.Owner, entityManager: EntityManager), component.InsertingSound.GetSound(), component.Owner);
         }
-
         
-        
-
         //Queue it up
         if (cookable.Recipe != null)
         {
@@ -96,31 +84,14 @@ public sealed class TimedCookerSystem : EntitySystem
         }
 
         _producingAddQueue.Clear();
+        
         foreach (var uid in _producingRemoveQueue)
         {
             RemComp<TimedCookerProducingComponent>(uid);
         }
 
         _producingRemoveQueue.Clear();
-        
-        foreach (var uid in _insertingAddQueue)
-        {
-            EnsureComp<TimedCookerProducingComponent>(uid);
-        }
 
-        _insertingAddQueue.Clear();
-        foreach (var uid in _insertingRemoveQueue)
-        {
-            RemComp<TimedCookerProducingComponent>(uid);
-        }
-
-        _insertingRemoveQueue.Clear();
-
-        foreach (var cooker in EntityQuery<TimedCookerComponent>())
-        {
-            _insertingRemoveQueue.Enqueue(cooker.Owner);
-        }
-        
         foreach (var cooker in EntityQuery<TimedCookerComponent>())
         {
             if (cooker.ProducingRecipe == null)
@@ -150,7 +121,12 @@ public sealed class TimedCookerSystem : EntitySystem
     {
         component.ProducingRecipe = null;
         if (productionSucceeded)
-            EntityManager.SpawnEntity(recipe.Result, Comp<TransformComponent>(component.Owner).Coordinates);
+        {
+            foreach (var result in recipe.Result)
+            {
+                EntityManager.SpawnEntity(result, Comp<TransformComponent>(component.Owner).Coordinates);
+            }
+        }
         
         // Play sound
         if (component.ProducingSound != null)
@@ -165,6 +141,7 @@ public sealed class TimedCookerSystem : EntitySystem
             return;
         }
         _producingRemoveQueue.Enqueue(component.Owner);
+        component.Container.CleanContainer();
     }
 
     /// <summary>
@@ -175,18 +152,4 @@ public sealed class TimedCookerSystem : EntitySystem
         component.ProducingRecipe = recipe;
         _producingAddQueue.Enqueue(component.Owner);
     }
-    
-    /*
-    if (recipe != null!)
-    {
-        for (var i = 0; i < msg.Quantity; i++)
-        {
-            component.Queue.Enqueue(recipe);
-            component.UserInterface?.SendMessage(new LatheFullQueueMessage(GetIdQueue(component)));
-        }
-    }
-
-    if (!HasComp<LatheProducingComponent>(component.Owner) && component.Queue.Count > 0)
-    Produce(component, component.Queue.Dequeue());
-    */
 }

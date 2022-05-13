@@ -10,35 +10,15 @@ public sealed class TimedCookerRecipePrototype : IPrototype
     [IdDataField]
     public string ID { get; } = default!;
 
-    [DataField("name")]
-    private string _name = string.Empty;
-    
     [DataField("input", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
     private string _input = string.Empty;
     
-    [DataField("result", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
-    private string _result = string.Empty;
+    [DataField("result")]
+    private List<string> _result = new();
     
-    [DataField("completetime")]
+    [DataField("completeTime")]
     private TimeSpan _completeTime = TimeSpan.FromSeconds(5);
-    
-    /// <summary>
-    ///     Name displayed in the GUI. ?
-    /// </summary>
-    [ViewVariables]
-    public string Name
-    {
-        get
-        {
-            if (_name.Trim().Length != 0) return _name;
-            var protoMan = IoCManager.Resolve<IPrototypeManager>();
-            protoMan.TryIndex(_result, out EntityPrototype? prototype);
-            if (prototype?.Name != null)
-                _name = prototype.Name;
-            return _name;
-        }
-    }
-    
+
     /// <summary>
     ///     The prototype name of the necessary entity when the recipe is produced.
     /// </summary>
@@ -49,7 +29,7 @@ public sealed class TimedCookerRecipePrototype : IPrototype
     ///     The prototype name of the resulting entity when the recipe is printed.
     /// </summary>
     [ViewVariables]
-    public string Result => _result;
+    public List<string> Result => _result;
     
     /// <summary>
     ///     How many milliseconds it'll take for the lathe to finish this recipe.

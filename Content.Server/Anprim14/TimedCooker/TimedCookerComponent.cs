@@ -26,7 +26,7 @@ public sealed class TimedCookerComponent : Component
     /// </summary>
     [ViewVariables]
     [DataField("max")] 
-    public int? Max = 2;
+    public int? Max = 1;
     
     /// <summary>
     /// The sound that plays when finished producing the result

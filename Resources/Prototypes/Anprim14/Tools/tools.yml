@@ -80,20 +80,3 @@
     damage:
       types:
         Piercing: 100
-
-- type: entity
-  name: blacksmith jug
-  parent: BaseItem
-  id: ToolBlacksmithJug
-  description: A jug that is capable of withstanding immense heat.
-  components:
-  - type: Sprite
-    sprite: Anprim14/Tools/blacksmithjug.rsi
-    state: icon
-    netsync: false
-  - type: BlacksmithJug
-    materialSlot:
-      whitelist:
-        tags:
-          - Ore
-          - Ingot
