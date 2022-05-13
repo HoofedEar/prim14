@@ -92,11 +92,8 @@
     state: icon
     netsync: false
   - type: BlacksmithJug
-    oreSlot:
+    materialSlot:
       whitelist:
         tags:
           - Ore
-    ingotSlot:
-      whitelist:
-        tags:
           - Ingot
