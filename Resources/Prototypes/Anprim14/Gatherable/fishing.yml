@@ -16,11 +16,11 @@
         !type:PhysShapeAabb { }
       layer:
       - Impassable
-      - MobImpassable
-      - VaultImpassable
-      - SmallImpassable
+      - MidImpassable
+      - HighImpassable
+      - LowImpassable
       mask:
-      - VaultImpassable
+      - HighImpassable
   - type: Physics
     bodyType: Static
   - type: Sprite
@@ -36,7 +36,5 @@
         - SharpStick
         - FishingPole
     loot:
-      SharpStick:
-        - id: RawCod
-      FishingPole:
-        - id: RawSalmon
+      SharpStick: SharpStickFishingLootTable
+      FishingPole: FishingPoleLootTable

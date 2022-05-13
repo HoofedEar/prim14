@@ -7,7 +7,6 @@ namespace Content.Client.Entry
         {
             "AirlockPainter",
             "AmmoBox",
-            "GatheringTool",
             "IngestionBlocker",
             "Charger",
             "CloningPod",
@@ -36,6 +35,7 @@ namespace Content.Client.Entry
             "MeleeChemicalInjector",
             "Dice",
             "PaperLabel",
+            "PressureImmunity",
             "Construction",
             "PoweredLight",
             "Smes",
@@ -52,7 +52,6 @@ namespace Content.Client.Entry
             "DiseaseZombie",
             "DiseaseBuildup",
             "ZombieTransfer",
-            "Gatherable",
             "RangedMagazine",
             "RandomMetadata",
             "Ammo",
@@ -199,7 +198,6 @@ namespace Content.Client.Entry
             "SignalReceiver",
             "SignalSwitch",
             "SignalTransmitter",
-            "SignalButton",
             "SignalLinker",
             "ItemCabinet",
             "FireExtinguisher",
@@ -310,6 +308,7 @@ namespace Content.Client.Entry
             "ExtensionCableReceiver",
             "ExtensionCableProvider",
             "ApcNetworkConnection",
+            "Gatherable",
             "SuitSensor",
             "CrewMonitoringConsole",
             "ApcNetSwitch",
@@ -328,6 +327,7 @@ namespace Content.Client.Entry
             "Raking",
             "UseWith",
             "ReleaseFish",
+            "GatheringTool",
             "Guardian",
             "GuardianCreator",
             "GuardianHost",
@@ -354,7 +354,11 @@ namespace Content.Client.Entry
             "DoorRemote",
             "InteractionPopup",
             "HealthAnalyzer",
-            "Wires"
+            "BodyReassemble",
+            "Thirst",
+            "CanEscapeInventory",
+            "PowerSink",
+            "Wires",
         };
     }
 }
