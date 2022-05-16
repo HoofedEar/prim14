@@ -7,6 +7,8 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Server.GameObjects;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Server.Chemistry.Components
 {
@@ -64,6 +66,13 @@ namespace Content.Server.Chemistry.Components
         [DataField("canChangeTransferAmount")]
         [ViewVariables(VVAccess.ReadWrite)]
         public bool CanChangeTransferAmount { get; set; } = false;
+
+        /// <summary>
+        /// Whether you're allowed to change the transfer amount.
+        /// </summary>
+        [ViewVariables]
+        [DataField("empty", customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+        public string? EmptyPrototype { get; set; }
 
         [ViewVariables] public BoundUserInterface? UserInterface => Owner.GetUIOrNull(TransferAmountUiKey.Key);
 

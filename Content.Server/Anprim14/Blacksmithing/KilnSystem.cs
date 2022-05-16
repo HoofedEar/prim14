@@ -18,6 +18,10 @@ public sealed class KilnSystem : EntitySystem
 
     private readonly Dictionary<string, string> _kilnMapping = new()
     {
+        {"Tin", "JugMoltenTin"},
+        {"Copper", "JugMoltenCopper"},
+        {"Bronze", "JugMoltenBronze"},
+        {"Iron", "JugMoltenIron"},
         {"Gold", "JugMoltenGold"}
     };
 

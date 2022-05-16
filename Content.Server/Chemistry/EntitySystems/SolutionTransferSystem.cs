@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 
 namespace Content.Server.Chemistry.EntitySystems
@@ -11,6 +12,8 @@ namespace Content.Server.Chemistry.EntitySystems
     [UsedImplicitly]
     public sealed class SolutionTransferSystem : EntitySystem
     {
+        [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
+
         /// <summary>
         ///     Default transfer amounts for the set-transfer verb.
         /// </summary>
@@ -23,7 +26,8 @@ namespace Content.Server.Chemistry.EntitySystems
             SubscribeLocalEvent<SolutionTransferComponent, GetVerbsEvent<AlternativeVerb>>(AddSetTransferVerbs);
         }
 
-        private void AddSetTransferVerbs(EntityUid uid, SolutionTransferComponent component, GetVerbsEvent<AlternativeVerb> args)
+        private void AddSetTransferVerbs(EntityUid uid, SolutionTransferComponent component,
+            GetVerbsEvent<AlternativeVerb> args)
         {
             if (!args.CanAccess || !args.CanInteract || !component.CanChangeTransferAmount)
                 return;
@@ -112,7 +116,34 @@ namespace Content.Server.Chemistry.EntitySystems
             var solution = solutionSystem.Drain(sourceEntity, source, actualAmount);
             solutionSystem.Refill(targetEntity, target, solution);
 
+
+            if (source.DrainAvailable == 0 && TryComp(sourceEntity, out SolutionTransferComponent? solutionComp) &&
+                solutionComp.EmptyPrototype != null)
+            {
+                DeleteAndSpawnJug(user, sourceEntity, solutionComp.EmptyPrototype);
+                return actualAmount;
+            }
+
             return actualAmount;
+        }
+
+        private void DeleteAndSpawnJug(EntityUid user, EntityUid source, string emptyprototype)
+        {
+            //We're empty. Become trash.
+            var position = EntityManager.GetComponent<TransformComponent>(source).Coordinates;
+            var finisher = EntityManager.SpawnEntity(emptyprototype, position);
+
+            // If the user is holding the item
+            if (_handsSystem.IsHolding(user, source, out var hand))
+            {
+                EntityManager.DeleteEntity(source);
+
+                // Put the trash in the user's hand
+                _handsSystem.TryPickup(user, finisher, hand);
+                return;
+            }
+
+            EntityManager.QueueDeleteEntity(source);
         }
     }
 

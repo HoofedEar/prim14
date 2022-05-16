@@ -53,10 +53,9 @@
   - type: SolutionTransfer
     canChangeTransferAmount: false
     transferAmount: 20
+    empty: ToolBlacksmithJug
   - type: DrainableSolution
     solution: metal
-  - type: MoltenJug
-    empty: ToolBlacksmithJug
 
 - type: entity
   parent: BaseMoltenJug
