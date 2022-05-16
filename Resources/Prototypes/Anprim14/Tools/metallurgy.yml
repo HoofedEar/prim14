@@ -1,3 +1,8 @@
+- type: reagent
+  id: BaseMetal
+  group: Metals
+  abstract: true
+
 - type: entity
   name: blacksmith jug
   parent: BaseItem
@@ -38,9 +43,20 @@
   name: molten gold
   description: It's filled with molten gold.
   components:
-  - type: Material
-    materials:
-      Gold: 100
+  - type: SolutionContainerManager
+    solutions:
+      metal:
+        reagents:
+        - ReagentId: Gold
+          Quantity: 20
+        maxVol: 20
+  - type: SolutionTransfer
+    canChangeTransferAmount: false
+    transferAmount: 20
+  - type: DrainableSolution
+    solution: metal
+  - type: MoltenJug
+    empty: ToolBlacksmithJug
 
 - type: entity
   parent: BaseMoltenJug

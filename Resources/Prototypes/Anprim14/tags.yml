@@ -9,6 +9,9 @@
 
 - type: Tag
   id: RawFish
+  
+- type: Tag
+  id: Mold
 
 - type: Tag
   id: SharpStick

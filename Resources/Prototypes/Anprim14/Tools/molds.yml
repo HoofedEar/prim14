@@ -1,0 +1,20 @@
+- type: entity
+  parent: BaseItem
+  id: BaseMold
+  name: base mold
+  description: It can be filled with molten metal.
+  components:
+  - type: Tag
+    tags:
+    - Mold
+  - type: Sprite
+    sprite: Anprim14/Tools/pickaxeheadmold.rsi
+    state: icon
+    scale: 0.6, 0.6
+  - type: SolutionContainerManager
+    solutions:
+      metal:
+        maxVol: 20
+  - type: RefillableSolution
+    solution: metal
+    maxRefill: 20
