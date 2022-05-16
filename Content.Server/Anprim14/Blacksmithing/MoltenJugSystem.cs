@@ -1,6 +1,4 @@
-﻿using Content.Server.Chemistry.Components;
-using Content.Server.Chemistry.Components.SolutionManager;
-using Content.Server.Chemistry.EntitySystems;
+﻿using Content.Server.Chemistry.Components.SolutionManager;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 
@@ -18,12 +16,10 @@ public sealed class MoltenJugSystem : EntitySystem
 
     private void OnAfterInteract(EntityUid uid, MoltenJugComponent component, AfterInteractEvent args)
     {
-        DeleteAndSpawnTrash(component, args.User);
-    }
+        if (!args.CanReach || args.Target == null)
+                return;
 
-    private void DeleteAndSpawnTrash(MoltenJugComponent component, EntityUid? user = null)
-    {
-        if (!TryComp<SolutionContainerManagerComponent>(user, out var solCont))
+        if (!TryComp<SolutionContainerManagerComponent>(args.Used, out var solCont))
             return;
 
         foreach (var (_, solution) in solCont.Solutions)
@@ -31,18 +27,17 @@ public sealed class MoltenJugSystem : EntitySystem
             if (solution.CurrentVolume != 0)
                 return;
         }
-
-        //We're empty. Become trash.
+        
         var position = EntityManager.GetComponent<TransformComponent>(component.Owner).Coordinates;
         var finisher = EntityManager.SpawnEntity(component.EmptyPrototype, position);
 
         // If the user is holding the item
-        if (_handsSystem.IsHolding(user.Value, component.Owner, out var hand))
+        if (_handsSystem.IsHolding(args.Used, component.Owner, out var hand))
         {
             EntityManager.DeleteEntity((component).Owner);
 
             // Put the trash in the user's hand
-            _handsSystem.TryPickup(user.Value, finisher, hand);
+            _handsSystem.TryPickup(args.User, finisher, hand);
             return;
         }
 
