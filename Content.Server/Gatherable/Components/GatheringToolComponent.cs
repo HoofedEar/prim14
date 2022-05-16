@@ -1,4 +1,4 @@
-using System.Threading;
+﻿using System.Threading;
 using Content.Shared.Damage;
 using Content.Shared.Sound;
 

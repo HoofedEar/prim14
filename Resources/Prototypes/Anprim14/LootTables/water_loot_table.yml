@@ -1,0 +1,9 @@
+- type: entityLootTable
+  id: SharpStickFishingLootTable
+  entries:
+  - id: RawCod
+  
+- type: entityLootTable
+  id: FishingPoleLootTable
+  entries:
+  - id: RawSalmon

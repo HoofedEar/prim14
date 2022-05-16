@@ -313,6 +313,7 @@
     attributes:
       proper: true
   - type: StandingState
+  - type: NoSlip
 
 - type: entity
   save: false

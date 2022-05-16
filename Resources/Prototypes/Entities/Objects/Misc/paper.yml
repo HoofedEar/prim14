@@ -90,6 +90,10 @@
     sprite: Objects/Misc/bureaucracy.rsi
     state: overpriced_pen
     netsync: false
+  - type: GatheringTool
+    damage:
+      types:
+        Piercing: 5
   - type: ItemCooldown
   - type: MeleeWeapon
     damage:

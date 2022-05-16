@@ -17,6 +17,7 @@ namespace Content.Server.Entry
             "Icon",
             "ClientEntitySpawner",
             "CharacterInfo",
+            "BushVisuals",
             "ItemCabinetVisuals",
             "LatheVisuals",
             "DiseaseMachineVisuals",

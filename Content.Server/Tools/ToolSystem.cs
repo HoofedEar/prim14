@@ -5,6 +5,7 @@ using Content.Server.Chemistry.EntitySystems;
 using Content.Server.DoAfter;
 using Content.Server.Popups;
 using Content.Shared.Audio;
+using Content.Shared.Interaction;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -23,6 +24,7 @@ namespace Content.Server.Tools
         [Dependency] private readonly SolutionContainerSystem _solutionContainerSystem = default!;
         [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private readonly PopupSystem _popupSystem = default!;
+        [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
 
 
         public override void Initialize()
@@ -32,6 +34,7 @@ namespace Content.Server.Tools
             InitializeTilePrying();
             InitializeWelders();
             InitializeMultipleTools();
+            InitializeRaking();
 
             SubscribeLocalEvent<ToolDoAfterComplete>(OnDoAfterComplete);
             SubscribeLocalEvent<ToolDoAfterCancelled>(OnDoAfterCancelled);

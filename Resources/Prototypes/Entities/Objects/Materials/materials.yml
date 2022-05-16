@@ -108,6 +108,7 @@
     stackType: WoodPlank
   - type: Sprite
     state: wood
+    scale: 0.8, 0.8
   - type: Item
     HeldPrefix: wood
 

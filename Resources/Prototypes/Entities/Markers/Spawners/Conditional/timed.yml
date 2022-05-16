@@ -36,26 +36,21 @@
       maximumEntitiesSpawned: 4
 
 - type: entity
-  name: Mouse Timed Spawner
-  id: MouseTimedSpawner
+  name: Tree Renewable Spawner
+  id: TreeRenewableSpawner
   parent: MarkerBase
   components:
     - type: Sprite
       layers:
         - state: blue
-        - texture: Mobs/Animals/mouse.rsi/icon-2.png
-        - state: timed
-    - type: TimedSpawner
+        - texture: Objects/Decoration/Flora/flora_trees.rsi/tree01.png
+    - type: RenewableSpawner
       prototypes:
-        - MobMouse
-        - MobMouse1
-        - MobMouse2
-      # round ~90m
-      # one spawner should only spawn ~5 mice for sanity reasons
-      # therefore 18m
-      # use 50% chance for randomness and balance with halved interval
-      chance: 0.5
-      intervalSeconds: 540
-      minimumEntitiesSpawned: 1
-      maximumEntitiesSpawned: 1
-
+        - FloraTree01
+        - FloraTree02
+        - FloraTree03
+        - FloraTree04
+        - FloraTree05
+        - FloraTree06
+      chance: 1.0
+      intervalSeconds: 10

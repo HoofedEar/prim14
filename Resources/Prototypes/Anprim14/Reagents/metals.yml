@@ -1,0 +1,26 @@
+- type: material
+  id: Tin
+  name: tin
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png # TODO replace icon
+
+- type: material
+  id: Copper
+  name: copper
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png
+
+- type: material
+  id: Bronze
+  name: bronze
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png
+
+- type: material
+  id: Iron
+  name: iron
+  icon: Objects/Materials/Sheets/metal.rsi/steel.png
+
+- type: reagent
+  id: Gold
+  name: reagent-name-coffee
+  parent: BaseMetal
+  desc: reagent-desc-coffee
+  physicalDesc: reagent-physical-desc-aromatic

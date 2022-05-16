@@ -9,7 +9,7 @@ namespace Content.Server.Tools;
 
 public sealed partial class ToolSystem
 {
-    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    //[Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
 
     private void InitializeTilePrying()
     {

@@ -1,0 +1,27 @@
+- type: construction
+  name: wooden hatchet
+  id: woodenhatchet
+  graph: WoodenHatchet
+  startNode: start
+  targetNode: hatchet
+  category: Wood
+  description: A robust wooden hatchet.
+  show: true
+  icon:
+    sprite: Anprim14/Tools/woodenhatchet.rsi
+    state: icon
+  objectType: Item
+
+- type: construction
+  name: fishing pole
+  id: fishingpole
+  graph: FishingPole
+  startNode: start
+  targetNode: pole
+  category: Wood
+  description: A simple fishing pole.
+  show: true
+  icon:
+    sprite: Anprim14/Tools/fishingpole.rsi
+    state: icon
+  objectType: Item

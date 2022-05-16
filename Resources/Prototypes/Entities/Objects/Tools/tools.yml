@@ -280,6 +280,27 @@
         Blunt: 10
   - type: Item
     sprite: Objects/Tools/shovel.rsi
+    
+- type: entity
+  name: rake
+  parent: BaseItem
+  id: Rake
+  description: A tool used to move soil for planting seeds.
+  components:
+  - type: Sprite
+    sprite: Objects/Tools/rake.rsi
+    state: icon
+  - type: ItemCooldown
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 10
+  - type: Item
+    sprite: Objects/Tools/rake.rsi
+  - type: Raking
+  - type: Tool
+    qualities:
+      - Raking
 
 - type: entity
   name: omnitool

@@ -93,7 +93,7 @@
 - type: entity
   name: tower-cap log
   description: It's better than bad, it's good!
-  id: Log
+  id: TowerCapLog
   parent: ProduceBase
   components:
   - type: Sprite

@@ -1,0 +1,82 @@
+- type: entity
+  name: wooden hatchet
+  parent: BaseItem
+  id: ToolWoodenHatchet
+  description: A sharp enough hatchet, makes cutting wood a lot easier.
+  components:
+  - type: Tag
+    tags:
+    - Hatchet
+  - type: Sharp
+  - type: Sprite
+    sprite: Anprim14/Tools/woodenhatchet.rsi
+    state: icon
+    netsync: false
+  - type: ItemCooldown
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 10
+        Piercing: 5
+  - type: Item
+    sprite: Anprim14/Tools/woodenhatchet.rsi
+  - type: GatheringTool
+    gatheringTime: 6
+    damage:
+      types:
+        Piercing: 100
+  - type: Construction
+    graph: WoodenHatchet
+    node: hatchet
+
+- type: entity
+  name: fishing pole
+  parent: BaseItem
+  id: ToolFishingPole
+  description: A very simple fishing pole. Better than using a stick.
+  components:
+  - type: Tag
+    tags:
+    - FishingPole
+  - type: Sprite
+    sprite: Anprim14/Tools/fishingpole.rsi
+    state: icon
+    netsync: false
+  - type: ItemCooldown
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 5
+  - type: GatheringTool
+    gatheringTime: 6
+    damage:
+      types:
+        Piercing: 100
+  - type: Construction
+    graph: FishingPole
+    node: pole
+
+- type: entity
+  name: sharpened stick
+  parent: BaseItem
+  id: ToolSharpenedStick
+  description: A decently sharp stick.
+  components:
+  - type: Tag
+    tags:
+    - SharpStick
+  - type: Sprite
+    sprite: Anprim14/Tools/sharpstick.rsi
+    state: icon
+    netsync: false
+  - type: ItemCooldown
+  - type: MeleeWeapon
+    damage:
+      types:
+        Piercing: 5
+  - type: GatheringTool
+    sound: /Audio/Anprim14/Effects/watersplash.ogg
+    gatheringTime: 6
+    damage:
+      types:
+        Piercing: 100
