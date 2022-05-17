@@ -47,7 +47,7 @@
     solutions:
       metal:
         reagents:
-        - ReagentId: Gold
+        - ReagentId: Iron
           Quantity: 20
         maxVol: 20
   - type: SolutionTransfer
