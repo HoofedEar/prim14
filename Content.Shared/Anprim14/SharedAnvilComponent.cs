@@ -2,15 +2,9 @@
 
 namespace Content.Shared.Anprim14;
 
-public sealed class SharedAnvilComponent
+[Serializable, NetSerializable]
+public enum AnvilState
 {
-    [ViewVariables]
-    public AnvilState State = AnvilState.Empty;
-    
-    [Serializable, NetSerializable]
-    public enum AnvilState
-    {
-        Empty,
-        Ready
-    }
+    Empty,
+    Ready
 }

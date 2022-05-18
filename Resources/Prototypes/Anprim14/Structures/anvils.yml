@@ -10,6 +10,10 @@
     sprite: Anprim14/Structures/Metallurgy/stone_anvil.rsi
     state: icon
     netsync: false
+  - type: Appearance
+  - type: AnvilVisuals
+    stateEmpty: icon
+    stateReady: anvil-ready
   - type: Anvil
     moldSlot:
       whitelist:

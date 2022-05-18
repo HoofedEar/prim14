@@ -12,6 +12,7 @@ namespace Content.Server.Entry
             "AnimationsTest",
             "ItemStatus",
             "VehicleVisuals",
+            "AnvilVisuals",
             "Marker",
             "Clickable",
             "Icon",

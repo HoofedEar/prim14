@@ -1,8 +1,8 @@
 ﻿using Content.Server.Anprim14.Blacksmithing.Components;
 using Content.Server.Chemistry.Components.SolutionManager;
+using Content.Shared.Anprim14;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
-using Content.Shared.Anprim14;
 using Robust.Shared.Containers;
 
 namespace Content.Server.Anprim14.Blacksmithing;
@@ -30,7 +30,7 @@ public sealed class AnvilSystem : EntitySystem
         if (!EntityManager.TryGetComponent(uid, out AppearanceComponent appearance))
             return;
 
-        appearance.SetData(SharedAnvilComponent.AnvilState.Ready, anvil.MoldSlot.HasItem);
+        appearance.SetData(AnvilState.Ready, anvil.MoldSlot.HasItem);
     }
 
     private void OnComponentInit(EntityUid uid, AnvilComponent jug, ComponentInit args)
@@ -55,7 +55,7 @@ public sealed class AnvilSystem : EntitySystem
 
         if (solutionComp.Solutions.Count == 0)
         {
-            
+
             return;
         }
 
@@ -69,7 +69,7 @@ public sealed class AnvilSystem : EntitySystem
                 args.Message.AddText("\nIt has an empty mold.");
                 break;
             }
-            
+
             args.Message.AddText("\nIt has a mold ready to smith.");
             break;
         }
