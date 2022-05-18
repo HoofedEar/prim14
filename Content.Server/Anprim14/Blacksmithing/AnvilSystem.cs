@@ -2,6 +2,8 @@
 using Content.Server.Chemistry.Components.SolutionManager;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
+using Content.Shared.Anprim14;
+using Robust.Shared.Containers;
 
 namespace Content.Server.Anprim14.Blacksmithing;
 
@@ -15,6 +17,20 @@ public sealed class AnvilSystem : EntitySystem
         SubscribeLocalEvent<AnvilComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<AnvilComponent, ComponentRemove>(OnComponentRemove);
         SubscribeLocalEvent<AnvilComponent, ExaminedEvent>(OnExamined);
+        SubscribeLocalEvent<AnvilComponent, ContainerModifiedMessage>(OnContainerModified);
+    }
+
+    private void OnContainerModified(EntityUid uid, AnvilComponent anvil, ContainerModifiedMessage args)
+    {
+        if (!anvil.Initialized) return;
+
+        if (args.Container.ID != anvil.MoldSlot.ID)
+            return;
+
+        if (!EntityManager.TryGetComponent(uid, out AppearanceComponent appearance))
+            return;
+
+        appearance.SetData(SharedAnvilComponent.AnvilState.Ready, anvil.MoldSlot.HasItem);
     }
 
     private void OnComponentInit(EntityUid uid, AnvilComponent jug, ComponentInit args)

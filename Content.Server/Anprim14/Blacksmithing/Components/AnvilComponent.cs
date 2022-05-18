@@ -7,6 +7,7 @@ public sealed class AnvilComponent : Component
 {
     public const string AnvilMoldSlotId = "Anvil-mold";
     
+    [ViewVariables]
     [DataField("moldSlot", required: true)] 
     public ItemSlot MoldSlot = new();
 }
