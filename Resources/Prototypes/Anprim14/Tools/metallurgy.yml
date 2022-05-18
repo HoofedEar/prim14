@@ -32,6 +32,9 @@
   abstract: true
   description: It's filled with molten gold.
   components:
+  - type: Tag
+    tags:
+    - BlacksmithJug
   - type: Sprite
     sprite: Anprim14/Tools/blacksmithjug.rsi
     state: full

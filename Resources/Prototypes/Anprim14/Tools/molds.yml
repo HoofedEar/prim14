@@ -7,21 +7,18 @@
   - type: Tag
     tags:
     - Mold
-  - type: Appearance
-    visuals:
-    - type: SolutionContainerVisualizer
-      maxFillLevels: 1
-      changeColor: false
-      emptySpriteName: icon
   - type: Sprite
     sprite: Anprim14/Tools/pickaxeheadmold.rsi
     scale: 0.6, 0.6
     layers:
-    - state: filled
+    - state: icon
+    - state: filled-1
       map: ["enum.SolutionContainerLayers.Fill"]
       visible: true
   - type: Icon
+    sprite: Anprim14/Tools/pickaxeheadmold.rsi
     state: icon
+    scale: 0.6, 0.6
   - type: SolutionContainerManager
     solutions:
       metal:
@@ -29,5 +26,15 @@
   - type: RefillableSolution
     solution: metal
     maxRefill: 20
+    whitelist:
+      tags:
+        - BlacksmithJug
   - type: ExaminableSolution
     solution: metal
+  - type: Appearance
+    visuals:
+    - type: SolutionContainerVisualizer
+      maxFillLevels: 1
+      fillBaseName: filled-
+      changeColor: false
+      emptySpriteName: icon

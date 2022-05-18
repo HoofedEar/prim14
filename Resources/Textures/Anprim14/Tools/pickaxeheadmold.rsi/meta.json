@@ -8,11 +8,11 @@
   "copyright": "https://github.com/Civ13/Civ13/",
   "states": [
     {
+	  "name": "filled-1"
+	},
+    {
       "name": "icon"
     },
-	{
-	  "name": "filled"
-	},
 	{
 	  "name": "raw"
 	}

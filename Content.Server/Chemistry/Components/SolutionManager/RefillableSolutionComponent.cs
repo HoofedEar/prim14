@@ -1,4 +1,5 @@
 using Content.Shared.FixedPoint;
+using Content.Shared.Whitelist;
 
 namespace Content.Server.Chemistry.Components.SolutionManager
 {
@@ -24,6 +25,12 @@ namespace Content.Server.Chemistry.Components.SolutionManager
         [ViewVariables(VVAccess.ReadWrite)]
         public FixedPoint2? MaxRefill { get; set; } = null;
 
+        /// <summary>
+        /// List of tags of entities that can refill this container
+        /// </summary>
+        [DataField("whitelist")]
+        [ViewVariables(VVAccess.ReadWrite)]
+        public EntityWhitelist? Whitelist { get; set; }
 
     }
 }

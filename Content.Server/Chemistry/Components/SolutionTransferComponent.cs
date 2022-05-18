@@ -6,6 +6,7 @@ using Content.Shared.Chemistry;
 using Content.Shared.FixedPoint;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Tag;
 using Robust.Server.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
@@ -158,6 +159,11 @@ namespace Content.Server.Chemistry.Components
 
                 if (_entities.TryGetComponent(target, out RefillableSolutionComponent? refill) && refill.MaxRefill != null)
                 {
+                    if (refill.Whitelist?.IsValid(Owner) == false)
+                    {
+                        return false;
+                    }
+
                     transferAmount = FixedPoint2.Min(transferAmount, (FixedPoint2) refill.MaxRefill);
                 }
 
