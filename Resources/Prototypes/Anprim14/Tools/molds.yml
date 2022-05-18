@@ -3,6 +3,7 @@
   id: BaseMold
   name: base mold
   description: It can be filled with molten metal.
+  abstract: true
   components:
   - type: Tag
     tags:
@@ -38,3 +39,9 @@
       fillBaseName: filled-
       changeColor: false
       emptySpriteName: icon
+      
+- type: entity
+  parent: BaseMold
+  id: MoldPickaxe
+  name: pickaxe head mold
+  description: Used for making metal pickaxe heads.

@@ -3,6 +3,7 @@
   group: Metals
   abstract: true
 
+# Blacksmith Jug
 - type: entity
   name: blacksmith jug
   parent: BaseItem
@@ -25,6 +26,7 @@
   - type: TimedCookable
     recipe: BlacksmithJugRecipe
 
+# Base MoltenJug
 - type: entity
   parent: BaseItem
   id: BaseMoltenJug
@@ -32,6 +34,19 @@
   abstract: true
   description: It's filled with molten gold.
   components:
+  - type: SolutionContainerManager
+    solutions:
+      metal:
+        reagents:
+          - ReagentId: Gold
+            Quantity: 20
+        maxVol: 20
+  - type: SolutionTransfer
+    canChangeTransferAmount: false
+    transferAmount: 20
+    empty: ToolBlacksmithJug
+  - type: DrainableSolution
+    solution: metal
   - type: Tag
     tags:
     - BlacksmithJug
@@ -50,15 +65,9 @@
     solutions:
       metal:
         reagents:
-        - ReagentId: Iron
-          Quantity: 20
+          - ReagentId: Gold
+            Quantity: 20
         maxVol: 20
-  - type: SolutionTransfer
-    canChangeTransferAmount: false
-    transferAmount: 20
-    empty: ToolBlacksmithJug
-  - type: DrainableSolution
-    solution: metal
 
 - type: entity
   parent: BaseMoltenJug
@@ -66,9 +75,13 @@
   name: molten tin
   description: It's filled with molten tin.
   components:
-  - type: Material
-    materials:
-      Gold: 100
+  - type: SolutionContainerManager
+    solutions:
+      metal:
+        reagents:
+          - ReagentId: Tin
+            Quantity: 20
+        maxVol: 20
 
 - type: entity
   parent: BaseMoltenJug
@@ -76,6 +89,10 @@
   name: molten copper
   description: It's filled with molten copper.
   components:
-  - type: Material
-    materials:
-      Gold: 100
+  - type: SolutionContainerManager
+    solutions:
+      metal:
+        reagents:
+          - ReagentId: Copper
+            Quantity: 20
+        maxVol: 20

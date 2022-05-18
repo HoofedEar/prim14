@@ -129,11 +129,13 @@ public sealed class KilnSystem : EntitySystem
     private void FinishProducing(EntityUid inside, KilnComponent component)
     {
         component.ProducingRecipe = null;
+        var foundMaterial = false;
 
         // Check what material is inside of the jug
         if (!TryComp(inside, out BlacksmithJugComponent? jugComp) ||
             !TryComp(jugComp.MaterialSlot.Item, out MaterialComponent? materialComp))
         {
+            // Check against list of
             component.Container.Remove(inside);
             return;
         }
@@ -142,13 +144,20 @@ public sealed class KilnSystem : EntitySystem
         {
             foreach (var mapping in _kilnMapping)
             {
-                if (mapping.Key == mat.Key)
+                if (mapping.Key == mat.Key && foundMaterial == false)
                 {
                     EntityManager.SpawnEntity(mapping.Value, Comp<TransformComponent>(component.Owner).Coordinates);
+                    foundMaterial = true;
                     break;
                 }
-                component.Container.Remove(inside);
             }
+        }
+
+        // There is material but it's not the right material
+        if (foundMaterial == false)
+        {
+            component.Container.Remove(inside);
+            return;
         }
 
         // Play sound
