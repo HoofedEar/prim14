@@ -1,4 +1,5 @@
-﻿using Content.Shared.Containers.ItemSlots;
+﻿using Content.Server.Anprim14.Blacksmithing.Components;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using Content.Shared.Tag;
 

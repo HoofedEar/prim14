@@ -50,6 +50,7 @@ namespace Content.Client.Entry
             "DiseaseDiagnoser",
             "DiseaseVaccine",
             "DiseaseVaccineCreator",
+            "Anvil",
             "DiseaseZombie",
             "DiseaseBuildup",
             "ZombieTransfer",

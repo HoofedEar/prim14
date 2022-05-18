@@ -1,4 +1,5 @@
-﻿using Content.Server.Anprim14.TimedCooker;
+﻿using Content.Server.Anprim14.Blacksmithing.Components;
+using Content.Server.Anprim14.TimedCooker;
 using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Shared.Interaction;
@@ -51,6 +52,16 @@ public sealed class KilnSystem : EntitySystem
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
             return;
         }
+        
+        // Make sure it has a valid recipe
+        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
+        {
+            // Unless it's made of wood
+            if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] != "Wood") return;
+            component.KilnWoodStorage += 10;
+            QueueDel(args.Used);
+            return;
+        }
 
         // Make sure it's not full
         if (component.Queue.Count >= component.KilnMax)
@@ -58,10 +69,6 @@ public sealed class KilnSystem : EntitySystem
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-full"), uid, Filter.Entities(args.User));
             return;
         }
-
-        // Make sure it has a valid recipe
-        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
-        { return; }
 
 
         if (cookable.Recipe == null ||
@@ -103,6 +110,22 @@ public sealed class KilnSystem : EntitySystem
 
         foreach (var cooker in EntityQuery<KilnComponent>())
         {
+            // Time frame stuff
+            cooker.ElapsedTime += frameTime;
+            if (cooker.ElapsedTime >= cooker.TimeThreshold)
+            {
+                // Has wood, keep cooking
+                if (cooker.KilnWoodStorage > 0)
+                {
+                    cooker.KilnWoodStorage -= 1;
+                }
+                // No more wood, stop cooking
+                else
+                {
+                    return;
+                }
+            }
+            
             if (cooker.ProducingRecipe == null)
             {
                 if (cooker.Queue.Count > 0)

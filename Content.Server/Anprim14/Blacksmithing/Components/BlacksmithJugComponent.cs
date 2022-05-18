@@ -1,6 +1,6 @@
 ﻿using Content.Shared.Containers.ItemSlots;
 
-namespace Content.Server.Anprim14.Blacksmithing;
+namespace Content.Server.Anprim14.Blacksmithing.Components;
 
 [RegisterComponent, Friend(typeof(BlacksmithJugSystem))]
 public sealed class BlacksmithJugComponent : Component
