@@ -33,7 +33,7 @@ public sealed class AnvilSystem : EntitySystem
             return;
         }
 
-        if (!tagComp.Tags.Contains("AnvilHammer"))
+        if (!tagComp.Tags.Contains(anvil.Tag))
         {
             return;
         }

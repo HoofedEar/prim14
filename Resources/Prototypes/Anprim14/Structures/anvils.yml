@@ -17,8 +17,22 @@
   - type: AnvilVisuals
     stateReady: anvil-ready
   - type: Anvil
+    tag: AnvilHammer
+    results:
+      MoldPickaxeHead: PickaxeHeadCrude
     moldSlot:
       ejectOnInteract: true
       whitelist:
         tags:
           - Mold
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      - shape:
+          !type:PhysShapeCircle
+          radius: 0.2
+        mass: 500
+        layer:
+          - HalfWallLayer
+          - Opaque

@@ -19,8 +19,17 @@ public sealed class AnvilComponent : Component
     [DataField("interactSound")]
     public SoundSpecifier? InteractSound;
 
-    public Dictionary<string, string> Results = new()
-    {
-        {"MoldPickaxeHead", "PickaxeHeadCrude"}
-    };
+    /// <summary>
+    /// Tag that the anvil needs to process the inside mold
+    /// </summary>
+    [ViewVariables] 
+    [DataField("tag", required: true)] 
+    public string Tag = string.Empty;
+
+    /// <summary>
+    /// List of IDs for molds and their result
+    /// </summary>
+    [ViewVariables]
+    [DataField("results", required: true)]
+    public Dictionary<string, string> Results = new();
 }
