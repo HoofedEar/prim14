@@ -41,6 +41,6 @@
       
 - type: entity
   parent: BaseMold
-  id: MoldPickaxe
+  id: MoldPickaxeHead
   name: pickaxe head mold
   description: Used for making metal pickaxe heads.

@@ -110,6 +110,7 @@ public sealed class KilnSystem : EntitySystem
 
         foreach (var cooker in EntityQuery<KilnComponent>())
         {
+            /*
             // Time frame stuff
             cooker.ElapsedTime += frameTime;
             if (cooker.ElapsedTime >= cooker.TimeThreshold)
@@ -125,6 +126,7 @@ public sealed class KilnSystem : EntitySystem
                     return;
                 }
             }
+            */
             
             if (cooker.ProducingRecipe == null)
             {

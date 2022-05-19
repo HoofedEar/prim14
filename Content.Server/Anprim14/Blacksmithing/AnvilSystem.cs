@@ -7,6 +7,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Anprim14.Blacksmithing;
 
@@ -36,24 +37,19 @@ public sealed class AnvilSystem : EntitySystem
         {
             return;
         }
-        
-        // Eject the mold
-        if (anvil.MoldSlot.Item != null)
+
+        var anvilPos = Transform(args.Target).MapPosition;
+        if (anvil.MoldSlot.Item == null) return;
+        if (TryPrototype(anvil.MoldSlot.Item.Value, out var mold))
         {
-            if (!TryComp(anvil.MoldSlot.Item.Value, out SolutionContainerManagerComponent? solutionComp))
+            foreach (var (oldMold, result) in anvil.Results)
             {
-                return;
+                if (mold?.ID != oldMold) break;
+                EntityManager.SpawnEntity(oldMold, anvilPos);
+                EntityManager.SpawnEntity(result, anvilPos);
             }
-            foreach (var (_, solution) in solutionComp.Solutions)
-            {
-                solution.RemoveAllSolution();
-            }
-            anvil.MoldSlot.ContainerSlot?.Remove(anvil.MoldSlot.Item.Value);
         }
-        
-        // Spawn the created item
-        var playerPos = Transform(args.Target).MapPosition;
-        EntityManager.SpawnEntity(anvil.Results[0], playerPos);
+        QueueDel(anvil.MoldSlot.Item.Value);
     }
 
     private void OnContainerModified(EntityUid uid, AnvilComponent anvil, ContainerModifiedMessage args)

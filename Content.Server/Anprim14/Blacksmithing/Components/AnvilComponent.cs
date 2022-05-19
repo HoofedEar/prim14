@@ -18,9 +18,9 @@ public sealed class AnvilComponent : Component
     [ViewVariables]
     [DataField("interactSound")]
     public SoundSpecifier? InteractSound;
-    
-    public List<string> Results = new()
+
+    public Dictionary<string, string> Results = new()
     {
-        "PickaxeHeadCrude"
+        {"MoldPickaxeHead", "PickaxeHeadCrude"}
     };
 }
