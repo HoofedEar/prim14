@@ -10,7 +10,6 @@ using Content.Shared.Nuke;
 using Content.Shared.Sound;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 using Robust.Shared.Player;
 
 namespace Content.Server.Nuke

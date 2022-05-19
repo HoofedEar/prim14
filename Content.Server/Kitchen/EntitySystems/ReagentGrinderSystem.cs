@@ -13,7 +13,6 @@ using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 

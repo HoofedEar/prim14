@@ -1,7 +1,6 @@
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Payload.Components;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 
 namespace Content.Shared.Payload.EntitySystems;
 

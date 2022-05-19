@@ -1,7 +1,6 @@
 ﻿using Content.Shared.Storage.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 
 namespace Content.Shared.Storage.EntitySystems
 {

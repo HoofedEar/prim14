@@ -10,7 +10,6 @@ using JetBrains.Annotations;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 using Robust.Shared.GameStates;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;

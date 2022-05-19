@@ -5,7 +5,6 @@ using Content.Shared.Examine;
 using Content.Shared.Labels;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 using Robust.Shared.Utility;
 
 namespace Content.Server.Labels

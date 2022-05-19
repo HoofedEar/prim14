@@ -7,7 +7,6 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 
 namespace Content.Server.Anprim14.Blacksmithing;
 

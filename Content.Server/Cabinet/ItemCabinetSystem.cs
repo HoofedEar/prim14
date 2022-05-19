@@ -5,7 +5,6 @@ using Content.Shared.Interaction;
 using Content.Shared.Verbs;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Containers.Events;
 using Robust.Shared.Player;
 
 namespace Content.Server.Cabinet
