@@ -1,17 +1,25 @@
 {
-  "version": 1,
-  "size": {
-    "x": 32,
-    "y": 32
-  },
-  "license": "CC-BY-NC-SA-4.0",
-  "copyright": "https://github.com/Civ13/Civ13/",
-  "states": [
-    {
-      "name": "icon"
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
     },
-	{
-	  "name": "kiln_on"
-	}
-  ]
+    "license": "CC-BY-NC-SA-4.0",
+    "copyright": "https://github.com/Civ13/Civ13/",
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "kiln-on",
+            "delays": [
+                [
+                    0.15,
+                    0.15,
+                    0.15,
+                    0.15
+                ]
+            ]
+        }
+    ]
 }

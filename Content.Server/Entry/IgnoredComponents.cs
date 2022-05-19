@@ -10,6 +10,7 @@ namespace Content.Server.Entry
             "InteractionOutline",
             "MeleeWeaponArcAnimation",
             "AnimationsTest",
+            "KilnVisuals",
             "ItemStatus",
             "VehicleVisuals",
             "AnvilVisuals",

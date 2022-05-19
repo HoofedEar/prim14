@@ -7,7 +7,6 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
-using Robust.Shared.Prototypes;
 
 namespace Content.Server.Anprim14.Blacksmithing;
 
@@ -44,7 +43,7 @@ public sealed class AnvilSystem : EntitySystem
         {
             foreach (var (oldMold, result) in anvil.Results)
             {
-                if (mold?.ID != oldMold) break;
+                if (mold.ID != oldMold) break;
                 EntityManager.SpawnEntity(oldMold, anvilPos);
                 EntityManager.SpawnEntity(result, anvilPos);
             }
@@ -66,12 +65,12 @@ public sealed class AnvilSystem : EntitySystem
             UpdateAppearance(uid, hasMold);
             return;
         }
-        
+
         if (!TryComp(anvil.MoldSlot.Item, out SolutionContainerManagerComponent? solutionComp))
         {
             return;
         }
-        
+
         foreach (var (name, solution) in solutionComp.Solutions)
         {
             if (name != "metal")
@@ -128,7 +127,7 @@ public sealed class AnvilSystem : EntitySystem
     {
         if (!TryComp<AppearanceComponent>(uid, out var appearance))
             return;
-        
+
         appearance.SetData(AnvilState.Ready, isReady);
     }
 }

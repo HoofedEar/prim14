@@ -2,6 +2,8 @@
 using Content.Server.Anprim14.TimedCooker;
 using Content.Server.Materials;
 using Content.Server.Popups;
+using Content.Server.Stack;
+using Content.Shared.Anprim14;
 using Content.Shared.Interaction;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
@@ -16,15 +18,7 @@ public sealed class KilnSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
-
-    private readonly Dictionary<string, string> _kilnMapping = new()
-    {
-        {"Tin", "JugMoltenTin"},
-        {"Copper", "JugMoltenCopper"},
-        {"Bronze", "JugMoltenBronze"},
-        {"Iron", "JugMoltenIron"},
-        {"Gold", "JugMoltenGold"}
-    };
+    private int _multiplier;
 
     // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private Queue<EntityUid> _producingAddQueue = new();
@@ -34,13 +28,14 @@ public sealed class KilnSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<KilnComponent, ComponentInit>(HandleTimedCookerInit);
+        SubscribeLocalEvent<KilnComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<KilnComponent, InteractUsingEvent>(OnInteractUsing);
     }
 
-    private void HandleTimedCookerInit(EntityUid uid, KilnComponent component, ComponentInit args)
+    private void OnComponentInit(EntityUid uid, KilnComponent component, ComponentInit args)
     {
         component.Container = _containerSystem.EnsureContainer<Container>(component.Owner, "cooker_container", out _);
+        UpdateAppearance(uid, false);
     }
 
     private void OnInteractUsing(EntityUid uid, KilnComponent component, InteractUsingEvent args)
@@ -52,19 +47,25 @@ public sealed class KilnSystem : EntitySystem
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
             return;
         }
-        
-        // Make sure it has a valid recipe
+
+        // Make sure it is cookable
         if (!TryComp(args.Used, out TimedCookableComponent? cookable))
         {
             // Unless it's made of wood
             if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] != "Wood") return;
-            component.KilnWoodStorage += 10;
+            if (TryComp<StackComponent>(args.Used, out var stack))
+                _multiplier = stack.Count;
+            component.KilnWoodStorage += 100 * _multiplier;
             QueueDel(args.Used);
             return;
         }
 
-        // Make sure it's not full
-        if (component.Queue.Count >= component.KilnMax)
+        // Make sure it has wood
+        if (component.KilnWoodStorage == 0)
+            return;
+
+            // Make sure it's not full
+        if (component.Container.ContainedEntities.Count >= component.KilnMax)
         {
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-full"), uid, Filter.Entities(args.User));
             return;
@@ -110,7 +111,6 @@ public sealed class KilnSystem : EntitySystem
 
         foreach (var cooker in EntityQuery<KilnComponent>())
         {
-            /*
             // Time frame stuff
             cooker.ElapsedTime += frameTime;
             if (cooker.ElapsedTime >= cooker.TimeThreshold)
@@ -118,19 +118,21 @@ public sealed class KilnSystem : EntitySystem
                 // Has wood, keep cooking
                 if (cooker.KilnWoodStorage > 0)
                 {
-                    cooker.KilnWoodStorage -= 1;
+                    cooker.KilnWoodStorage -= 10;
+                    UpdateAppearance(cooker.Owner, cooker.KilnWoodStorage > 0);
+                    cooker.ElapsedTime = 0;
                 }
-                // No more wood, stop cooking
+                // Carry on
                 else
                 {
-                    return;
+                    //UpdateAppearance(cooker.Owner, false);
+                    cooker.ElapsedTime = 0;
                 }
             }
-            */
-            
+
             if (cooker.ProducingRecipe == null)
             {
-                if (cooker.Queue.Count > 0)
+                if (cooker.Queue.Count > 0 && cooker.KilnWoodStorage > 0)
                 {
                     Produce(cooker, cooker.Queue.Dequeue());
                     return;
@@ -167,7 +169,7 @@ public sealed class KilnSystem : EntitySystem
 
         foreach (var mat in materialComp._materials)
         {
-            foreach (var mapping in _kilnMapping)
+            foreach (var mapping in component.Results)
             {
                 if (mapping.Key == mat.Key && foundMaterial == false)
                 {
@@ -208,5 +210,13 @@ public sealed class KilnSystem : EntitySystem
     {
         component.ProducingRecipe = recipe;
         _producingAddQueue.Enqueue(component.Owner);
+    }
+
+    private void UpdateAppearance(EntityUid uid, bool isFired)
+    {
+        if (!TryComp<AppearanceComponent>(uid, out var appearance))
+            return;
+
+        appearance.SetData(KilnState.Fired, isFired);
     }
 }

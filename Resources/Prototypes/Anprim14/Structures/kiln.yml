@@ -6,14 +6,27 @@
     mode: SnapgridCenter
   components:
   - type: Kiln
+    results:
+      # Format is <MaterialID>: <MoltenJugID>
+      Tin: JugMoltenTin
+      Copper: JugMoltenCopper
+      Bronze: JugMoltenBronze
+      Iron: JugMoltenIron
+      Gold: JugMoltenGold
     whitelist:
       id:
         - BlacksmithJug
   - type: Clickable
+  - type: Appearance
   - type: Sprite
     sprite: Anprim14/Structures/Metallurgy/kiln.rsi
-    state: icon
+    layers:
+      - state: icon
+      - state: kiln-on
+        map: [ "enum.KilnVisualLayers.Fired" ]
     netsync: false
+  - type: KilnVisuals
+    stateFired: kiln-on
   - type: Physics
     bodyType: Static
   - type: Fixtures

@@ -15,6 +15,6 @@ public sealed class AnvilVisualsSystem : VisualizerSystem<AnvilVisualsComponent>
 }
 
 public enum AnvilVisualLayers : byte
-{   
+{
     Ready
 }
