@@ -1,4 +1,5 @@
 ﻿using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Sound;
 
 namespace Content.Server.Anprim14.Blacksmithing.Components;
 
@@ -10,4 +11,16 @@ public sealed class AnvilComponent : Component
     [ViewVariables]
     [DataField("moldSlot", required: true)] 
     public ItemSlot MoldSlot = new();
+    
+    /// <summary>
+    /// The sound played when hammering the anvil
+    /// </summary>
+    [ViewVariables]
+    [DataField("interactSound")]
+    public SoundSpecifier? InteractSound;
+    
+    public List<string> Results = new()
+    {
+        "PickaxeHeadCrude"
+    };
 }

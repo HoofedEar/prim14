@@ -6,6 +6,7 @@ using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
+using Robust.Shared.Containers.Events;
 
 namespace Content.Server.Buckle.Systems
 {

@@ -5,6 +5,5 @@ namespace Content.Shared.Anprim14;
 [Serializable, NetSerializable]
 public enum AnvilState
 {
-    Empty,
     Ready
 }

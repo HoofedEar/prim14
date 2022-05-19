@@ -1,9 +1,13 @@
-﻿using Content.Server.Anprim14.Blacksmithing.Components;
+﻿using System.Linq;
+using Content.Server.Anprim14.Blacksmithing.Components;
 using Content.Server.Chemistry.Components.SolutionManager;
 using Content.Shared.Anprim14;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
+using Content.Shared.Interaction;
+using Content.Shared.Tag;
 using Robust.Shared.Containers;
+using Robust.Shared.Containers.Events;
 
 namespace Content.Server.Anprim14.Blacksmithing;
 
@@ -17,7 +21,40 @@ public sealed class AnvilSystem : EntitySystem
         SubscribeLocalEvent<AnvilComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<AnvilComponent, ComponentRemove>(OnComponentRemove);
         SubscribeLocalEvent<AnvilComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<AnvilComponent, ContainerModifiedMessage>(OnContainerModified);
+        SubscribeLocalEvent<AnvilComponent, EntInsertedIntoContainerMessage>(OnContainerModified);
+        SubscribeLocalEvent<AnvilComponent, EntRemovedFromContainerMessage>(OnContainerModified);
+        SubscribeLocalEvent<AnvilComponent, InteractUsingEvent>(OnInteractUsing);
+    }
+
+    private void OnInteractUsing(EntityUid uid, AnvilComponent anvil, InteractUsingEvent args)
+    {
+        if (!TryComp(args.Used, out TagComponent? tagComp))
+        {
+            return;
+        }
+
+        if (!tagComp.Tags.Contains("AnvilHammer"))
+        {
+            return;
+        }
+        
+        // Eject the mold
+        if (anvil.MoldSlot.Item != null)
+        {
+            if (!TryComp(anvil.MoldSlot.Item.Value, out SolutionContainerManagerComponent? solutionComp))
+            {
+                return;
+            }
+            foreach (var (_, solution) in solutionComp.Solutions)
+            {
+                solution.RemoveAllSolution();
+            }
+            anvil.MoldSlot.ContainerSlot?.Remove(anvil.MoldSlot.Item.Value);
+        }
+        
+        // Spawn the created item
+        var playerPos = Transform(args.Target).MapPosition;
+        EntityManager.SpawnEntity(anvil.Results[0], playerPos);
     }
 
     private void OnContainerModified(EntityUid uid, AnvilComponent anvil, ContainerModifiedMessage args)
@@ -27,20 +64,39 @@ public sealed class AnvilSystem : EntitySystem
         if (args.Container.ID != anvil.MoldSlot.ID)
             return;
 
-        if (!EntityManager.TryGetComponent(uid, out AppearanceComponent appearance))
+        var hasMold = args.Container.ContainedEntities.Any();
+
+        if (hasMold == false)
+        {
+            UpdateAppearance(uid, hasMold);
             return;
+        }
+        
+        if (!TryComp(anvil.MoldSlot.Item, out SolutionContainerManagerComponent? solutionComp))
+        {
+            return;
+        }
+        
+        foreach (var (name, solution) in solutionComp.Solutions)
+        {
+            if (name != "metal")
+                return;
 
-        appearance.SetData(AnvilState.Ready, anvil.MoldSlot.HasItem);
+            if (solution.CurrentVolume != 20) break;
+            UpdateAppearance(uid, hasMold);
+            break;
+        }
     }
 
-    private void OnComponentInit(EntityUid uid, AnvilComponent jug, ComponentInit args)
+    private void OnComponentInit(EntityUid uid, AnvilComponent anvil, ComponentInit args)
     {
-        _itemSlotsSystem.AddItemSlot(uid, AnvilComponent.AnvilMoldSlotId, jug.MoldSlot);
+        _itemSlotsSystem.AddItemSlot(uid, AnvilComponent.AnvilMoldSlotId, anvil.MoldSlot);
+        UpdateAppearance(uid, false);
     }
 
-    private void OnComponentRemove(EntityUid uid, AnvilComponent jug, ComponentRemove args)
+    private void OnComponentRemove(EntityUid uid, AnvilComponent anvil, ComponentRemove args)
     {
-        _itemSlotsSystem.RemoveItemSlot(uid, jug.MoldSlot);
+        _itemSlotsSystem.RemoveItemSlot(uid, anvil.MoldSlot);
     }
 
     private void OnExamined(EntityUid uid, AnvilComponent component, ExaminedEvent args)
@@ -55,7 +111,6 @@ public sealed class AnvilSystem : EntitySystem
 
         if (solutionComp.Solutions.Count == 0)
         {
-
             return;
         }
 
@@ -73,5 +128,12 @@ public sealed class AnvilSystem : EntitySystem
             args.Message.AddText("\nIt has a mold ready to smith.");
             break;
         }
+    }
+    private void UpdateAppearance(EntityUid uid, bool isReady)
+    {
+        if (!TryComp<AppearanceComponent>(uid, out var appearance))
+            return;
+        
+        appearance.SetData(AnvilState.Ready, isReady);
     }
 }

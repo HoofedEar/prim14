@@ -19,7 +19,6 @@
   - type: Icon
     sprite: Anprim14/Tools/pickaxeheadmold.rsi
     state: icon
-    scale: 0.6, 0.6
   - type: SolutionContainerManager
     solutions:
       metal:

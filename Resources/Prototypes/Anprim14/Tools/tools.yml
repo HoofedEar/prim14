@@ -80,3 +80,17 @@
     damage:
       types:
         Piercing: 100
+
+- type: entity
+  name: iron hammer
+  parent: BaseItem
+  id: ToolIronHammer
+  description: Used to form metal into useful items.
+  components:
+    - type: Tag
+      tags:
+        - AnvilHammer
+    - type: Sprite
+      sprite: Anprim14/Tools/ironhammer.rsi
+      state: icon
+      netsync: false
