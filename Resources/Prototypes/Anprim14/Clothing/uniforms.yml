@@ -1,0 +1,10 @@
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformLeatherLoinCloth
+  description: A tasteful loincloth to cover your bits.
+  name: leather loincloth
+  components:
+  - type: Sprite
+    sprite: Anprim14/Clothing/Uniforms/leatherloincloth.rsi
+  - type: Clothing
+    sprite: Anprim14/Clothing/Uniforms/leatherloincloth.rsi
