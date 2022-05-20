@@ -59,4 +59,9 @@ public class TimedCookerComponent : Component
     /// </summary>
     [ViewVariables]
     public Queue<TimedCookerRecipePrototype> Queue { get; } = new();
+
+    /// <summary>
+    /// Is the cooker currently turned on?
+    /// </summary>
+    public bool IsRunning;
 }

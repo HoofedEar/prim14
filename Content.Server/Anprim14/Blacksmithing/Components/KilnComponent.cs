@@ -27,5 +27,5 @@ public sealed class KilnComponent : TimedCookerComponent
 
 
     public float ElapsedTime;
-    public int TimeThreshold = 10;
+    public int TimeThreshold = 5;
 }

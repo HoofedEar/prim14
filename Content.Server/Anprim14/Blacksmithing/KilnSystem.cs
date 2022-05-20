@@ -22,20 +22,37 @@ public sealed class KilnSystem : EntitySystem
 
     // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private Queue<EntityUid> _producingAddQueue = new();
+
     // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private Queue<EntityUid> _producingRemoveQueue = new();
+
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<KilnComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<KilnComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<KilnComponent, InteractHandEvent>(OnInteractHand);
     }
 
     private void OnComponentInit(EntityUid uid, KilnComponent component, ComponentInit args)
     {
         component.Container = _containerSystem.EnsureContainer<Container>(component.Owner, "cooker_container", out _);
         UpdateAppearance(uid, false);
+    }
+
+    private void OnInteractHand(EntityUid uid, KilnComponent component, InteractHandEvent args)
+    {
+        if (component.KilnWoodStorage <= 0)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User)); 
+            return;
+        }
+        _popupSystem.PopupEntity(
+            component.IsRunning ? Loc.GetString("timed-cooker-turn-off") : Loc.GetString("timed-cooker-turn-on"), uid,
+            Filter.Entities(args.User));
+        component.IsRunning = !component.IsRunning;
+        UpdateAppearance(uid, component.IsRunning);
     }
 
     private void OnInteractUsing(EntityUid uid, KilnComponent component, InteractUsingEvent args)
@@ -55,7 +72,9 @@ public sealed class KilnSystem : EntitySystem
             if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] != "Wood") return;
             if (TryComp<StackComponent>(args.Used, out var stack))
                 _multiplier = stack.Count;
-            component.KilnWoodStorage += 100 * _multiplier;
+            component.KilnWoodStorage += 30 * _multiplier;
+            if (component.IsRunning)
+                UpdateAppearance(component.Owner, true);
             QueueDel(args.Used);
             return;
         }
@@ -112,6 +131,7 @@ public sealed class KilnSystem : EntitySystem
         foreach (var cooker in EntityQuery<KilnComponent>())
         {
             // Time frame stuff
+            if (!cooker.IsRunning) continue;
             cooker.ElapsedTime += frameTime;
             if (cooker.ElapsedTime >= cooker.TimeThreshold)
             {
