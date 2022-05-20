@@ -13,5 +13,9 @@ ironsand1-4, junglegrass, eightiesred and eighties taken from TG station at http
 arcadeblue edited by Peptide90 based on eightiestred from TG.
 shuttleblue, orange, purple, red and white taken from ParadiseSS13 at https://github.com/ParadiseSS13/Paradise/commit/69c831afcd9aef25a2889b507e4f36a3a5fc6def
 
+deprecated.png made by 20kdc, licensed under SS14's MIT license - don't remove it, it's useful to make sure that maps with old tiles get noticed.
+
+
+
 // Anprim14 changes
 sand.png is from Civ13 at https://github.com/Civ13/Civ13/commit/174817489ad5a141cbe2fb891674f80916ee1683
