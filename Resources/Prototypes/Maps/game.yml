@@ -106,3 +106,19 @@
         ChiefEngineer: [ 1, 1 ]
         ChiefMedicalOfficer: [ 1, 1 ]
         SecurityOfficer: [ 3, 6 ]
+
+- type: gameMap
+  id: anprim
+  mapName: 'Anprim'
+  mapPath: /Maps/Anprim14/anprim.yml
+  minPlayers: 0
+  votable: false
+  stations:
+    Station:
+      mapNameTemplate: '{0} Anprim {1}'
+      nameGenerator:
+        !type:NanotrasenNameGenerator
+        prefixCreator: 'VG'
+      overflowJobs: []
+      availableJobs:
+        Passenger: [ 1, 1 ]

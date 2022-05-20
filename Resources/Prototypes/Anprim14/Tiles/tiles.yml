@@ -1,7 +1,7 @@
 - type: tile
   id: grassplating
-  name: grass plating
-  texture: grass
+  name: dirt plating
+  texture: dirt
   base_turfs:
   - lattice
   is_subfloor: true
