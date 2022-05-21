@@ -80,17 +80,19 @@ public sealed class KilnSystem : EntitySystem
         }
 
         // Make sure it has wood
-        if (component.KilnWoodStorage == 0)
+        if (component.KilnWoodStorage <= 0)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User));
             return;
+        }
 
-            // Make sure it's not full
+        // Make sure it's not full
         if (component.Container.ContainedEntities.Count >= component.KilnMax)
         {
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-full"), uid, Filter.Entities(args.User));
             return;
         }
-
-
+        
         if (cookable.Recipe == null ||
             !_prototypeManager.TryIndex(cookable.Recipe, out TimedCookerRecipePrototype? recipe))
             return;

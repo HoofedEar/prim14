@@ -1,8 +1,8 @@
-- type: stack
-  id: GoldOre
-  name: gold ore
-  icon: /Textures/Objects/Materials/ore.rsi/gold.png
-  spawn: GoldOre1
+# type: stack
+# id: GoldOre
+# name: gold ore
+# icon: /Textures/Objects/Materials/ore.rsi/gold.png
+# spawn: GoldOre1
 
 - type: stack
   id: SteelOre
