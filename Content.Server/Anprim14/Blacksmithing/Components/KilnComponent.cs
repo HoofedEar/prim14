@@ -26,6 +26,6 @@ public sealed class KilnComponent : TimedCookerComponent
     public Dictionary<string, string> Results = new();
 
 
-    public float ElapsedTime;
-    public int TimeThreshold = 5;
+    //public float ElapsedTime;
+    //public int TimeThreshold = 5;
 }

@@ -22,3 +22,6 @@
     whitelist:
       tags:
       - Hatchet
+  - type: Material
+    materials:
+      Wood: 100

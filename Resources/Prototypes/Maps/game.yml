@@ -112,13 +112,16 @@
   mapName: 'Anprim'
   mapPath: /Maps/Anprim14/anprim.yml
   minPlayers: 0
+  maxPlayers: 20
+  fallback: true
   votable: false
   stations:
     Station:
       mapNameTemplate: '{0} Anprim {1}'
       nameGenerator:
         !type:NanotrasenNameGenerator
-        prefixCreator: 'VG'
-      overflowJobs: []
+        prefixCreator: 'AP'
+      overflowJobs:
+        - Passenger
       availableJobs:
-        Passenger: [ 1, 1 ]
+        Passenger: [ -1, -1 ]

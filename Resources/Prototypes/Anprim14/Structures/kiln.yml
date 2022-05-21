@@ -17,6 +17,7 @@
       id:
         - BlacksmithJug
   - type: Clickable
+  - type: InteractionOutline
   - type: Appearance
   - type: Sprite
     sprite: Anprim14/Structures/Metallurgy/kiln.rsi

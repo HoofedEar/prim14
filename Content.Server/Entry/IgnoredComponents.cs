@@ -11,6 +11,7 @@ namespace Content.Server.Entry
             "MeleeWeaponArcAnimation",
             "AnimationsTest",
             "KilnVisuals",
+            "TimedCookerVisuals",
             "ItemStatus",
             "VehicleVisuals",
             "AnvilVisuals",

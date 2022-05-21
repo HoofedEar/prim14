@@ -61,7 +61,10 @@ public class TimedCookerComponent : Component
     public Queue<TimedCookerRecipePrototype> Queue { get; } = new();
 
     /// <summary>
-    /// Is the cooker currently turned on?
+    /// Used with handling fuel
     /// </summary>
     public bool IsRunning;
+    public float ElapsedTime;
+    public int TimeThreshold = 5;
+    public int FuelStorage;
 }

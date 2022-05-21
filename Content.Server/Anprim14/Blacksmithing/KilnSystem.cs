@@ -70,8 +70,7 @@ public sealed class KilnSystem : EntitySystem
         {
             // Unless it's made of wood
             if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] != "Wood") return;
-            if (TryComp<StackComponent>(args.Used, out var stack))
-                _multiplier = stack.Count;
+            _multiplier = TryComp<StackComponent>(args.Used, out var stack) ? stack.Count : 2;
             component.KilnWoodStorage += 30 * _multiplier;
             if (component.IsRunning)
                 UpdateAppearance(component.Owner, true);
@@ -193,12 +192,10 @@ public sealed class KilnSystem : EntitySystem
         {
             foreach (var mapping in component.Results)
             {
-                if (mapping.Key == mat.Key && foundMaterial == false)
-                {
-                    EntityManager.SpawnEntity(mapping.Value, Comp<TransformComponent>(component.Owner).Coordinates);
-                    foundMaterial = true;
-                    break;
-                }
+                if (mapping.Key != mat.Key || foundMaterial) continue;
+                EntityManager.SpawnEntity(mapping.Value, Comp<TransformComponent>(component.Owner).Coordinates);
+                foundMaterial = true;
+                break;
             }
         }
 

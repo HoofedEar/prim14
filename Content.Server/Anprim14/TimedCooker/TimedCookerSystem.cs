@@ -1,4 +1,7 @@
-﻿using Content.Server.Popups;
+﻿using Content.Server.Materials;
+using Content.Server.Popups;
+using Content.Server.Stack;
+using Content.Shared.Anprim14;
 using Content.Shared.Interaction;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
@@ -15,6 +18,7 @@ public sealed class TimedCookerSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
+    private int _multiplier;
 
     // ReSharper disable once FieldCanBeMadeReadOnly.Local
     private Queue<EntityUid> _producingAddQueue = new();
@@ -26,11 +30,27 @@ public sealed class TimedCookerSystem : EntitySystem
         
         SubscribeLocalEvent<TimedCookerComponent, ComponentInit>(HandleTimedCookerInit);
         SubscribeLocalEvent<TimedCookerComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<TimedCookerComponent, InteractHandEvent>(OnInteractHand);
     }
     
     private void HandleTimedCookerInit(EntityUid uid, TimedCookerComponent component, ComponentInit args)
     {
         component.Container = _containerSystem.EnsureContainer<Container>(component.Owner, "cooker_container", out _);
+        UpdateAppearance(uid, false);
+    }
+    
+    private void OnInteractHand(EntityUid uid, TimedCookerComponent component, InteractHandEvent args)
+    {
+        if (component.FuelStorage <= 0)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User)); 
+            return;
+        }
+        _popupSystem.PopupEntity(
+            component.IsRunning ? Loc.GetString("timed-cooker-turn-off") : Loc.GetString("timed-cooker-turn-on"), uid,
+            Filter.Entities(args.User));
+        component.IsRunning = !component.IsRunning;
+        UpdateAppearance(uid, component.IsRunning);
     }
     
     private void OnInteractUsing(EntityUid uid, TimedCookerComponent component, InteractUsingEvent args)
@@ -43,18 +63,33 @@ public sealed class TimedCookerSystem : EntitySystem
             return;
         }
         
+        // Make sure it is cookable
+        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
+        {
+            // Unless it's made of wood
+            if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] != "Wood") return;
+            _multiplier = TryComp<StackComponent>(args.Used, out var stack) ? stack.Count : 2;
+            component.FuelStorage += 30 * _multiplier;
+            if (component.IsRunning)
+                UpdateAppearance(component.Owner, true);
+            QueueDel(args.Used);
+            return;
+        }
+        
+        // Make sure it has fuel
+        if (component.FuelStorage <= 0)
+        {
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User));
+            return;
+        }
+        
         // Make sure it's not full
-        if (component.Queue.Count >= component.Max - 1)
+        if (component.Container.ContainedEntities.Count >= component.Max)
         {
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-full"), uid, Filter.Entities(args.User));
             return;
         }
-        
-        // Make sure it has a valid recipe
-        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
-        { return; }
-            
-        
+
         if (cookable.Recipe == null || 
             !_prototypeManager.TryIndex(cookable.Recipe, out TimedCookerRecipePrototype? recipe))
             return;
@@ -94,6 +129,26 @@ public sealed class TimedCookerSystem : EntitySystem
 
         foreach (var cooker in EntityQuery<TimedCookerComponent>())
         {
+            // Time frame stuff
+            if (!cooker.IsRunning) continue;
+            cooker.ElapsedTime += frameTime;
+            if (cooker.ElapsedTime >= cooker.TimeThreshold)
+            {
+                // Has wood, keep cooking
+                if (cooker.FuelStorage > 0)
+                {
+                    cooker.FuelStorage -= 10;
+                    UpdateAppearance(cooker.Owner, cooker.FuelStorage > 0);
+                    cooker.ElapsedTime = 0;
+                }
+                // Carry on
+                else
+                {
+                    //UpdateAppearance(cooker.Owner, false);
+                    cooker.ElapsedTime = 0;
+                }
+            }
+            
             if (cooker.ProducingRecipe == null)
             {
                 if (cooker.Queue.Count > 0)
@@ -151,5 +206,18 @@ public sealed class TimedCookerSystem : EntitySystem
     {
         component.ProducingRecipe = recipe;
         _producingAddQueue.Enqueue(component.Owner);
+    }
+    
+    /// <summary>
+    /// Update appearance of the TimedCooker
+    /// </summary>
+    /// <param name="uid">EntityUID</param>
+    /// <param name="isFired">bool, if its on or not</param>
+    private void UpdateAppearance(EntityUid uid, bool isFired)
+    {
+        if (!TryComp<AppearanceComponent>(uid, out var appearance))
+            return;
+
+        appearance.SetData(TimedCookerState.Fired, isFired);
     }
 }
