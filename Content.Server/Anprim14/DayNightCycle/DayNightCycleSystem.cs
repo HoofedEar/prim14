@@ -9,10 +9,10 @@ namespace Content.Server.Anprim14.DayNightCycle;
 public sealed class DayNightCycleSystem : SharedDayNightCycleSystem
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
-    
+
     private float _elapsedTime;
-    private int _timeThreshold = 900; // 900 = 15 mins, 600 = 10 mins, 300 = 5 mins, 60 = 1 min, 30 = 30 secs, 10 = 10 sec  
-    private DayNightCycleStates _current = DayNightCycleStates.Noon;
+    private int _timeThreshold = 900; // 900 = 15 mins, 600 = 10 mins, 300 = 5 mins, 60 = 1 min, 30 = 30 secs, 10 = 10 sec
+    private DayNightCycleStates _current = DayNightCycleStates.Midnight;
 
     public override void Initialize()
     {
@@ -39,11 +39,11 @@ public sealed class DayNightCycleSystem : SharedDayNightCycleSystem
         };
 
         Logger.Info("DayNight Cycle is now: " + _current);
-            
+
         RaiseNetworkEvent(new DayNightCycleMessage(_current));
         _elapsedTime = 0f;
     }
-    
+
     private void PlayerStatusChanged(object? blah, SessionStatusEventArgs args)
     {
         if (args.NewStatus == SessionStatus.Connected)

@@ -644,13 +644,16 @@ entities:
     parent: 52
     type: Transform
 - uid: 56
-  type: Floodlight
+  type: Bonfire
   components:
-  - pos: -4.472087,-1.7658525
+  - pos: -3.5,-2.5
     parent: 52
     type: Transform
+  - enabled: False
+    type: PointLight
   - containers:
-      cellslot_cell_container: !type:ContainerSlot {}
+      cooker_container: !type:Container
+        ents: []
     type: ContainerContainer
 - uid: 57
   type: WallReinforced
@@ -926,6 +929,18 @@ entities:
   type: WallReinforced
   components:
   - pos: -7.5,4.5
+    parent: 52
+    type: Transform
+- uid: 103
+  type: Log
+  components:
+  - pos: -2.3895178,-2.2021258
+    parent: 52
+    type: Transform
+- uid: 104
+  type: Log
+  components:
+  - pos: -1.843782,-2.4768653
     parent: 52
     type: Transform
 ...

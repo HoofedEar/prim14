@@ -33,6 +33,11 @@
       layer:
         - HalfWallLayer
         - Opaque
+  - type: PointLight
+    enabled: false
+    radius: 4.0
+    energy: 2.0
+    color: "#ffda78"
 
 - type: entity
   parent: BaseBonfire
