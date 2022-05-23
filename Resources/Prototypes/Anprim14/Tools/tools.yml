@@ -94,3 +94,14 @@
       sprite: Anprim14/Tools/ironhammer.rsi
       state: icon
       netsync: false
+
+- type: entity
+  name: bone shovel
+  parent: Crowbar
+  id: ToolBoneShovel
+  description: Dig through the ditches and burn.
+  components:
+    - type: Sprite
+      sprite: Anprim14/Tools/bone_shovel.rsi
+      state: icon
+      netsync: false
