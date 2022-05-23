@@ -14,7 +14,7 @@
       Iron: JugMoltenIron
       Gold: JugMoltenGold
     whitelist:
-      id:
+      tags:
         - BlacksmithJug
   - type: Clickable
   - type: InteractionOutline

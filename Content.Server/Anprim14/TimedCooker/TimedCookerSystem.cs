@@ -14,8 +14,6 @@ namespace Content.Server.Anprim14.TimedCooker;
 
 public sealed class TimedCookerSystem : EntitySystem
 {
-    // TODO later on add checks for regent stuff (spices and such)
-
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly PopupSystem _popupSystem = default!;
     [Dependency] private readonly ContainerSystem _containerSystem = default!;
@@ -56,24 +54,23 @@ public sealed class TimedCookerSystem : EntitySystem
 
     private void OnInteractUsing(EntityUid uid, TimedCookerComponent component, InteractUsingEvent args)
     {
-        // Check if the item can be insert, and that it's on the whitelist
-        if (!component.Container.CanInsert(args.Used) &&
-            component.Whitelist?.IsValid(args.Used) == false)
+        // Are we inserting wood?
+        if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] == "Wood")
         {
-            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
-            return;
-        }
-
-        // Make sure it is cookable
-        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
-        {
-            // Unless it's made of wood
-            if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] != "Wood") return;
-            _multiplier = TryComp<StackComponent>(args.Used, out var stack) ? stack.Count : 2;
+            _multiplier = TryComp<StackComponent>(args.Used, out var stack) ? stack.Count : 4;
             component.FuelStorage += 30 * _multiplier;
             if (component.IsRunning)
                 UpdateAppearance(component.Owner, component, true);
             QueueDel(args.Used);
+            return;
+        }
+        
+        // No? Ok can it insert, is it on the whitelist, and does it have a recipe?
+        if (!component.Container.CanInsert(args.Used) || 
+            component.Whitelist != null && !component.Whitelist.IsValid(args.Used) ||
+            !TryComp(args.Used, out TimedCookableComponent? cookable))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
             return;
         }
 
@@ -139,7 +136,12 @@ public sealed class TimedCookerSystem : EntitySystem
                 if (cooker.FuelStorage > 0)
                 {
                     cooker.FuelStorage -= 10;
-                    UpdateAppearance(cooker.Owner, cooker, cooker.FuelStorage > 0);
+                    // Did it run out?
+                    if (cooker.FuelStorage <= 0)
+                    {
+                        UpdateAppearance(cooker.Owner, cooker, false);
+                        cooker.IsRunning = false;
+                    }
                     cooker.ElapsedTime = 0;
                 }
                 // Carry on
