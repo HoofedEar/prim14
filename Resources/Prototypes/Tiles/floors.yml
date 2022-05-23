@@ -545,13 +545,13 @@
   name: grass floor
   texture: "grass"
   base_turfs:
-  - plating
+  - dirtplating
   is_subfloor: false
   can_crowbar: true
   footstep_sounds:
     collection: footstep_floor
   friction: 0.30
-  item_drop: FloorTileItemGrass
+  item_drop: FloorTileItemGrass # Add sod here
   thermalConductivity: 0.04
   heatCapacity: 10000
 

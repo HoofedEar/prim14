@@ -1,5 +1,5 @@
 - type: tile
-  id: grassplating
+  id: dirtplating
   name: dirt plating
   texture: dirt
   base_turfs:

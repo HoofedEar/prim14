@@ -12,7 +12,7 @@ public sealed class DayNightCycleSystem : SharedDayNightCycleSystem
 
     private float _elapsedTime;
     private int _timeThreshold = 900; // 900 = 15 mins, 600 = 10 mins, 300 = 5 mins, 60 = 1 min, 30 = 30 secs, 10 = 10 sec
-    private DayNightCycleStates _current = DayNightCycleStates.Midnight;
+    private DayNightCycleStates _current = DayNightCycleStates.Noon; // CHANGEDAYNIGHT
 
     public override void Initialize()
     {
