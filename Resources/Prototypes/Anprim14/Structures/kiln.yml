@@ -39,3 +39,11 @@
         layer:
           - HalfWallLayer
           - Opaque
+  - type: PointLight
+    enabled: false
+    radius: 2.0
+    energy: 1.5
+    softness: 1
+    mask: /Textures/Effects/LightMasks/cone.png
+    color: "#ffda78"
+    autoRot: true

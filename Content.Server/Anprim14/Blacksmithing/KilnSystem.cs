@@ -6,6 +6,7 @@ using Content.Server.Stack;
 using Content.Shared.Anprim14;
 using Content.Shared.Interaction;
 using Robust.Server.Containers;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
@@ -38,7 +39,7 @@ public sealed class KilnSystem : EntitySystem
     private void OnComponentInit(EntityUid uid, KilnComponent component, ComponentInit args)
     {
         component.Container = _containerSystem.EnsureContainer<Container>(component.Owner, "cooker_container", out _);
-        UpdateAppearance(uid, false);
+        UpdateAppearance(uid, component, false);
     }
 
     private void OnInteractHand(EntityUid uid, KilnComponent component, InteractHandEvent args)
@@ -52,7 +53,7 @@ public sealed class KilnSystem : EntitySystem
             component.IsRunning ? Loc.GetString("timed-cooker-turn-off") : Loc.GetString("timed-cooker-turn-on"), uid,
             Filter.Entities(args.User));
         component.IsRunning = !component.IsRunning;
-        UpdateAppearance(uid, component.IsRunning);
+        UpdateAppearance(uid, component, component.IsRunning);
     }
 
     private void OnInteractUsing(EntityUid uid, KilnComponent component, InteractUsingEvent args)
@@ -73,7 +74,7 @@ public sealed class KilnSystem : EntitySystem
             _multiplier = TryComp<StackComponent>(args.Used, out var stack) ? stack.Count : 2;
             component.KilnWoodStorage += 30 * _multiplier;
             if (component.IsRunning)
-                UpdateAppearance(component.Owner, true);
+                UpdateAppearance(component.Owner, component, true);
             QueueDel(args.Used);
             return;
         }
@@ -140,7 +141,7 @@ public sealed class KilnSystem : EntitySystem
                 if (cooker.KilnWoodStorage > 0)
                 {
                     cooker.KilnWoodStorage -= 10;
-                    UpdateAppearance(cooker.Owner, cooker.KilnWoodStorage > 0);
+                    UpdateAppearance(cooker.Owner, cooker, cooker.KilnWoodStorage > 0);
                     cooker.ElapsedTime = 0;
                 }
                 // Carry on
@@ -225,17 +226,23 @@ public sealed class KilnSystem : EntitySystem
     /// <summary>
     /// This handles the checks to start producing an item
     /// </summary>
-    private void Produce(KilnComponent component, TimedCookerRecipePrototype recipe)
+    private void Produce(TimedCookerComponent component, TimedCookerRecipePrototype recipe)
     {
         component.ProducingRecipe = recipe;
         _producingAddQueue.Enqueue(component.Owner);
     }
 
-    private void UpdateAppearance(EntityUid uid, bool isFired)
+    private void UpdateAppearance(EntityUid uid, TimedCookerComponent component, bool isFired)
     {
         if (!TryComp<AppearanceComponent>(uid, out var appearance))
             return;
 
         appearance.SetData(KilnState.Fired, isFired);
+        
+        if (!EntityManager.TryGetComponent(uid, out PointLightComponent? light))
+            return;
+
+        component.LightOn = isFired;
+        light.Enabled = component.LightOn;
     }
 }

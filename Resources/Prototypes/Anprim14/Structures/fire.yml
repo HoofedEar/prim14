@@ -35,8 +35,9 @@
         - Opaque
   - type: PointLight
     enabled: false
-    radius: 4.0
-    energy: 2.0
+    radius: 3.0
+    energy: 1.5
+    softness: 1.0
     color: "#ffda78"
 
 - type: entity
