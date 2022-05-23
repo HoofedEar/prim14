@@ -46,7 +46,7 @@ public sealed class KilnSystem : EntitySystem
     {
         if (component.KilnWoodStorage <= 0)
         {
-            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User)); 
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User));
             return;
         }
         _popupSystem.PopupEntity(
@@ -58,24 +58,23 @@ public sealed class KilnSystem : EntitySystem
 
     private void OnInteractUsing(EntityUid uid, KilnComponent component, InteractUsingEvent args)
     {
-        // Check if the item can be insert, and that it's on the whitelist
-        if (!component.Container.CanInsert(args.Used) &&
-            component.Whitelist?.IsValid(args.Used) == false)
+        // Are we inserting wood?
+        if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] == "Wood")
         {
-            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
-            return;
-        }
-
-        // Make sure it is cookable
-        if (!TryComp(args.Used, out TimedCookableComponent? cookable))
-        {
-            // Unless it's made of wood
-            if (TryComp(args.Used, out MaterialComponent? material) && material.MaterialIds[0] != "Wood") return;
-            _multiplier = TryComp<StackComponent>(args.Used, out var stack) ? stack.Count : 2;
-            component.KilnWoodStorage += 30 * _multiplier;
+            _multiplier = TryComp<StackComponent>(args.Used, out var stack) ? stack.Count : 4;
+            component.FuelStorage += 30 * _multiplier;
             if (component.IsRunning)
                 UpdateAppearance(component.Owner, component, true);
             QueueDel(args.Used);
+            return;
+        }
+
+        // No? Ok can it insert, is it on the whitelist, and does it have a recipe?
+        if (!component.Container.CanInsert(args.Used) ||
+            component.Whitelist != null && !component.Whitelist.IsValid(args.Used) ||
+            !TryComp(args.Used, out TimedCookableComponent? cookable))
+        {
+            _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-fail"), uid, Filter.Entities(args.User));
             return;
         }
 
@@ -92,7 +91,7 @@ public sealed class KilnSystem : EntitySystem
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-insert-full"), uid, Filter.Entities(args.User));
             return;
         }
-        
+
         if (cookable.Recipe == null ||
             !_prototypeManager.TryIndex(cookable.Recipe, out TimedCookerRecipePrototype? recipe))
             return;
@@ -238,7 +237,7 @@ public sealed class KilnSystem : EntitySystem
             return;
 
         appearance.SetData(KilnState.Fired, isFired);
-        
+
         if (!EntityManager.TryGetComponent(uid, out PointLightComponent? light))
             return;
 
