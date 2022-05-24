@@ -1,0 +1,39 @@
+﻿- type: reagent
+  id: Tin
+  name: reagent-name-molten-tin
+  parent: BaseMetal
+  desc: reagent-desc-molten-tin
+  physicalDesc: reagent-physical-desc-molten
+  color: "#D3D4D5"
+
+- type: reagent
+  id: Copper
+  name: reagent-name-molten-copper
+  parent: BaseMetal
+  desc: reagent-desc-molten-copper
+  physicalDesc: reagent-physical-desc-molten
+  color: "#B87333"
+
+- type: reagent
+  id: Bronze
+  name: reagent-name-molten-bronze
+  parent: BaseMetal
+  desc: reagent-desc-molten-bronze
+  physicalDesc: reagent-physical-desc-molten
+  color: "#CD7F32"
+
+- type: reagent
+  id: Iron
+  name: reagent-name-molten-iron
+  parent: BaseMetal
+  desc: reagent-desc-molten-iron
+  physicalDesc: reagent-physical-desc-molten
+  color: "#61666A"
+
+- type: reagent
+  id: Gold
+  name: reagent-name-molten-gold
+  parent: BaseMetal
+  desc: reagent-desc-molten-gold
+  physicalDesc: reagent-physical-desc-molten
+  color: "#FFD700"

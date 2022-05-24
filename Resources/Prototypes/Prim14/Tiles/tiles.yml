@@ -1,0 +1,12 @@
+﻿- type: tile
+  id: dirtplating
+  name: dirt plating
+  texture: dirt
+  base_turfs:
+  - lattice
+  is_subfloor: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.5
+  thermalConductivity: 0.04
+  heatCapacity: 10000

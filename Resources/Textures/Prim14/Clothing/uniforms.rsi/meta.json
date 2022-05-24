@@ -1,0 +1,214 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-NC-SA 3.0",
+  "copyright": "https://github.com/Civ13/Civ13/",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "indianshaman"
+    },
+    {
+      "name": "indianchef"
+    },
+    {
+      "name": "indianwhite"
+    },
+    {
+      "name": "indian1",
+      "directions": 4
+    },
+    {
+      "name": "indian2",
+      "directions": 4
+    },
+    {
+      "name": "giant_leopard_pelt"
+    },
+    {
+      "name": "roman"
+    },
+    {
+      "name": "old_roman"
+    },
+    {
+      "name": "athens"
+    },
+    {
+      "name": "roman_centurion"
+    },
+    {
+      "name": "old_roman_centurion"
+    },
+    {
+      "name": "toxotai"
+    },
+    {
+      "name": "thebes"
+    },
+    {
+      "name": "corinthia"
+    },
+    {
+      "name": "greek_commander"
+    },
+    {
+      "name": "yellow_tunic"
+    },
+    {
+      "name": "blue_tunic"
+    },
+    {
+      "name": "red_tunic"
+    },
+    {
+      "name": "leather_tunic"
+    },
+    {
+      "name": "red_tunic2"
+    },
+    {
+      "name": "blue_tunic2"
+    },
+    {
+      "name": "white_tunic"
+    },
+    {
+      "name": "syellow_tunic"
+    },
+    {
+      "name": "sblue_tunic"
+    },
+    {
+      "name": "sred_tunic"
+    },
+    {
+      "name": "sred_tunic2"
+    },
+    {
+      "name": "sblue_tunic2"
+    },
+    {
+      "name": "swhite_tunic"
+    },
+    {
+      "name": "spartan"
+    },
+    {
+      "name": "white_tunic_long"
+    },
+    {
+      "name": "arabw_robe"
+    },
+    {
+      "name": "arabw_tunic"
+    },
+    {
+      "name": "arab1"
+    },
+    {
+      "name": "arab2"
+    },
+    {
+      "name": "arab3"
+    },
+    {
+      "name": "hauberk"
+    },
+    {
+      "name": "crusader1"
+    },
+    {
+      "name": "crusader2"
+    },
+    {
+      "name": "toga"
+    },
+    {
+      "name": "toga2"
+    },
+    {
+      "name": "loincloth1"
+    },
+    {
+      "name": "leatherloincloth1"
+    },
+    {
+      "name": "leatherloincloth2"
+    },
+    {
+      "name": "leatherloincloth4"
+    },
+    {
+      "name": "customtoga"
+    },
+    {
+      "name": "customroman"
+    },
+    {
+      "name": "old_customroman"
+    },
+    {
+      "name": "customtunic"
+    },
+    {
+      "name": "customarabictunic"
+    },
+    {
+      "name": "wise_tutor"
+    },
+    {
+      "name": "green_tunic"
+    },
+    {
+      "name": "tribalrobe"
+    },
+    {
+      "name": "tribalrobe_decoration"
+    },
+    {
+      "name": "tribalrobe_robe"
+    },
+    {
+      "name": "tribalrobe_robebelt"
+    },
+    {
+      "name": "leaves_skirt"
+    },
+    {
+      "name": "leaves_skirt_long"
+    },
+    {
+      "name": "aztec_loincloth"
+    },
+    {
+      "name": "blue_sari"
+    },
+    {
+      "name": "red_sari"
+    },
+    {
+      "name": "stormcloak"
+    },
+    {
+      "name": "stormcloak_f"
+    },
+    {
+      "name": "whiterun"
+    },
+    {
+      "name": "whiterun_f"
+    },
+    {
+      "name": "ulfric"
+    },
+    {
+      "name": "tes13_imperial"
+    },
+    {
+      "name": "bolgruf"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+﻿- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformClothUniform
+  description: A tasteful bit of clothing to cover your bits.
+  name: cloth uniform
+  components:
+  - type: Sprite
+    sprite: Prim14/Clothing/Uniforms/clothuniform.rsi
+  - type: Clothing
+    sprite: Prim14/Clothing/Uniforms/clothuniform.rsi

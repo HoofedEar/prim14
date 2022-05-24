@@ -1,0 +1,68 @@
+﻿{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "copyright": "https://github.com/Civ13/Civ13/",
+  "states": [
+    {
+      "name": "tribalknife"
+    },
+    {
+      "name": "tribalmask1"
+    },
+    {
+      "name": "tribalhorn"
+    },
+    {
+      "name": "tribalhammer"
+    },
+    {
+      "name": "tribalaxe"
+    },
+    {
+      "name": "tribalmask2"
+    },
+    {
+      "name": "tribalpot"
+    },
+    {
+      "name": "tribalmortar"
+    },
+    {
+      "name": "tribalpestle"
+    },
+    {
+      "name": "tribalpot_sap"
+    },
+    {
+      "name": "tribalhorn2"
+    },
+    {
+      "name": "remains1"
+    },
+    {
+      "name": "remains2"
+    },
+    {
+      "name": "remains3"
+    },
+    {
+      "name": "remains4"
+    },
+    {
+      "name": "remains5"
+    },
+    {
+      "name": "remains6"
+    },
+    {
+      "name": "bonehatchet"
+    },
+	{
+      "name": "woodaxe"
+    }
+  ]
+}

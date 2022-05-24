@@ -1,0 +1,47 @@
+﻿- type: entity
+  id: BaseBonfire
+  name: bonfire
+  description: Careful not to burn yourself!
+  abstract: true
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: TimedCooker
+    whitelist:
+      tags:
+        - Raw
+  - type: Clickable
+  - type: InteractionOutline
+  - type: Appearance
+  - type: Sprite
+    sprite: Prim14/Structures/bonfire.rsi
+    layers:
+      - state: icon
+      - state: on_fire
+        map: [ "enum.TimedCookerVisualLayers.Fired" ]
+    netsync: false
+  - type: TimedCookerVisuals
+    stateFired: on_fire
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeCircle
+        radius: 0.4
+      mass: 500
+      layer:
+        - HalfWallLayer
+        - Opaque
+  - type: PointLight
+    enabled: false
+    radius: 3.0
+    energy: 1.5
+    softness: 1.0
+    color: "#ffda78"
+
+- type: entity
+  parent: BaseBonfire
+  id: Bonfire
+  name: bonfire
+  description: pretend there are flames here. woosh

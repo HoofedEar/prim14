@@ -1,0 +1,27 @@
+﻿- type: constructionGraph
+  id: WoodenHatchet
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: hatchet
+          steps:
+            - material: WoodPlank
+              amount: 2
+              doAfter: 4
+    - node: hatchet
+      entity: ToolWoodenHatchet
+
+- type: constructionGraph
+  id: FishingPole
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: pole
+          steps:
+            - material: WoodPlank
+              amount: 1
+              doAfter: 4
+    - node: pole
+      entity: ToolFishingPole

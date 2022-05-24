@@ -1,0 +1,42 @@
+﻿- type: entity
+  name: sod
+  parent: BaseItem
+  id: FloorTileSod
+  description: A moist pile of grass.
+  components:
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: sod
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Blunt: 2
+    - type: FloorTile
+      outputs:
+        - dirtplating
+        - floor_grass
+
+- type: entity
+  name: dirt
+  parent: BaseItem
+  id: Dirt
+  description: Very dirty.
+  components:
+    - type: Tag
+      tags:
+        - Dirt
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: icon
+
+- type: entity
+  name: clay
+  parent: BaseItem
+  id: Clay
+  components:
+    - type: Tag
+      tags:
+        - Clay
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: icon

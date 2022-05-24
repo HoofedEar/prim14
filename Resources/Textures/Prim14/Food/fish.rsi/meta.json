@@ -1,0 +1,26 @@
+﻿{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-NC-SA-4.0",
+  "copyright": "ËmoGarbagε#7559",
+  "states": [
+    {
+      "name": "bream"
+    },
+    {
+      "name": "cod"
+    },
+    {
+      "name": "lobster"
+    },
+    {
+      "name": "salmon"
+    },
+    {
+      "name": "shrimp"
+    }
+  ]
+}
