@@ -1,0 +1,9 @@
+﻿using Robust.Shared.Serialization;
+
+namespace Content.Shared.Prim14;
+
+[Serializable, NetSerializable]
+public enum AnvilState
+{
+    Ready
+}

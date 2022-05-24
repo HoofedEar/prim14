@@ -551,7 +551,7 @@
   footstep_sounds:
     collection: footstep_floor
   friction: 0.30
-  item_drop: FloorTileItemGrass # Add sod here
+  item_drop: FloorTileSod
   thermalConductivity: 0.04
   heatCapacity: 10000
 

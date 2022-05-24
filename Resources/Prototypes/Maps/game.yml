@@ -110,7 +110,7 @@
 - type: gameMap
   id: anprim
   mapName: 'Anprim'
-  mapPath: /Maps/Anprim14/anprim.yml
+  mapPath: /Maps/Prim14/anprim.yml
   minPlayers: 0
   maxPlayers: 20
   fallback: true

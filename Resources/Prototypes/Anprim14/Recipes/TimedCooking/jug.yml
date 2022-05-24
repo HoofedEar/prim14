@@ -1,6 +1,0 @@
-- type: timedCookerRecipe
-  id: BlacksmithJugRecipe
-  input: ToolBlacksmithJug
-  result: 
-    - ToolBlacksmithJug
-  completeTime: 4

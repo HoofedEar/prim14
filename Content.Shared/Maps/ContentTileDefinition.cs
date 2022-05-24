@@ -56,6 +56,14 @@ namespace Content.Shared.Maps
         [DataField("is_space")] public bool IsSpace { get; private set; }
         [DataField("sturdy")] public bool Sturdy { get; private set; } = true;
 
+        /// <summary>
+        /// This part is used to "renew" a tile of it's resource
+        /// Used for digging purposes.
+        /// </summary>
+        [DataField("maxQuantity")] public int MaxQuantity = 3;
+        [DataField("lootTable")] public string LootTable = string.Empty;
+        public string Overlay = "DiggingBlocker";
+
         public void AssignTileId(ushort id)
         {
             TileId = id;

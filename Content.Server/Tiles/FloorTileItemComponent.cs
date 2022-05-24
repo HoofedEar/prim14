@@ -28,7 +28,9 @@ namespace Content.Server.Tiles
         protected override void Initialize()
         {
             base.Initialize();
-            Owner.EnsureComponent<StackComponent>();
+            // Don't force StackComponent onto it
+            if (_entMan.TryGetComponent(Owner, out StackComponent _))
+                Owner.EnsureComponent<StackComponent>();
         }
 
         private bool HasBaseTurf(ContentTileDefinition tileDef, string baseTurf)
@@ -56,8 +58,7 @@ namespace Content.Server.Tiles
             if (!eventArgs.CanReach)
                 return true;
 
-            if (!_entMan.TryGetComponent(Owner, out StackComponent? stack))
-                return true;
+            _entMan.TryGetComponent(Owner, out StackComponent? stack);
 
             var mapManager = IoCManager.Resolve<IMapManager>();
 
@@ -81,8 +82,12 @@ namespace Content.Server.Tiles
 
                     if (HasBaseTurf(currentTileDefinition, baseTurf.ID))
                     {
-                        if (!EntitySystem.Get<StackSystem>().Use(Owner, 1, stack))
-                            continue;
+                        if (stack != null)
+                            EntitySystem.Get<StackSystem>().Use(Owner, 1, stack);
+                        else
+                        {
+                            _entMan.QueueDeleteEntity(Owner);
+                        }
 
                         PlaceAt(mapGrid, location, currentTileDefinition.TileId);
                         break;
