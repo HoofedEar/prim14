@@ -7,7 +7,7 @@ This fork focuses on a primitive setting, with emphasis on survival and PvE.
 
 ## Links
 
-[Website](https://anprim14.io) | [Wiki](https://wiki.anprim14.io) | [Discord](https://discord.gg/9JzQeWpkew)
+[Website]() | [Wiki]() | [Discord](https://discord.gg/9JzQeWpkew)
 
 ## Building
 
