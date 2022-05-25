@@ -9,24 +9,30 @@ namespace Content.Server.Tools;
 
 public sealed partial class ToolSystem
 {
+    public bool IsPrying;
     private void InitializeDigging()
     {
         SubscribeLocalEvent<DiggingComponent, AfterInteractEvent>(OnDiggingAfterInteract);
         SubscribeLocalEvent<DiggingComponent, DiggingCompleteEvent>(OnDiggingComplete);
     }
-    
+
     private void OnDiggingComplete(EntityUid uid, DiggingComponent component, DiggingCompleteEvent args)
     {
         component.CancelToken = null;
-        //args.Coordinates.PryTile(EntityManager, _mapManager);
-        
+
         if (!_mapManager.TryGetGrid(args.Coordinates.GetGridId(EntityManager), out var mapGrid))
             return;
-        
+
         var tile = mapGrid.GetTileRef(args.Coordinates);
         var coordinates = mapGrid.GridTileToLocal(tile.GridIndices);
         var tileDef = (ContentTileDefinition)_tileDefinitionManager[tile.Tile.TypeId];
-        
+
+        if (IsPrying)
+        {
+            args.Coordinates.PryTile(EntityManager, _mapManager);
+            return;
+        }
+
         // Create dirt
         if (tileDef.MaxQuantity <= 0) return;
         EntityManager.SpawnEntity("Dirt", coordinates);
@@ -36,7 +42,7 @@ public sealed partial class ToolSystem
             EntityManager.SpawnEntity("InteractionBlocker", coordinates);
         }
     }
-    
+
     private void OnDiggingAfterInteract(EntityUid uid, DiggingComponent component, AfterInteractEvent args)
     {
         if (args.Handled || !args.CanReach) return;
@@ -70,17 +76,23 @@ public sealed partial class ToolSystem
 
         if (!tileDef.CanCrowbar)
         {
-            if (tileDef.ID != "dirt_plating")
+            if (tileDef.ID == "dirt_plating")
+            {
+                IsPrying = false;
+            }
+            else
+            {
                 return false;
+            }
         }
         else
         {
-            return false;
+            IsPrying = true;
         }
 
         var token = new CancellationTokenSource();
         component.CancelToken = token;
-        
+
         //var gridId = EntityManager.GetComponent<TransformComponent>(component.Owner).GridID;
         //var lookup = Get<EntityLookupSystem>();
 
@@ -101,7 +113,7 @@ public sealed partial class ToolSystem
 
         return true;
     }
-    
+
     private sealed class DiggingCompleteEvent : EntityEventArgs
     {
         public EntityCoordinates Coordinates { get; init; }

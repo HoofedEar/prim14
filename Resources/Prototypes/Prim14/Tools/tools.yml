@@ -97,7 +97,7 @@
 
 - type: entity
   name: bone shovel
-  parent: Crowbar
+  parent: BaseItem
   id: ToolBoneShovel
   description: Dig through the ditches and burn.
   components:
@@ -105,11 +105,15 @@
       sprite: Prim14/Tools/bone_shovel.rsi
       state: icon
       netsync: false
+    - type: ItemCooldown
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 10
     - type: Digging
     - type: Tool
       qualities:
         - Digging
-        - Prying
 
 - type: entity
   name: wooden cup
