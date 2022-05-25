@@ -89,7 +89,7 @@
   components:
     - type: Tag
       tags:
-        - AnvilHammer
+      - AnvilHammer
     - type: Sprite
       sprite: Prim14/Tools/ironhammer.rsi
       state: icon
@@ -101,6 +101,9 @@
   id: ToolBoneShovel
   description: Dig through the ditches and burn.
   components:
+    - type: Tag
+      tags:
+      - Shovel
     - type: Sprite
       sprite: Prim14/Tools/bone_shovel.rsi
       state: icon
