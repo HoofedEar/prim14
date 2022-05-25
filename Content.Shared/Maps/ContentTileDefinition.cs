@@ -61,7 +61,7 @@ namespace Content.Shared.Maps
         /// Used for digging purposes.
         /// </summary>
         [DataField("maxQuantity")] public int MaxQuantity = 3;
-        [DataField("lootTable")] public string LootTable = string.Empty;
+        [DataField("loot")] public string Loot = string.Empty;
         public string Overlay = "DiggingBlocker";
 
         public void AssignTileId(ushort id)

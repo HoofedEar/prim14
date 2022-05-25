@@ -1,14 +1,18 @@
 using System.Threading;
+using Content.Server.Popups;
+using Content.Server.Prim14.Blocker;
 using Content.Server.Tools.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Tools.Components;
 using Robust.Shared.Map;
+using Robust.Shared.Player;
 
 namespace Content.Server.Tools;
 
 public sealed partial class ToolSystem
 {
+    [Dependency] private readonly PopupSystem _popup = default!;
     public bool IsPrying;
     private void InitializeDigging()
     {
@@ -33,14 +37,15 @@ public sealed partial class ToolSystem
             return;
         }
 
-        // Create dirt
+        // Create dirt or clay depending on what is defined by the tile
         if (tileDef.MaxQuantity <= 0) return;
-        EntityManager.SpawnEntity("Dirt", coordinates);
+        EntityManager.SpawnEntity(tileDef.Loot, coordinates);
         tileDef.MaxQuantity -= 1;
-        if (tileDef.MaxQuantity <= 0)
-        {
-            EntityManager.SpawnEntity("InteractionBlocker", coordinates);
-        }
+
+        // Once we have dug all the dirt up, place a marker to block it
+        if (tileDef.MaxQuantity > 0) return;
+        EntityManager.SpawnEntity("InteractionBlocker", coordinates);
+        tileDef.MaxQuantity = 3;
     }
 
     private void OnDiggingAfterInteract(EntityUid uid, DiggingComponent component, AfterInteractEvent args)
@@ -72,11 +77,26 @@ public sealed partial class ToolSystem
         if (!_interactionSystem.InRangeUnobstructed(user, coordinates, popup: false))
             return false;
 
+        var gridId = EntityManager.GetComponent<TransformComponent>(component.Owner).GridID;
+        var lookup = Get<EntityLookupSystem>();
+
+        foreach (var entity in lookup.GetEntitiesIntersecting(gridId, tile.GridIndices))
+        {
+            if (!EntityManager.HasComponent<BlockerComponent>(entity))
+            {
+                continue;
+            }
+
+            // TODO Localise
+            _popup.PopupEntity("The ground is too hard.", user, Filter.Entities(user));
+            return false;
+        }
+
         var tileDef = (ContentTileDefinition)_tileDefinitionManager[tile.Tile.TypeId];
 
         if (!tileDef.CanCrowbar)
         {
-            if (tileDef.ID == "dirt_plating")
+            if (tileDef.ID == "dirt_plating" && tileDef.MaxQuantity > 0)
             {
                 IsPrying = false;
             }
