@@ -105,6 +105,11 @@
       sprite: Prim14/Tools/bone_shovel.rsi
       state: icon
       netsync: false
+    - type: Digging
+    - type: Tool
+      qualities:
+        - Digging
+        - Prying
 
 - type: entity
   name: wooden cup

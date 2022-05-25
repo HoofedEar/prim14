@@ -545,7 +545,7 @@
   name: grass floor
   texture: "grass"
   base_turfs:
-  - dirtplating
+  - dirt_plating
   is_subfloor: false
   can_crowbar: true
   footstep_sounds:

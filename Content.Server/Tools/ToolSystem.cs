@@ -35,6 +35,7 @@ namespace Content.Server.Tools
             InitializeWelders();
             InitializeMultipleTools();
             InitializeRaking();
+            InitializeDigging();
 
             SubscribeLocalEvent<ToolDoAfterComplete>(OnDoAfterComplete);
             SubscribeLocalEvent<ToolDoAfterCancelled>(OnDoAfterCancelled);

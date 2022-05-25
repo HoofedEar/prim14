@@ -13,7 +13,7 @@
           Blunt: 2
     - type: FloorTile
       outputs:
-        - dirtplating
+        - dirt_plating
         - floor_grass
 
 - type: entity

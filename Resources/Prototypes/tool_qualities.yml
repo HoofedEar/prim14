@@ -53,3 +53,10 @@
   toolName: tool-quality-raking-tool-name
   spawn: Rake
   icon: Objects/Tools/rake.rsi/icon.png
+
+- type: tool
+  id: Digging
+  name: tool-quality-digging-name
+  toolName: tool-quality-digging-tool-name
+  spawn: Shovel
+  icon: Objects/Tools/rake.rsi/icon.png

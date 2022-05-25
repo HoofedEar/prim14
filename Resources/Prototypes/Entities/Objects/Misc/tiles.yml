@@ -578,7 +578,7 @@
     HeldPrefix: grass
   - type: FloorTile
     outputs:
-      - dirtplating
+      - dirt_plating
       - floor_grass
   - type: Stack
     stackType: FloorTileGrass

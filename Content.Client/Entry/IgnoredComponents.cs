@@ -9,6 +9,7 @@ namespace Content.Client.Entry
             "AmmoBox",
             "IngestionBlocker",
             "Charger",
+            "Digging",
             "CloningPod",
             "HealthExaminable",
             "Destructible",
