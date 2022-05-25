@@ -1,0 +1,10 @@
+- type: entity
+  name: Interaction Blocker
+  id: InteractionBlocker
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: red
+    - type: Blocker
+      timer: 10

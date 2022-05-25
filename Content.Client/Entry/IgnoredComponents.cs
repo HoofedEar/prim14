@@ -17,6 +17,7 @@ namespace Content.Client.Entry
             "AtmosExposed",
             "Explosive",
             "ExplosionResistance",
+            "Blocker",
             "BlacksmithJug",
             "Vocal",
             "TimedCookable",
