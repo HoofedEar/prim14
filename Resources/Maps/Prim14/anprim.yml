@@ -52,10 +52,11 @@ tilemap:
   45: floor_techmaint
   46: floor_white
   47: floor_wood
-  48: dirt_plating
-  49: lattice
-  50: plating
-  51: underplating
+  48: dirt_plating2
+  49: dirt_plating1
+  50: lattice
+  51: plating
+  52: underplating
 grids:
 - settings:
     chunksize: 16

@@ -38,14 +38,14 @@ public sealed partial class ToolSystem
         }
 
         // Create dirt or clay depending on what is defined by the tile
-        if (tileDef.MaxQuantity <= 0) return;
+        if (tileDef.Quantity <= 0) return;
         EntityManager.SpawnEntity(tileDef.Loot, coordinates);
-        tileDef.MaxQuantity -= 1;
+        tileDef.Quantity -= 1;
 
         // Once we have dug all the dirt up, place a marker to block it
-        if (tileDef.MaxQuantity > 0) return;
+        if (tileDef.Quantity > 0) return;
         EntityManager.SpawnEntity("InteractionBlocker", coordinates);
-        tileDef.MaxQuantity = 3;
+        tileDef.Quantity = 3;
     }
 
     private void OnDiggingAfterInteract(EntityUid uid, DiggingComponent component, AfterInteractEvent args)
@@ -96,7 +96,7 @@ public sealed partial class ToolSystem
 
         if (!tileDef.CanCrowbar)
         {
-            if (tileDef.ID == "dirt_plating" && tileDef.MaxQuantity > 0)
+            if (tileDef.ID == "dirt_plating" && tileDef.Quantity > 0)
             {
                 IsPrying = false;
             }

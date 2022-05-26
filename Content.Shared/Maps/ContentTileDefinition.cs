@@ -60,7 +60,7 @@ namespace Content.Shared.Maps
         /// This part is used to "renew" a tile of it's resource
         /// Used for digging purposes.
         /// </summary>
-        [DataField("maxQuantity")] public int MaxQuantity = 3;
+        [DataField("quantity")] public int Quantity = 3;
         [DataField("loot")] public string Loot = string.Empty;
         public string Overlay = "DiggingBlocker";
 

@@ -1,13 +1,133 @@
 ﻿- type: tile
-  id: dirt_plating
+  id: floor_grass
+  name: grass floor
+  texture: grass
+  base_turfs:
+    - dirt_plating1
+  is_subfloor: false
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.30
+  item_drop: FloorTileSod
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
+  id: dirt_plating1
   name: dirt plating
   texture: dirt
   base_turfs:
-  - lattice
+  - dirt_plating2
+  is_subfloor: true
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.5
+  item_drop: Dirt
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
+  id: dirt_plating2
+  name: dirt plating
+  texture: dirt
+  base_turfs:
+    - dirt_plating3
+  is_subfloor: true
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.5
+  item_drop: Dirt
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
+  id: dirt_plating3
+  name: dirt plating
+  texture: dirt
+  base_turfs:
+    - bedrock
+  is_subfloor: true
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.5
+  item_drop: Dirt
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
+  id: bedrock
+  name: dirt plating
+  texture: bedrock
+  base_turfs:
+    - space
   is_subfloor: true
   footstep_sounds:
     collection: footstep_grass
   friction: 0.5
+  item_drop: Dirt
   thermalConductivity: 0.04
   heatCapacity: 10000
-  loot: Dirt
+
+- type: tile
+  id: floor_wet_grass
+  name: wet grass floor
+  texture: grassjungle
+  base_turfs:
+    - clay_plating1
+  is_subfloor: false
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.30
+  item_drop: FloorTileWetSod
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
+  id: clay_plating1
+  name: clay plating (3)
+  texture: claydirt
+  base_turfs:
+    - clay_plating2
+  is_subfloor: true
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.5
+  item_drop: Clay
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
+  id: clay_plating2
+  name: clay plating (2)
+  texture: claydirt
+  base_turfs:
+    - clay_plating3
+  is_subfloor: true
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.5
+  item_drop: Clay
+  thermalConductivity: 0.04
+  heatCapacity: 10000
+
+- type: tile
+  id: clay_plating3
+  name: clay plating (1)
+  texture: claydirt
+  base_turfs:
+    - bedrock
+  is_subfloor: true
+  can_crowbar: true
+  footstep_sounds:
+    collection: footstep_grass
+  friction: 0.5
+  item_drop: Clay
+  thermalConductivity: 0.04
+  heatCapacity: 10000

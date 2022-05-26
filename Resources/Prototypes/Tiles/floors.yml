@@ -541,11 +541,11 @@
   heatCapacity: 10000
 
 - type: tile
-  id: floor_grass
+  id: floor_grass_old
   name: grass floor
   texture: "grass"
   base_turfs:
-  - dirt_plating
+  - dirt_plating1
   is_subfloor: false
   can_crowbar: true
   footstep_sounds:

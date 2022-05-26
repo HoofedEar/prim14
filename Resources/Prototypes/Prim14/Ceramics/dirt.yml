@@ -13,7 +13,7 @@
           Blunt: 2
     - type: FloorTile
       outputs:
-        - dirt_plating
+        - dirt_plating1
         - floor_grass
 
 - type: entity
@@ -28,6 +28,11 @@
     - type: Sprite
       sprite: Prim14/Materials/dirt.rsi
       state: icon
+    - type: FloorTile
+      outputs:
+        - dirt_plating3
+        - dirt_plating2
+        - dirt_plating1
 
 - type: entity
   name: clay
@@ -40,3 +45,26 @@
     - type: Sprite
       sprite: Prim14/Materials/dirt.rsi
       state: icon
+    - type: FloorTile
+      outputs:
+        - clay_plating3
+        - clay_plating2
+        - clay_plating1
+
+- type: entity
+  name: wet sod
+  parent: BaseItem
+  id: FloorTileWetSod
+  description: A moist pile of grass.
+  components:
+    - type: Sprite
+      sprite: Prim14/Materials/dirt.rsi
+      state: sod
+    - type: DamageOtherOnHit
+      damage:
+        types:
+          Blunt: 2
+    - type: FloorTile
+      outputs:
+        - clay_plating1
+        - floor_wet_grass

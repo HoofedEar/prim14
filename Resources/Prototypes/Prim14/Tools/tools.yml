@@ -98,7 +98,7 @@
 - type: entity
   name: bone shovel
   parent: BaseItem
-  id: ToolBoneShovel
+  id: ToolShovelBone
   description: Dig through the ditches and burn.
   components:
     - type: Tag
@@ -113,10 +113,10 @@
       damage:
         types:
           Blunt: 10
-    - type: Digging
+    - type: TilePrying
     - type: Tool
       qualities:
-        - Digging
+        - Prying
 
 - type: entity
   name: wooden cup
