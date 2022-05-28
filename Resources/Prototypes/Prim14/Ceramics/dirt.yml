@@ -50,6 +50,24 @@
         - clay_plating3
         - clay_plating2
         - clay_plating1
+    - type: SolutionContainerManager
+      solutions:
+        cube:
+          maxVol: 11 # needs room for water
+          reagents:
+          - ReagentId: Nutriment
+            Quantity: 10
+    - type: RefillableSolution
+      solution: cube
+    - type: Reactive
+      reactions:
+      - reagents: [ Water ]
+        methods: [ Touch, Ingestion, Injection ]
+        effects:
+        - !type:AddToSolutionReaction
+          solution: cube
+    - type: Rehydratable
+      target: MobMonkey
 
 - type: entity
   name: wet sod
