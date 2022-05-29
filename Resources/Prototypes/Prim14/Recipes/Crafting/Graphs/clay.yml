@@ -1,0 +1,17 @@
+- type: constructionGraph
+  id: RawBlacksmithJug
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: rawjug
+          steps:
+            - tag: WetClay
+              amount: 1
+              doAfter: 2
+              icon:
+                sprite: Prim14/Materials/dirt.rsi
+                state: icon
+              name: wet clay
+    - node: rawjug
+      entity: ToolBlacksmithJugRaw

@@ -1,0 +1,13 @@
+- type: construction
+  name: raw blacksmith jug
+  id: rawblacksmithjug
+  graph: RawBlacksmithJug
+  startNode: start
+  targetNode: rawjug
+  category: Clay
+  description: The beginnings of a jug.
+  show: true
+  icon:
+    sprite: Prim14/Tools/blacksmithjug.rsi
+    state: raw
+  objectType: Item

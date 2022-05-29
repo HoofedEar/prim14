@@ -30,3 +30,6 @@
 
 - type: Tag
   id: Clay
+
+- type: Tag
+  id: WetClay

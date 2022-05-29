@@ -3,6 +3,23 @@
   group: Metals
   abstract: true
 
+- type: entity
+  name: raw blacksmith jug
+  parent: BaseItem
+  id: ToolBlacksmithJugRaw
+  description: You should fire this in a kiln.
+  components:
+    - type: Tag
+      tags:
+        - Raw
+    - type: Sprite
+      sprite: Prim14/Tools/blacksmithjug.rsi
+      state: raw
+      netsync: false
+    - type: Construction
+      graph: RawBlacksmithJug
+      node: rawjug
+
 # Blacksmith Jug
 - type: entity
   name: blacksmith jug

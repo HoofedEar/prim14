@@ -53,10 +53,7 @@
     - type: SolutionContainerManager
       solutions:
         cube:
-          maxVol: 11 # needs room for water
-          reagents:
-          - ReagentId: Nutriment
-            Quantity: 10
+          maxVol: 5
     - type: RefillableSolution
       solution: cube
     - type: Reactive
@@ -67,7 +64,19 @@
         - !type:AddToSolutionReaction
           solution: cube
     - type: Rehydratable
-      target: MobMonkey
+      target: ClayWet
+
+- type: entity
+  name: wet clay
+  parent: BaseItem
+  id: ClayWet
+  components:
+    - type: Tag
+      tags:
+        - WetClay
+    - type: Sprite
+      sprite: Prim14/Objects/claystuff.rsi
+      state: claylump
 
 - type: entity
   name: wet sod
