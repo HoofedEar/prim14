@@ -7,6 +7,7 @@ using Content.Shared.Interaction;
 using Content.Server.Materials;
 using Content.Server.Popups;
 using Content.Server.Power.Components;
+using Content.Server.Power.EntitySystems;
 using Content.Server.Stack;
 using Content.Server.UserInterface;
 using Robust.Server.GameObjects;
@@ -187,7 +188,7 @@ namespace Content.Server.Lathe
                 return;
             }
 
-            if (TryComp<ApcPowerReceiverComponent>(component.Owner, out var receiver) && !receiver.Powered)
+            if (!this.IsPowered(component.Owner, EntityManager))
             {
                 FinishProducing(recipe, component, false);
                 return;
@@ -263,7 +264,7 @@ namespace Content.Server.Lathe
         /// </summary>
         private void UserInterfaceOnOnReceiveMessage(EntityUid uid, LatheComponent component, ServerBoundUserInterfaceMessage message)
         {
-            if (TryComp<ApcPowerReceiverComponent>(uid, out var receiver) && !receiver.Powered)
+            if (!this.IsPowered(uid, EntityManager))
                 return;
 
             switch (message.Message)
