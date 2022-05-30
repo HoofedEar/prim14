@@ -1,0 +1,5 @@
+- type: stack
+  id: WetClay
+  name: wetclay
+  icon: Prim14/Objects/claystuff.rsi/claylump.png
+  spawn: ClayWet1

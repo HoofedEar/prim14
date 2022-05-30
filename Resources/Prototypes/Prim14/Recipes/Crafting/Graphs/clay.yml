@@ -24,7 +24,7 @@
       edges:
         - to: rawbrick
           steps:
-            - tag: WetClay
+            - tag: WetClay # Make WetClay into a material you fool
               amount: 1
               doAfter: 2
               icon:
