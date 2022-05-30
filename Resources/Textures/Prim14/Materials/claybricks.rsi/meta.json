@@ -15,6 +15,12 @@
     },
     {
       "name": "clay_3"
+    },
+    {
+      "name": "wetclay"
+    },
+    {
+      "name": "dryclay"
     }
   ]
 }

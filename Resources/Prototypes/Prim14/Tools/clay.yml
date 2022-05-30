@@ -1,0 +1,18 @@
+- type: entity
+  name: raw clay brick
+  parent: BaseItem
+  id: ClayBrickRaw
+  description: Let this sit in the sun or fire it.
+  components:
+    - type: Tag
+      tags:
+        - Raw
+    - type: Sprite
+      sprite: Prim14/Materials/claybricks.rsi
+      state: wetclay
+      netsync: false
+    - type: Construction
+      graph: RawClayBrick
+      node: rawbrick
+    - type: Drying
+      result: FloorTileWetSod

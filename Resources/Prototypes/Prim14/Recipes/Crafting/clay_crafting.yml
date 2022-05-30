@@ -11,3 +11,17 @@
     sprite: Prim14/Tools/blacksmithjug.rsi
     state: raw
   objectType: Item
+
+- type: construction
+  name: raw clay brick
+  id: rawclaybrick
+  graph: RawClayBrick
+  startNode: start
+  targetNode: rawbrick
+  category: Clay
+  description: That's a nice brick.
+  show: true
+  icon:
+    sprite: Prim14/Materials/claybricks.rsi
+    state: wetclay
+  objectType: Item

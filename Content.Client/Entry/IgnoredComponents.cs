@@ -26,6 +26,7 @@ namespace Content.Client.Entry
             "OnUseTimerTrigger",
             "WarpPoint",
             "EmitSoundOnUse",
+            "Drying",
             "EmitSoundOnLand",
             "EmitSoundOnTrigger",
             "EmitSoundOnActivate",

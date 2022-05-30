@@ -10,8 +10,26 @@
               amount: 1
               doAfter: 2
               icon:
-                sprite: Prim14/Materials/dirt.rsi
-                state: icon
+                sprite: Prim14/Objects/claystuff.rsi
+                state: claylump
               name: wet clay
     - node: rawjug
       entity: ToolBlacksmithJugRaw
+
+- type: constructionGraph
+  id: RawClayBrick
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: rawbrick
+          steps:
+            - tag: WetClay
+              amount: 1
+              doAfter: 2
+              icon:
+                sprite: Prim14/Objects/claystuff.rsi
+                state: claylump
+              name: wet clay
+    - node: rawbrick
+      entity: ClayBrickRaw
