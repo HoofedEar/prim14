@@ -64,7 +64,7 @@
         - !type:AddToSolutionReaction
           solution: cube
     - type: Rehydratable
-      target: ClayWet
+      target: ClayWet1
 
 - type: entity
   name: wet clay (full)
