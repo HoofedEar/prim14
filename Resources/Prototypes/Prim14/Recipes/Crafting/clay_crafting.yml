@@ -25,3 +25,21 @@
     sprite: Prim14/Materials/claybricks.rsi
     state: wetclay
   objectType: Item
+
+- type: construction
+  name: kiln
+  id: Kiln
+  graph: Kiln
+  startNode: start
+  targetNode: kiln
+  category: Clay
+  description: You sit in this. Either by will or force.
+  show: true
+  icon:
+    sprite: Structures/Furniture/chairs.rsi
+    state: wooden
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked

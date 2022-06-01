@@ -9,10 +9,10 @@ public sealed class DryingComponent : Component
     /// </summary>
     [ViewVariables]
     [DataField("dryingTime")]
-    public float? DryingTime = 1f;
-    
+    public float? DryingTime = 15f;
+
     [DataField("result")]
     public string Result = string.Empty;
-    
+
     public float Accumulator;
 }

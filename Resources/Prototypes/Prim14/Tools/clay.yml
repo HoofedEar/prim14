@@ -15,4 +15,18 @@
       graph: RawClayBrick
       node: rawbrick
     - type: Drying
-      result: FloorTileWetSod
+      result: ClayBrickDry
+
+- type: entity
+  name: dry clay brick
+  parent: BaseItem
+  id: ClayBrickDry
+  description: It's brittle but it works.
+  components:
+    - type: Tag
+      tags:
+        - DryBrick
+    - type: Sprite
+      sprite: Prim14/Materials/claybricks.rsi
+      state: dryclay
+      netsync: false

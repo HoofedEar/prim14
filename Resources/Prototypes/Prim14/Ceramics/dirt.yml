@@ -67,9 +67,10 @@
       target: ClayWet1
 
 - type: entity
-  name: wet clay (full)
+  name: wet clay
   parent: BaseItem
   id: ClayWet
+  suffix: Full
   components:
     - type: Stack
       stackType: WetClay
@@ -79,11 +80,15 @@
     - type: Sprite
       sprite: Prim14/Objects/claystuff.rsi
       state: claylump
-      
+    - type: Material
+      materials:
+        WetClay: 100
+
 - type: entity
   name: wet clay
   parent: ClayWet
   id: ClayWet1
+  suffix: Single
   components:
     - type: Stack
       stackType: WetClay

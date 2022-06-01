@@ -6,7 +6,7 @@
       edges:
         - to: rawjug
           steps:
-            - tag: WetClay
+            - material: WetClay
               amount: 1
               doAfter: 2
               icon:
@@ -24,7 +24,7 @@
       edges:
         - to: rawbrick
           steps:
-            - tag: WetClay # Make WetClay into a material you fool
+            - material: WetClay
               amount: 1
               doAfter: 2
               icon:
@@ -33,3 +33,32 @@
               name: wet clay
     - node: rawbrick
       entity: ClayBrickRaw
+
+- type: constructionGraph
+  id: Kiln
+  start: start
+  graph:
+    - node: start
+        actions:
+          - !type:DestroyEntity {}
+        edges:
+          - to: kiln
+            steps:
+              - tag: DryBrick
+                icon:
+                  sprite: Objects/Misc/cablecuffs.rsi
+                  state: cuff
+                  color: red
+              amount: 10
+              doAfter: 4
+
+          - node: kiln
+              entity: BaseKiln
+              edges:
+                - to: start
+                  completed:
+                    - !type:SpawnPrototype
+                      prototype: ClayBrickDry
+                  steps:
+                    - tool: Screwing
+                      doAfter: 6
