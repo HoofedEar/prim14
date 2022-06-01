@@ -1,8 +1,8 @@
 ﻿- type: entity
   parent: BaseStructure
-  id: BaseFishingWater
-  name: Fishing Test
-  description: It's a body of water
+  id: BaseWater
+  name: deep water
+  description: Looks wet.
   placement:
     mode: SnapgridCenter
   components:

@@ -12,11 +12,13 @@ public sealed class KilnComponent : TimedCookerComponent
     [ViewVariables]
     public int KilnMax = 1;
 
+/*
     /// <summary>
     /// This is how we track how much wood it current is holding.
     /// </summary>
     [ViewVariables]
     public int KilnWoodStorage = 0;
+*/
 
     /// <summary>
     /// List of materials and their corresponding
