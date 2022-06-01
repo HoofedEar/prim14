@@ -47,3 +47,6 @@
     mask: /Textures/Effects/LightMasks/cone.png
     color: "#ffda78"
     autoRot: true
+  - type: Construction
+    graph: Kiln
+    node: kiln

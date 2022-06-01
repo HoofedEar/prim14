@@ -44,7 +44,7 @@ public sealed class KilnSystem : EntitySystem
 
     private void OnInteractHand(EntityUid uid, KilnComponent component, InteractHandEvent args)
     {
-        if (component.KilnWoodStorage <= 0)
+        if (component.FuelStorage <= 0)
         {
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User));
             return;
@@ -79,7 +79,7 @@ public sealed class KilnSystem : EntitySystem
         }
 
         // Make sure it has wood
-        if (component.KilnWoodStorage <= 0)
+        if (component.FuelStorage <= 0)
         {
             _popupSystem.PopupEntity(Loc.GetString("timed-cooker-no-fuel"), uid, Filter.Entities(args.User));
             return;
@@ -137,10 +137,10 @@ public sealed class KilnSystem : EntitySystem
             if (cooker.ElapsedTime >= cooker.TimeThreshold)
             {
                 // Has wood, keep cooking
-                if (cooker.KilnWoodStorage > 0)
+                if (cooker.FuelStorage > 0)
                 {
-                    cooker.KilnWoodStorage -= 10;
-                    UpdateAppearance(cooker.Owner, cooker, cooker.KilnWoodStorage > 0);
+                    cooker.FuelStorage -= 10;
+                    UpdateAppearance(cooker.Owner, cooker, cooker.FuelStorage > 0);
                     cooker.ElapsedTime = 0;
                 }
                 // Carry on
@@ -153,7 +153,7 @@ public sealed class KilnSystem : EntitySystem
 
             if (cooker.ProducingRecipe == null)
             {
-                if (cooker.Queue.Count > 0 && cooker.KilnWoodStorage > 0)
+                if (cooker.Queue.Count > 0 && cooker.FuelStorage > 0)
                 {
                     Produce(cooker, cooker.Queue.Dequeue());
                     return;

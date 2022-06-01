@@ -21,8 +21,11 @@
   name: dry clay brick
   parent: BaseItem
   id: ClayBrickDry
+  suffix: Full
   description: It's brittle but it works.
   components:
+    - type: Stack
+      stackType: DryBrick
     - type: Tag
       tags:
         - DryBrick
@@ -30,3 +33,17 @@
       sprite: Prim14/Materials/claybricks.rsi
       state: dryclay
       netsync: false
+    - type: Material
+      materials:
+        DryBrick: 100
+
+- type: entity
+  name: dry clay brick
+  parent: ClayBrickDry
+  id: ClayBrickDry1
+  suffix: Single
+  description: It's brittle but it works.
+  components:
+    - type: Stack
+      stackType: DryBrick
+      count: 1

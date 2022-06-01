@@ -1,5 +1,9 @@
 - type: material
   id: WetClay
-  name: WetClay
+  name: Wet Clay
   icon: Prim14/Objects/claystuff.rsi/claylump.png
 
+- type: material
+  id: DryBrick
+  name: Dry Brick
+  icon: Prim14/Materials/claybricks.rsi/dryclay.png

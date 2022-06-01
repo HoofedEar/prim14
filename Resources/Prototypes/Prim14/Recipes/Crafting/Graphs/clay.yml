@@ -35,30 +35,23 @@
       entity: ClayBrickRaw
 
 - type: constructionGraph
-  id: Kiln
+  id: kiln
   start: start
   graph:
     - node: start
-        actions:
-          - !type:DestroyEntity {}
-        edges:
-          - to: kiln
-            steps:
-              - tag: DryBrick
-                icon:
-                  sprite: Objects/Misc/cablecuffs.rsi
-                  state: cuff
-                  color: red
-              amount: 10
-              doAfter: 4
-
-          - node: kiln
-              entity: BaseKiln
-              edges:
-                - to: start
-                  completed:
-                    - !type:SpawnPrototype
-                      prototype: ClayBrickDry
-                  steps:
-                    - tool: Screwing
-                      doAfter: 6
+      actions:
+        - !type:DestroyEntity {}
+      edges:
+        - to: kiln
+          completed:
+            - !type:SnapToGrid { }
+          steps:
+            - material: DryBrick
+              amount: 15
+              doAfter: 5
+              icon:
+                sprite: Prim14/Materials/claybricks.rsi
+                state: dryclay
+              name: dry brick
+    - node: kiln
+      entity: BaseKiln

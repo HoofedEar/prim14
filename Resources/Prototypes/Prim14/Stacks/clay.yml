@@ -3,3 +3,9 @@
   name: wetclay
   icon: Prim14/Objects/claystuff.rsi/claylump.png
   spawn: ClayWet1
+
+- type: stack
+  id: DryBrick
+  name: Dry Brick
+  icon: Prim14/Materials/claybricks.rsi/dryclay.png
+  spawn: ClayBrickDry1
