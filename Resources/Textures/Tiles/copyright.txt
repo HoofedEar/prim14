@@ -15,7 +15,9 @@ shuttleblue, orange, purple, red and white taken from ParadiseSS13 at https://gi
 
 deprecated.png made by 20kdc, licensed under SS14's MIT license - don't remove it, it's useful to make sure that maps with old tiles get noticed.
 
+arcadeblue2, boxing, carpetclown, carpetoffice, and gym taken from Goon at commit https://github.com/goonstation/goonstation/commit/c4d549f9259728427c6003da0aa2d95aaafff805
 
 
-// Anprim14 changes
+
+// Prim14 changes
 sand.png is from Civ13 at https://github.com/Civ13/Civ13/commit/174817489ad5a141cbe2fb891674f80916ee1683

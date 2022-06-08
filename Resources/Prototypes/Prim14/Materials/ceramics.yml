@@ -2,8 +2,10 @@
   id: WetClay
   name: Wet Clay
   icon: Prim14/Objects/claystuff.rsi/claylump.png
+  price: 0
 
 - type: material
   id: DryBrick
   name: Dry Brick
   icon: Prim14/Materials/claybricks.rsi/dryclay.png
+  price: 0
