@@ -1,0 +1,53 @@
+﻿{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "https://github.com/Civ13/Civ13",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "leaved_stick"
+    },
+    {
+      "name": "cleared_stick"
+    },
+    {
+      "name": "debranched_stick"
+    },
+    {
+      "name": "ant_stick",
+      "delays": [
+        [
+          0.19,
+          0.19,
+          0.19,
+          0.19,
+          0.19
+        ]
+      ]
+    },
+    {
+      "name": "sharpened_stick"
+    },
+    {
+      "name": "fish_stick"
+    },
+    {
+      "name": "salmon_stick"
+    },
+    {
+      "name": "bloody_stick"
+    },
+    {
+      "name": "flint"
+    },
+    {
+      "name": "sharpened_flint"
+    },
+    {
+      "name": "flint_axe"
+    }
+  ]
+}
