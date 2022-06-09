@@ -57,31 +57,6 @@
     node: pole
 
 - type: entity
-  name: sharpened stick
-  parent: BaseItem
-  id: ToolSharpenedStick
-  description: A decently sharp stick.
-  components:
-  - type: Tag
-    tags:
-    - SharpStick
-  - type: Sprite
-    sprite: Prim14/Tools/sharpstick.rsi
-    state: icon
-    netsync: false
-  - type: ItemCooldown
-  - type: MeleeWeapon
-    damage:
-      types:
-        Piercing: 5
-  - type: GatheringTool
-    sound: /Audio/Prim14/Effects/watersplash.ogg
-    gatheringTime: 6
-    damage:
-      types:
-        Piercing: 100
-
-- type: entity
   name: iron hammer
   parent: BaseItem
   id: ToolIronHammer

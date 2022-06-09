@@ -1,0 +1,61 @@
+- type: entity
+  name: tree branch
+  parent: BaseItem
+  id: StickTreeBranch
+  description: A branch with some leaves on it.
+  components:
+    - type: Sprite
+      sprite: Prim14/Tools/old_tools.rsi
+      state: leaved_stick
+      netsync: false
+    - type: UseWith
+      results:
+        - id: StickCleared
+      inHand: true
+
+- type: entity
+  name: cleared branch
+  parent: BaseItem
+  id: StickCleared
+  description: A branch cleared of its leaves.
+  components:
+    - type: Sprite
+      sprite: Prim14/Tools/old_tools.rsi
+      state: cleared_stick
+      netsync: false
+
+- type: entity
+  name: stick
+  parent: BaseItem
+  id: StickDebranched
+  description: What it says it on the tin.
+  components:
+    - type: Sprite
+      sprite: Prim14/Tools/old_tools.rsi
+      state: debranched_stick
+      netsync: false
+
+- type: entity
+  name: sharpened stick
+  parent: BaseItem
+  id: ToolSharpenedStick
+  description: Ol' reliable.
+  components:
+    - type: Tag
+      tags:
+        - SharpStick
+    - type: Sprite
+      sprite: Prim14/Tools/sharpstick.rsi
+      state: icon
+      netsync: false
+    - type: ItemCooldown
+    - type: MeleeWeapon
+      damage:
+        types:
+          Piercing: 5
+    - type: GatheringTool
+      sound: /Audio/Prim14/Effects/watersplash.ogg
+      gatheringTime: 6
+      damage:
+        types:
+          Piercing: 100
