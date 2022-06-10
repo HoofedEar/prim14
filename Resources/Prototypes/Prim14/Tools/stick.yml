@@ -9,8 +9,7 @@
       state: leaved_stick
       netsync: false
     - type: UseWith
-      results:
-        - id: StickCleared
+      result: StickCleared
       inHand: true
 
 - type: entity

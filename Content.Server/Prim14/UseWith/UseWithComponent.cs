@@ -9,12 +9,12 @@ namespace Content.Server.Prim14.UseWith;
 public sealed class UseWithComponent : Component
 {
     [ViewVariables]
-    [DataField("results")]
-    public List<EntitySpawnEntry> Results = new();
+    [DataField("result")]
+    public string? Results;
 
     [ViewVariables]
     [DataField("spawnCount")]
-    public int SpawnCount;
+    public int SpawnCount = 1;
 
     [ViewVariables]
     [DataField("whitelist")]
@@ -25,16 +25,4 @@ public sealed class UseWithComponent : Component
     public bool UseInHand;
 
     public CancellationTokenSource? CancelToken;
-}
-
-public sealed class UseWithEvent : EntityEventArgs
-{
-    public readonly EntityUid User;
-    public readonly UseWithComponent UseWith;
-
-    public UseWithEvent(EntityUid user, UseWithComponent usewith)
-    {
-        User = user;
-        UseWith = usewith;
-    }
 }
