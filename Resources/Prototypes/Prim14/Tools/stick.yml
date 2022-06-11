@@ -11,6 +11,7 @@
     - type: UseWith
       result: StickCleared
       inHand: true
+      # drop leaves when destroyed
 
 - type: entity
   name: cleared branch

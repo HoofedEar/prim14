@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "license": "CC-BY-NC-SA 3.0",
+  "copyright": "https://github.com/Civ13/Civ13",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "shovel"
+    },
+    {
+      "name": "spade"
+    },
+    {
+      "name": "spadem"
+    },
+    {
+      "name": "spickaxe"
+    },
+    {
+      "name": "dirt_pile"
+    },
+    {
+      "name": "empty_sandbag"
+    },
+    {
+      "name": "sandbag_new"
+    },
+    {
+      "name": "german_shovel"
+    },
+    {
+      "name": "german_shovel2"
+    },
+    {
+      "name": "goldstuff1"
+    },
+    {
+      "name": "goldnugget"
+    },
+    {
+      "name": "goldbar"
+    },
+    {
+      "name": "goldstuff2"
+    },
+    {
+      "name": "goldstuff3"
+    },
+    {
+      "name": "goldcoin_pile"
+    },
+    {
+      "name": "pickaxe"
+    },
+    {
+      "name": "s_pickaxe"
+    },
+    {
+      "name": "iplough"
+    },
+    {
+      "name": "plough"
+    },
+    {
+      "name": "hammer"
+    },
+    {
+      "name": "tea_leaves_dried"
+    },
+    {
+      "name": "coffee_roasted"
+    },
+    {
+      "name": "pickaxe_bone"
+    },
+    {
+      "name": "shovel_bone"
+    },
+    {
+      "name": "fishing"
+    },
+    {
+      "name": "bedroll_r"
+    },
+    {
+      "name": "bedroll_o"
+    },
+    {
+      "name": "bedroll_o1"
+    },
+    {
+      "name": "bedroll_w"
+    },
+    {
+      "name": "leash"
+    },
+    {
+      "name": "snow_pile"
+    },
+    {
+      "name": "snowball_pile"
+    },
+    {
+      "name": "snowball"
+    },
+    {
+      "name": "snowball_hit",
+      "delays": [
+        [
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2,
+          0.2
+        ]
+      ]
+    },
+    {
+      "name": "olivebranch"
+    },
+    {
+      "name": "shears"
+    },
+    {
+      "name": "dropspindle_full"
+    },
+    {
+      "name": "dropspindle"
+    },
+    {
+      "name": "multiple_wool_yarn"
+    },
+    {
+      "name": "wool_yarn"
+    },
+    {
+      "name": "coppershears"
+    },
+    {
+      "name": "fishing_net"
+    },
+    {
+      "name": "whip"
+    },
+    {
+      "name": "leaves1"
+    },
+    {
+      "name": "leaves2"
+    },
+    {
+      "name": "leaves3"
+    },
+    {
+      "name": "fossil_1"
+    },
+    {
+      "name": "fossil_2"
+    },
+    {
+      "name": "fossil_3"
+    },
+    {
+      "name": "fossil_4"
+    },
+    {
+      "name": "fossil_5"
+    },
+    {
+      "name": "fossil_6"
+    },
+    {
+      "name": "fossil_7"
+    },
+    {
+      "name": "fossil_8"
+    },
+    {
+      "name": "fossil_9"
+    },
+    {
+      "name": "fossil_10"
+    },
+    {
+      "name": "sandbag_new_empty"
+    },
+    {
+      "name": "chisel"
+    },
+    {
+      "name": "chisel_metal"
+    },
+    {
+      "name": "hammer_modern"
+    },
+    {
+      "name": "fishing_modern"
+    },
+    {
+      "name": "stone_arrowhead"
+    },
+    {
+      "name": "sandstone_arrowhead"
+    },
+    {
+      "name": "copper_arrowhead"
+    },
+    {
+      "name": "iron_arrowhead"
+    },
+    {
+      "name": "bronze_arrowhead"
+    },
+    {
+      "name": "steel_arrowhead"
+    },
+    {
+      "name": "vial_arrowhead"
+    },
+    {
+      "name": "gods_arrowhead"
+    },
+    {
+      "name": "claybricks"
+    },
+    {
+      "name": "advclaybricks"
+    },
+    {
+      "name": "palm_leaves"
+    },
+    {
+      "name": "fernleaf1"
+    },
+    {
+      "name": "fernleaf2"
+    },
+    {
+      "name": "septim"
+    },
+    {
+      "name": "septim_2"
+    },
+    {
+      "name": "septim_3"
+    },
+    {
+      "name": "septim_4"
+    },
+    {
+      "name": "septim_5"
+    },
+    {
+      "name": "septim_6"
+    },
+    {
+      "name": "septim_7"
+    },
+    {
+      "name": "septim_10"
+    },
+    {
+      "name": "septim_50"
+    },
+    {
+      "name": "septim_100"
+    },
+    {
+      "name": "septim_200"
+    },
+    {
+      "name": "septim_100\u002B"
+    },
+    {
+      "name": "septim_200\u002B"
+    },
+    {
+      "name": "septim_500"
+    },
+    {
+      "name": "septim_500\u002B"
+    }
+  ]
+}
