@@ -1,4 +1,5 @@
-﻿using Content.Shared.Sound;
+﻿using System.Threading;
+using Content.Shared.Sound;
 
 namespace Content.Server.Prim14.Bush;
 
@@ -36,4 +37,5 @@ public sealed class BushComponent : Component
     
     public float Accumulator;
     public bool Ready = true;
+    public CancellationTokenSource? CancelToken;
 }

@@ -1,28 +1,68 @@
-﻿using Content.Shared.Interaction;
+﻿using System.Threading;
+using Content.Server.DoAfter;
+using Content.Shared.Interaction;
 using Content.Shared.Prim14;
 using JetBrains.Annotations;
-using Robust.Shared.Random;
+//using Robust.Shared.Random;
 
 namespace Content.Server.Prim14.Bush;
 
 public sealed class BushSystem : EntitySystem
 { 
-    [Dependency] private readonly IRobustRandom _random = null!;
+    //[Dependency] private readonly IRobustRandom _random = null!;
+    [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
         
         SubscribeLocalEvent<BushComponent, InteractHandEvent>(OnInteractHand);
         SubscribeLocalEvent<BushComponent, BushReadyEvent>(OnBushReady);
+        SubscribeLocalEvent<BushComponent, BushPickEvent>(BushPick);
+        SubscribeLocalEvent<BushComponent, BushPickCancel>(OnBushPickCancel);
     }
 
     public void OnInteractHand(EntityUid uid, BushComponent component, InteractHandEvent args)
     {
-        if (!component.Ready) return;
-        var playerPos = Transform(args.Target).MapPosition;
+        if (args.Handled || !component.Ready)
+            return;
+        
+        TryBushPick(uid, component, args);
+        
+        args.Handled = true;
+    }
+
+    private void TryBushPick(EntityUid uid, BushComponent component, InteractHandEvent args)
+    {
+        if (component.CancelToken != null) return;
+        
+        component.CancelToken = new CancellationTokenSource();
+        
+        var doAfterEventArgs = new DoAfterEventArgs(args.User, 1, component.CancelToken.Token, uid)
+        {
+            BreakOnUserMove = true,
+            BreakOnDamage = true,
+            BreakOnStun = true,
+            BreakOnTargetMove = true,
+            NeedHand = true,
+            TargetFinishedEvent = new BushPickEvent(args.User),
+            TargetCancelledEvent = new BushPickCancel()
+        };
+        
+        _doAfterSystem.DoAfter(doAfterEventArgs);
+    }
+
+    private void BushPick(EntityUid uid, BushComponent component, BushPickEvent args)
+    {
+        component.CancelToken = null;
+        var playerPos = Transform(component.Owner).MapPosition;
         EntityManager.SpawnEntity(component.Loot, playerPos);
         UpdateAppearance(uid, true, false);
         component.Ready = false;
+    }
+    
+    private void OnBushPickCancel(EntityUid uid, BushComponent component, BushPickCancel args)
+    {
+        component.CancelToken = null;
     }
 
     public override void Update(float frameTime)
@@ -64,4 +104,19 @@ public sealed class BushSystem : EntitySystem
             Bush = bush;
         }
     }
+    
+    #region DoAfterClasses
+    public sealed class BushPickEvent : EntityEventArgs
+    {
+        public readonly EntityUid User;
+
+        public BushPickEvent(EntityUid user)
+        {
+            User = user;
+        }
+    }
+    
+    private sealed class BushPickCancel : EntityEventArgs { }
+    
+    #endregion
 }
