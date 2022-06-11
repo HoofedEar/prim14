@@ -3,6 +3,7 @@ using Content.Server.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Robust.Shared.Containers;
 using Robust.Shared.Random;
 
 namespace Content.Server.Prim14.UseWith;
@@ -12,6 +13,7 @@ public sealed class UseWithSystem : EntitySystem
     [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly IRobustRandom _random = null!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -25,12 +27,12 @@ public sealed class UseWithSystem : EntitySystem
     private void OnInteractUsing(EntityUid uid, UseWithComponent component, InteractUsingEvent args)
     {
         if (component.UseWithWhitelist?.IsValid(args.Used) == false) return;
-        
+
         if (args.Handled && !component.UseInHand)
             return;
-        
+
         OnUseWith(uid, component, args);
-        
+
         args.Handled = true;
     }
 
@@ -38,18 +40,18 @@ public sealed class UseWithSystem : EntitySystem
     {
         if (args.Handled && !component.UseInHand)
             return;
-        
+
         OnUseWith(uid, component, args);
-        
+
         args.Handled = true;
     }
 
     private void OnUseWith(EntityUid uid, UseWithComponent component, UseInHandEvent args)
     {
         if (component.CancelToken != null) return;
-        
+
         component.CancelToken = new CancellationTokenSource();
-        
+
         var doAfterEventArgs = new DoAfterEventArgs(args.User, 1, component.CancelToken.Token, uid)
         {
             BreakOnUserMove = true,
@@ -60,16 +62,16 @@ public sealed class UseWithSystem : EntitySystem
             TargetFinishedEvent = new UseWithEvent(args.User),
             TargetCancelledEvent = new UseWithCancel()
         };
-        
+
         _doAfterSystem.DoAfter(doAfterEventArgs);
     }
 
     private void OnUseWith(EntityUid uid, UseWithComponent component, InteractUsingEvent args)
     {
         if (component.CancelToken != null) return;
-        
+
         component.CancelToken = new CancellationTokenSource();
-        
+
         var doAfterEventArgs = new DoAfterEventArgs(args.User, 1, component.CancelToken.Token, uid)
         {
             BreakOnUserMove = true,
@@ -80,7 +82,7 @@ public sealed class UseWithSystem : EntitySystem
             TargetFinishedEvent = new UseWithEvent(args.User),
             TargetCancelledEvent = new UseWithCancel()
         };
-        
+
         _doAfterSystem.DoAfter(doAfterEventArgs);
     }
 
@@ -89,21 +91,21 @@ public sealed class UseWithSystem : EntitySystem
         component.CancelToken = null;
         DeleteAndSpawn(component, args.User);
     }
-    
+
     private void OnUseWithCancel(EntityUid uid, UseWithComponent component, UseWithCancel args)
     {
         component.CancelToken = null;
     }
-    
+
     private void DeleteAndSpawn(UseWithComponent component, EntityUid user)
     {
-        if (!_handsSystem.TryGetEmptyHand(user, out var hand))
+        if (!_handsSystem.TryGetEmptyHand(user, out var _) || !_containerSystem.IsEntityInContainer(component.Owner))
         {
-            var position = EntityManager.GetComponent<TransformComponent>(component.Owner).Coordinates;
-            
+            var groundPos = Transform(user).MapPosition;
+
             for (var i=0; i < component.SpawnCount; i++)
             {
-                var spawnPos = position.Offset(_random.NextVector2(0.2f));
+                var spawnPos = groundPos.Offset(_random.NextVector2(0.2f));
                 EntityManager.SpawnEntity(component.Results, spawnPos);
             }
 
@@ -111,23 +113,19 @@ public sealed class UseWithSystem : EntitySystem
             return;
         }
 
-        var groundPos = Transform(user).MapPosition;
-        if (component.SpawnCount != 0)
+        if (!component.UseInHand || !_handsSystem.IsHolding(user, component.Owner, out var hand)) return;
         {
-            for (var i=0; i < component.SpawnCount; i++)
-            {
-                var spawnPos = groundPos.Offset(_random.NextVector2(0.2f));
-                EntityManager.SpawnEntity(component.Results, spawnPos);
-            }
+            var position = EntityManager.GetComponent<TransformComponent>(component.Owner).Coordinates;
+            var finisher = EntityManager.SpawnEntity(component.Results, position);
+
+            // Delete the original
+            EntityManager.QueueDeleteEntity(component.Owner);
+
+            // Put the spawned item into their hand
+            _handsSystem.TryPickup(user, finisher, hand);
         }
-            
-        var finisher = EntityManager.SpawnEntity(component.Results, groundPos);
-        EntityManager.DeleteEntity(component.Owner);
-            
-        // Put it back into their hand
-        _handsSystem.TryPickup(user, finisher, hand);
     }
-    
+
     #region DoAfterClasses
     public sealed class UseWithEvent : EntityEventArgs
     {
@@ -138,8 +136,8 @@ public sealed class UseWithSystem : EntitySystem
             User = user;
         }
     }
-    
+
     private sealed class UseWithCancel : EntityEventArgs { }
-    
+
     #endregion
 }
