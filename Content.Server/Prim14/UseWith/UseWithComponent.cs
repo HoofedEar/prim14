@@ -10,7 +10,7 @@ public sealed class UseWithComponent : Component
 {
     [ViewVariables]
     [DataField("result")]
-    public string? Results;
+    public string? Result;
 
     [ViewVariables]
     [DataField("spawnCount")]

@@ -101,7 +101,7 @@ public sealed class UseWithSystem : EntitySystem
             DeleteSpawnHand(component, args.User);
         else
         {
-            DeleteAndSpawn(component);
+            DeleteAndSpawn(component, args.User);
         }
     }
     
@@ -114,16 +114,17 @@ public sealed class UseWithSystem : EntitySystem
     /// This simply spawns the results of the UseWith and then deletes the original entity.
     /// </summary>
     /// <param name="component">UseWithComponent</param>
-    private void DeleteAndSpawn(UseWithComponent component)
+    /// <param name="user">User</param>
+    private void DeleteAndSpawn(UseWithComponent component, EntityUid user)
     {
-        var position = EntityManager.GetComponent<TransformComponent>(component.Owner).Coordinates;
+        var position = Transform(user).MapPosition;
             
         for (var i=0; i < component.SpawnCount; i++)
         {
-            EntityManager.SpawnEntity(component.Results, position);
+            EntityManager.SpawnEntity(component.Result, position);
         }
 
-        QueueDel(component.Owner);
+        EntityManager.DeleteEntity(component.Owner);
     }
 
     /// <summary>
@@ -142,7 +143,7 @@ public sealed class UseWithSystem : EntitySystem
             for (var i=0; i < component.SpawnCount; i++)
             {
                 var spawnPos = groundPos.Offset(_random.NextVector2(0.2f));
-                finisher = EntityManager.SpawnEntity(component.Results, spawnPos);
+                finisher = EntityManager.SpawnEntity(component.Result, spawnPos);
             }
         }
 
