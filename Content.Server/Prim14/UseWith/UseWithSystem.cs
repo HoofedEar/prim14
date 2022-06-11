@@ -26,7 +26,7 @@ public sealed class UseWithSystem : EntitySystem
     {
         if (component.UseWithWhitelist?.IsValid(args.Used) == false) return;
         
-        if (args.Handled && !component.UseInHand)
+        if (args.Handled && component.UseInHand)
             return;
         
         OnUseWith(uid, component, args);
@@ -43,7 +43,12 @@ public sealed class UseWithSystem : EntitySystem
         
         args.Handled = true;
     }
-
+    /// <summary>
+    /// doAfter stuffs for the UseWith system.
+    /// </summary>
+    /// <param name="uid">EntityUid passthrough</param>
+    /// <param name="component">UseWithComponent passthrough</param>
+    /// <param name="args">UseInHandEvent or InteractUsingEvent</param>
     private void OnUseWith(EntityUid uid, UseWithComponent component, UseInHandEvent args)
     {
         if (component.CancelToken != null) return;
@@ -83,7 +88,12 @@ public sealed class UseWithSystem : EntitySystem
         
         _doAfterSystem.DoAfter(doAfterEventArgs);
     }
-
+    /// <summary>
+    /// Method for handling UseWithEvent
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="component"></param>
+    /// <param name="args"></param>
     private void TryUseWith(EntityUid uid, UseWithComponent component, UseWithEvent args)
     {
         component.CancelToken = null;
@@ -100,19 +110,29 @@ public sealed class UseWithSystem : EntitySystem
         component.CancelToken = null;
     }
     
+    /// <summary>
+    /// This simply spawns the results of the UseWith and then deletes the original entity.
+    /// </summary>
+    /// <param name="component">UseWithComponent</param>
     private void DeleteAndSpawn(UseWithComponent component)
     {
         var position = EntityManager.GetComponent<TransformComponent>(component.Owner).Coordinates;
             
         for (var i=0; i < component.SpawnCount; i++)
         {
-            //var spawnPos = position.Offset(_random.NextVector2(0.2f));
             EntityManager.SpawnEntity(component.Results, position);
         }
 
         QueueDel(component.Owner);
     }
 
+    /// <summary>
+    /// This spawns an item, deletes the original, then puts the new one into the users hand.
+    /// This will only pick up the last spawned entity, so if you are using inHand: true,
+    /// make sure you only have one item spawned.
+    /// </summary>
+    /// <param name="component">UseWithComponent</param>
+    /// <param name="user">The player</param>
     private void DeleteSpawnHand(UseWithComponent component, EntityUid user)
     {
         var groundPos = Transform(user).MapPosition;
@@ -130,6 +150,9 @@ public sealed class UseWithSystem : EntitySystem
         EntityManager.DeleteEntity(component.Owner);
 
         // Put it back into their hand
+        // This will only pick up the last spawned entity, so if you are using inHand: true,
+        // make sure you only have one item spawned.
+        // MAYBE add something to throw an error if you try to use quantity > 1 with inHand.
         _handsSystem.TryPickup(user, finisher, hand);
     }
     
