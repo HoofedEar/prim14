@@ -1,6 +1,7 @@
-using Content.Server.Prim14.Ceramics;
 using JetBrains.Annotations;
 using Robust.Shared.Containers;
+
+namespace Content.Server.Prim14.Ceramics;
 
 public sealed class DryingSystem : EntitySystem
 {

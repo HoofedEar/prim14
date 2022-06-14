@@ -3,6 +3,7 @@ using Content.Server.DoAfter;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
+using Robust.Shared.Containers;
 using Robust.Shared.Random;
 
 namespace Content.Server.Prim14.UseWith;
@@ -12,6 +13,7 @@ public sealed class UseWithSystem : EntitySystem
     [Dependency] private readonly DoAfterSystem _doAfterSystem = default!;
     [Dependency] private readonly SharedHandsSystem _handsSystem = default!;
     [Dependency] private readonly IRobustRandom _random = null!;
+    [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -98,7 +100,14 @@ public sealed class UseWithSystem : EntitySystem
     {
         component.CancelToken = null;
         if (args.Hand)
+        {
+            if (component.SpawnCount > 1)
+            {
+                Logger.Error($"SpawnCount in {ToPrettyString(component.Owner)} prototype cannot be greater than 1.");
+                return;
+            }
             DeleteSpawnHand(component, args.User);
+        }
         else
         {
             DeleteAndSpawn(component, args.User);
@@ -117,8 +126,9 @@ public sealed class UseWithSystem : EntitySystem
     /// <param name="user">User</param>
     private void DeleteAndSpawn(UseWithComponent component, EntityUid user)
     {
-        var position = Transform(user).MapPosition;
-            
+        var position = _containerSystem.IsEntityInContainer(component.Owner) ? 
+            Transform(user).MapPosition : Transform(component.Owner).MapPosition;
+
         for (var i=0; i < component.SpawnCount; i++)
         {
             EntityManager.SpawnEntity(component.Result, position);
