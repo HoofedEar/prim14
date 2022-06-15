@@ -22,7 +22,7 @@
 # END SPAWNER SECTION
 
 - type: entity
-  id: BaseTreePrim14
+  id: BaseTreePrim
   description: Yep, it's a tree.
   abstract: true
   components:
@@ -63,3 +63,12 @@
         - Hatchet
     loot:
       Hatchet: TreeLootTable
+
+- type: entity
+  parent: BaseTreePrim
+  id: TreePrim01
+  name: tree
+  suffix: P
+  components:
+    - type: Sprite
+      state: tree01

@@ -9,10 +9,6 @@
             - material: WetClay
               amount: 1
               doAfter: 2
-              icon:
-                sprite: Prim14/Objects/claystuff.rsi
-                state: claylump
-              name: wet clay
     - node: rawjug
       entity: ToolBlacksmithJugRaw
 
@@ -27,31 +23,23 @@
             - material: WetClay
               amount: 1
               doAfter: 2
-              icon:
-                sprite: Prim14/Objects/claystuff.rsi
-                state: claylump
-              name: wet clay
     - node: rawbrick
       entity: ClayBrickRaw
 
 - type: constructionGraph
-  id: kiln
+  id: Kiln
   start: start
   graph:
     - node: start
       actions:
         - !type:DestroyEntity {}
       edges:
-        - to: kiln
+        - to: kilnfinish
           completed:
             - !type:SnapToGrid { }
           steps:
             - material: DryBrick
               amount: 15
               doAfter: 5
-              icon:
-                sprite: Prim14/Materials/claybricks.rsi
-                state: dryclay
-              name: dry brick
-    - node: kiln
+    - node: kilnfinish
       entity: BaseKiln

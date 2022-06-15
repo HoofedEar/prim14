@@ -28,8 +28,8 @@
 
 - type: construction
   name: kiln
-  id: Kiln
-  graph: kiln
+  id: KilnConstruction
+  graph: Kiln
   startNode: start
   targetNode: kiln
   category: Clay

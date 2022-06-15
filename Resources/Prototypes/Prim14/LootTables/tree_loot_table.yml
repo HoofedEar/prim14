@@ -2,3 +2,5 @@
   id: TreeLootTable
   entries:
   - id: Log
+    amount: 1
+    maxAmount: 3
