@@ -1,4 +1,27 @@
-﻿- type: entity
+﻿# START SPAWNER SECTION
+
+- type: entity
+  name: Tree Renewable Spawner
+  id: TreeRenewableSpawner
+  parent: MarkerBase
+  components:
+    - type: Sprite
+      layers:
+        - state: blue
+    - type: RenewableSpawner
+      prototypes:
+        - FloraTree01
+        - FloraTree02
+        - FloraTree03
+        - FloraTree04
+        - FloraTree05
+        - FloraTree06
+      chance: 1.0
+      intervalSeconds: 10
+
+# END SPAWNER SECTION
+
+- type: entity
   id: BaseTreePrim14
   description: Yep, it's a tree.
   abstract: true
