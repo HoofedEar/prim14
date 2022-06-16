@@ -3,6 +3,7 @@
   description: It's better than bad, it's good!
   id: Log
   parent: MaterialBase
+  suffix: P
   components:
   - type: Sprite
     netsync: false

@@ -36,8 +36,11 @@ public sealed class AnvilSystem : EntitySystem
         {
             return;
         }
+        
+        if (!TryComp<TransformComponent>(args.Target, out var transformComp))
+            return;
 
-        var anvilPos = Transform(args.Target).MapPosition;
+        var anvilPos = transformComp.Coordinates;
         if (anvil.MoldSlot.Item == null) return;
         if (TryPrototype(anvil.MoldSlot.Item.Value, out var mold))
         {

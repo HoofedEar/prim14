@@ -1,0 +1,14 @@
+﻿- type: entity
+  name: leaves
+  description: It's a bundle of leaves!
+  id: TreeLeaves
+  parent: MaterialBase
+  suffix: P
+  components:
+    - type: Sprite
+      netsync: false
+      sprite: Prim14/Materials/leaves.rsi
+      state: leaves
+    - type: Item
+      sprite: Prim14/Materials/leaves.rsi
+      state: leaves
