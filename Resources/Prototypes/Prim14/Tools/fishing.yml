@@ -1,0 +1,46 @@
+- type: entity
+  name: fishing pole
+  parent: BaseItem
+  id: ToolFishingPole
+  description: A very simple fishing pole. Better than using a stick.
+  components:
+    - type: Tag
+      tags:
+        - FishingPole
+    - type: Sprite
+      sprite: Prim14/Tools/fishingpole.rsi
+      state: icon
+      netsync: false
+    - type: ItemCooldown
+    - type: MeleeWeapon
+      damage:
+        types:
+          Blunt: 5
+    - type: GatheringTool
+      gatheringTime: 6
+      damage:
+        types:
+          Piercing: 100
+    - type: Construction
+      graph: FishingPole
+      node: pole
+
+- type: entity
+  name: fishing net
+  parent: BaseItem
+  id: ToolFishingNet
+  description: A woven net for fishing.
+  components:
+    - type: Tag
+      tags:
+        - FishingNet
+    - type: Sprite
+      sprite: Prim14/Tools/fishing_net.rsi
+      state: icon
+      netsync: false
+    - type: GatheringTool
+      gatheringTime: 6
+      damage:
+        types:
+          Piercing: 100
+    - type: ItemCooldown

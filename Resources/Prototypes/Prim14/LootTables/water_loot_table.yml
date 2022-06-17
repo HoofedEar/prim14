@@ -7,3 +7,18 @@
   id: FishingPoleLootTable
   entries:
   - id: RawSalmon
+    prob: 0.50
+    orGroup: PoleFishing
+  - id: RawCod
+    prob: 0.50
+    orGroup: PoleFishing
+
+- type: entityLootTable
+  id: FishingNetLootTable
+  entries:
+    - id: RawCrawfish
+      prob: 0.20
+      orGroup: NetFishing
+    - id: RawShrimp
+      prob: 0.80
+      orGroup: NetFishing

@@ -80,12 +80,12 @@
     state: bream
 
 - type: entity
-  name: raw lobster
+  name: raw crawfish
   parent: RawFishBase
-  id: RawLobster
+  id: RawCrawfish
   components:
   - type: Sprite
-    state: lobster
+    state: crawfish
 
 - type: entity
   name: raw shrimp

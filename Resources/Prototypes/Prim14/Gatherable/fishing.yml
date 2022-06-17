@@ -35,6 +35,8 @@
       tags:
         - SharpStick
         - FishingPole
+        - FishingNet
     loot:
       SharpStick: SharpStickFishingLootTable
       FishingPole: FishingPoleLootTable
+      FishingNet: FishingNetLootTable
