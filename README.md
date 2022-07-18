@@ -1,7 +1,3 @@
-<p align="center"> <img alt="Space Station 14" style='height: 75%; width: 75%; object-fit: cover' src="" /></p>
-
-
-
 Prim14 is a fork of Space Station 14. 
 This fork focuses on a primitive setting, with emphasis on survival and PvE.
 
