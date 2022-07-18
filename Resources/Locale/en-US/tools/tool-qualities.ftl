@@ -21,3 +21,6 @@ tool-quality-slicing-tool-name = Knife
 
 tool-quality-raking-name = Raking
 tool-quality-raking-tool-name = Rake
+
+tool-quality-sawing-name = Sawing
+tool-quality-sawing-tool-name = Saw

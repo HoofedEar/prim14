@@ -3,7 +3,7 @@
 namespace Content.Server.Prim14.Blacksmithing.Components;
 
 [RegisterComponent]
-[Friend(typeof(TimedCookerSystem), typeof(KilnSystem))]
+[Access(typeof(TimedCookerSystem), typeof(KilnSystem))]
 public sealed class KilnComponent : TimedCookerComponent
 {
     /// <summary>

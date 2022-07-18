@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 namespace Content.Server.Prim14.TimedCooker;
 
 [RegisterComponent]
-[Friend(typeof(TimedCookerSystem), typeof(KilnSystem))]
+[Access(typeof(TimedCookerSystem), typeof(KilnSystem))]
 public class TimedCookerComponent : Component
 {
     /// <summary>

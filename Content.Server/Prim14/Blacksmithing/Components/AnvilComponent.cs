@@ -3,15 +3,15 @@ using Content.Shared.Sound;
 
 namespace Content.Server.Prim14.Blacksmithing.Components;
 
-[RegisterComponent, Friend(typeof(AnvilSystem))]
+[RegisterComponent, Access(typeof(AnvilSystem))]
 public sealed class AnvilComponent : Component
 {
     public const string AnvilMoldSlotId = "Anvil-mold";
-    
+
     [ViewVariables]
-    [DataField("moldSlot", required: true)] 
+    [DataField("moldSlot", required: true)]
     public ItemSlot MoldSlot = new();
-    
+
     /// <summary>
     /// The sound played when hammering the anvil
     /// </summary>
@@ -22,8 +22,8 @@ public sealed class AnvilComponent : Component
     /// <summary>
     /// Tag that the anvil needs to process the inside mold
     /// </summary>
-    [ViewVariables] 
-    [DataField("tag", required: true)] 
+    [ViewVariables]
+    [DataField("tag", required: true)]
     public string Tag = string.Empty;
 
     /// <summary>

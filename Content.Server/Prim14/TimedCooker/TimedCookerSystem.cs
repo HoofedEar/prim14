@@ -64,9 +64,9 @@ public sealed class TimedCookerSystem : EntitySystem
             QueueDel(args.Used);
             return;
         }
-        
+
         // No? Ok can it insert, is it on the whitelist, and does it have a recipe?
-        if (!component.Container.CanInsert(args.Used) || 
+        if (!component.Container.CanInsert(args.Used) ||
             component.Whitelist != null && !component.Whitelist.IsValid(args.Used) ||
             !TryComp(args.Used, out TimedCookableComponent? cookable))
         {
@@ -99,7 +99,7 @@ public sealed class TimedCookerSystem : EntitySystem
         // Play the inserting sound (if any)
         if (component.InsertingSound != null)
         {
-            SoundSystem.Play(Filter.Pvs(component.Owner, entityManager: EntityManager), component.InsertingSound.GetSound(), component.Owner);
+            SoundSystem.Play(component.InsertingSound.GetSound(), Filter.Pvs(component.Owner, entityManager: EntityManager),  component.Owner);
         }
 
         //Queue it up
@@ -189,7 +189,7 @@ public sealed class TimedCookerSystem : EntitySystem
         // Play sound
         if (component.ProducingSound != null)
         {
-            SoundSystem.Play(Filter.Pvs(component.Owner), component.ProducingSound.GetSound(), component.Owner);
+            SoundSystem.Play(component.ProducingSound.GetSound(), Filter.Pvs(component.Owner), component.Owner);
         }
 
         // Continue to next in queue if there are items left

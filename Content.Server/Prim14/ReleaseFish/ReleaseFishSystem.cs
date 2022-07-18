@@ -33,7 +33,7 @@ public sealed class ReleaseFishSystem : EntitySystem
             !component.Container.Insert(args.Thrown))
             return;
         */
-        SoundSystem.Play(Filter.Pvs(args.Thrown), _waterSplash.GetSound(), args.Thrown);
+        SoundSystem.Play(_waterSplash.GetSound(), Filter.Pvs(args.Thrown), args.Thrown);
         QueueDel(args.Thrown);
     }
 

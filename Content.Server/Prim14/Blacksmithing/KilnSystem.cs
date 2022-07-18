@@ -103,7 +103,7 @@ public sealed class KilnSystem : EntitySystem
         // Play the inserting sound (if any)
         if (component.InsertingSound != null)
         {
-            SoundSystem.Play(Filter.Pvs(component.Owner, entityManager: EntityManager), component.InsertingSound.GetSound(), component.Owner);
+            SoundSystem.Play(component.InsertingSound.GetSound(), Filter.Pvs(component.Owner, entityManager: EntityManager), component.Owner);
         }
 
         //Queue it up
@@ -209,7 +209,7 @@ public sealed class KilnSystem : EntitySystem
         // Play sound
         if (component.ProducingSound != null)
         {
-            SoundSystem.Play(Filter.Pvs(component.Owner), component.ProducingSound.GetSound(), component.Owner);
+            SoundSystem.Play(component.ProducingSound.GetSound(), Filter.Pvs(component.Owner), component.Owner);
         }
 
         // Continue to next in queue if there are items left

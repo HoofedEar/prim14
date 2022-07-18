@@ -1,7 +1,7 @@
 namespace Content.Server.Prim14.Ceramics;
 
 [RegisterComponent]
-[Friend(typeof(DryingSystem))]
+[Access(typeof(DryingSystem))]
 public sealed class DryingComponent : Component
 {
     /// <summary>

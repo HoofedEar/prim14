@@ -1,4 +1,5 @@
 using System.Threading;
+using Content.Server.Fluids.Components;
 using Content.Server.Tools.Components;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
@@ -9,7 +10,7 @@ namespace Content.Server.Tools;
 
 public sealed partial class ToolSystem
 {
-    //[Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
+    [Dependency] private readonly SharedInteractionSystem _interactionSystem = default!;
 
     private void InitializeTilePrying()
     {
@@ -26,12 +27,19 @@ public sealed partial class ToolSystem
     private void OnTilePryComplete(EntityUid uid, TilePryingComponent component, TilePryingCompleteEvent args)
     {
         component.CancelToken = null;
-        args.Coordinates.PryTile(EntityManager, _mapManager);
+        var gridUid = args.Coordinates.GetGridUid(EntityManager);
+        if (!_mapManager.TryGetGrid(gridUid, out var grid))
+        {
+            Logger.Error("Attempted to pry from a non-existent grid?");
+            return;
+        }
+
+        grid.GetTileRef(args.Coordinates).PryTile(_mapManager, _tileDefinitionManager, EntityManager);
     }
 
     private void OnTilePryingAfterInteract(EntityUid uid, TilePryingComponent component, AfterInteractEvent args)
     {
-        if (args.Handled || !args.CanReach || args.Target != null) return;
+        if (args.Handled || !args.CanReach || (args.Target != null && !HasComp<PuddleComponent>(args.Target))) return;
 
         if (TryPryTile(args.User, component, args.ClickLocation))
             args.Handled = true;
@@ -47,7 +55,7 @@ public sealed partial class ToolSystem
         if (!TryComp<ToolComponent?>(component.Owner, out var tool) && component.ToolComponentNeeded)
             return false;
 
-        if (!_mapManager.TryGetGrid(clickLocation.GetGridEntityId(EntityManager), out var mapGrid))
+        if (!_mapManager.TryGetGrid(clickLocation.GetGridUid(EntityManager), out var mapGrid))
             return false;
 
         var tile = mapGrid.GetTileRef(clickLocation);
@@ -65,7 +73,7 @@ public sealed partial class ToolSystem
         var token = new CancellationTokenSource();
         component.CancelToken = token;
 
-        bool success = UseTool(
+        var success = UseTool(
             component.Owner,
             user,
             null,

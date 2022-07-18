@@ -5,7 +5,7 @@ using Content.Shared.Whitelist;
 namespace Content.Server.Prim14.UseWith;
 
 [RegisterComponent]
-[Friend(typeof(UseWithSystem))]
+[Access(typeof(UseWithSystem))]
 public sealed class UseWithComponent : Component
 {
     [ViewVariables]

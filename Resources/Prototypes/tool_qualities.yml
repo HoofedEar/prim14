@@ -60,3 +60,10 @@
   toolName: tool-quality-digging-tool-name
   spawn: Shovel
   icon: Objects/Tools/rake.rsi/icon.png
+
+- type: tool
+  id: Sawing
+  name: tool-quality-sawing-name
+  toolName: tool-quality-sawing-tool-name
+  spawn: Saw
+  icon: Objects/Specific/Medical/Surgery/saw.rsi/saw.png

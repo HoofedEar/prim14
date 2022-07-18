@@ -4,7 +4,6 @@ using Content.Server.Popups;
 using Content.Shared.Actions;
 using Content.Shared.CharacterAppearance.Components;
 using Content.Shared.Chemistry.Components;
-using Content.Shared.Damage;
 using Content.Shared.MobState;
 using Content.Shared.MobState.Components;
 using Content.Shared.Tag;
@@ -12,8 +11,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using System.Threading;
-using Content.Shared.MobState.State;
-using Content.Shared.Doors.Components;
 
 namespace Content.Server.Dragon
 {
@@ -24,7 +21,6 @@ namespace Content.Server.Dragon
         [Dependency] private readonly PopupSystem _popupSystem = default!;
         [Dependency] private readonly BloodstreamSystem _bloodstreamSystem = default!;
         [Dependency] private readonly SharedContainerSystem _containerSystem = default!;
-        [Dependency] private readonly TagSystem _tagSystem = default!;
 
         public override void Initialize()
         {
@@ -60,6 +56,7 @@ namespace Content.Server.Dragon
 
         private void OnDragonDevourComplete(EntityUid uid, DragonComponent component, DragonDevourComplete args)
         {
+            component.CancelToken = null;
             var ichorInjection = new Solution(component.DevourChem, component.DevourHealRate);
 
             //Humanoid devours allow dragon to get eggs, corpses included
@@ -112,9 +109,11 @@ namespace Content.Server.Dragon
         /// <summary>
         /// The devour action
         /// </summary>
-        private void OnDevourAction(EntityUid dragonuid, DragonComponent component, DragonDevourActionEvent args)
+        private void OnDevourAction(EntityUid uid, DragonComponent component, DragonDevourActionEvent args)
         {
-            if (component.CancelToken != null || args.Handled) return;
+            if (component.CancelToken != null ||
+                args.Handled ||
+                component.DevourWhitelist?.IsValid(args.Target, EntityManager) != true) return;
 
             args.Handled = true;
             var target = args.Target;
@@ -124,13 +123,13 @@ namespace Content.Server.Dragon
             {
                 switch (targetState.CurrentState)
                 {
-                    case SharedCriticalMobState:
-                    case SharedDeadMobState:
+                    case DamageState.Critical:
+                    case DamageState.Dead:
                         component.CancelToken = new CancellationTokenSource();
 
-                        _doAfterSystem.DoAfter(new DoAfterEventArgs(dragonuid, component.DevourTime, component.CancelToken.Token, target)
+                        _doAfterSystem.DoAfter(new DoAfterEventArgs(uid, component.DevourTime, component.CancelToken.Token, target)
                         {
-                            UserFinishedEvent = new DragonStructureDevourComplete(dragonuid, target),
+                            UserFinishedEvent = new DragonDevourComplete(uid, target),
                             UserCancelledEvent = new DragonDevourCancelledEvent(),
                             BreakOnTargetMove = true,
                             BreakOnUserMove = true,
@@ -138,33 +137,28 @@ namespace Content.Server.Dragon
                         });
                         break;
                     default:
-                        _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-alive"), dragonuid, Filter.Entities(dragonuid));
+                        _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-fail-target-alive"), uid, Filter.Entities(uid));
                         break;
                 }
 
                 return;
             }
 
-            // Absolutely ass solution but requires less yaml fuckery
-            // If it's a door (firelock, airlock, windoor), Wall or Window, dragon can eat it.
-            if (_tagSystem.HasTag(target, "Wall") || (_tagSystem.HasTag(target, "Window") || EntityManager.HasComponent<DoorComponent>(target)))
+            _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-structure"), uid, Filter.Entities(uid));
+
+            if (component.SoundStructureDevour != null)
+                SoundSystem.Play(component.SoundStructureDevour.GetSound(), Filter.Pvs(uid, entityManager: EntityManager), uid, component.SoundStructureDevour.Params);
+
+            component.CancelToken = new CancellationTokenSource();
+
+            _doAfterSystem.DoAfter(new DoAfterEventArgs(uid, component.StructureDevourTime, component.CancelToken.Token, target)
             {
-                _popupSystem.PopupEntity(Loc.GetString("devour-action-popup-message-structure"), dragonuid, Filter.Entities(dragonuid));
-
-                if (component.SoundStructureDevour != null)
-                    SoundSystem.Play(component.SoundStructureDevour.GetSound(), Filter.Pvs(dragonuid, entityManager: EntityManager), dragonuid, component.SoundStructureDevour.Params);
-
-                component.CancelToken = new CancellationTokenSource();
-
-                _doAfterSystem.DoAfter(new DoAfterEventArgs(dragonuid, component.DevourTime, component.CancelToken.Token, target)
-                {
-                    UserFinishedEvent = new DragonStructureDevourComplete(dragonuid, target),
-                    UserCancelledEvent = new DragonDevourCancelledEvent(),
-                    BreakOnTargetMove = true,
-                    BreakOnUserMove = true,
-                    BreakOnStun = true,
-                });
-            }
+                UserFinishedEvent = new DragonStructureDevourComplete(uid, target),
+                UserCancelledEvent = new DragonDevourCancelledEvent(),
+                BreakOnTargetMove = true,
+                BreakOnUserMove = true,
+                BreakOnStun = true,
+            });
         }
 
         private void OnDragonSpawnAction(EntityUid dragonuid, DragonComponent component, DragonSpawnActionEvent args)

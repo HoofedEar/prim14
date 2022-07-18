@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using Content.Server.Popups;
 using Content.Server.Prim14.Blocker;
@@ -24,18 +25,12 @@ public sealed partial class ToolSystem
     {
         component.CancelToken = null;
 
-        if (!_mapManager.TryGetGrid(args.Coordinates.GetGridId(EntityManager), out var mapGrid))
+        if (!_mapManager.TryGetGrid(args.Coordinates.GetGridUid(EntityManager), out var mapGrid))
             return;
 
         var tile = mapGrid.GetTileRef(args.Coordinates);
         var coordinates = mapGrid.GridTileToLocal(tile.GridIndices);
         var tileDef = (ContentTileDefinition)_tileDefinitionManager[tile.Tile.TypeId];
-
-        if (IsPrying)
-        {
-            args.Coordinates.PryTile(EntityManager, _mapManager);
-            return;
-        }
 
         // Create dirt or clay depending on what is defined by the tile
         if (tileDef.Quantity <= 0) return;
@@ -68,7 +63,7 @@ public sealed partial class ToolSystem
         if (!TryComp<ToolComponent?>(component.Owner, out var tool) && component.ToolComponentNeeded)
             return false;
 
-        if (!_mapManager.TryGetGrid(clickLocation.GetGridId(EntityManager), out var mapGrid))
+        if (!_mapManager.TryGetGrid(clickLocation.GetGridUid(EntityManager), out var mapGrid))
             return false;
 
         var tile = mapGrid.GetTileRef(clickLocation);
@@ -77,10 +72,10 @@ public sealed partial class ToolSystem
         if (!_interactionSystem.InRangeUnobstructed(user, coordinates, popup: false))
             return false;
 
-        var gridId = EntityManager.GetComponent<TransformComponent>(component.Owner).GridID;
-        var lookup = Get<EntityLookupSystem>();
+        //var gridUid = EntityManager.GetComponent<TransformComponent>(component.Owner).GridUid;
+        EntityLookupSystem lookup = default!;
 
-        foreach (var entity in lookup.GetEntitiesIntersecting(gridId, tile.GridIndices))
+        foreach (var entity in lookup.GetEntitiesIntersecting(tile).ToArray())
         {
             if (!EntityManager.HasComponent<BlockerComponent>(entity))
             {

@@ -1,7 +1,7 @@
 namespace Content.Server.Prim14.Blocker;
 
 [RegisterComponent]
-[Friend(typeof(BlockerSystem))]
+[Access(typeof(BlockerSystem))]
 public sealed class BlockerComponent : Component
 {
     /// <summary>

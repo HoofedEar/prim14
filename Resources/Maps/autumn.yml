@@ -1845,7 +1845,7 @@ entities:
   - canCollide: False
     type: Physics
 - uid: 120
-  type: SalternSubstation
+  type: SubstationBasic
   components:
   - pos: 0.5,10.5
     parent: 83
@@ -1869,7 +1869,7 @@ entities:
   - canCollide: False
     type: Physics
 - uid: 122
-  type: SalternSMES
+  type: SMESBasic
   components:
   - pos: -0.5,10.5
     parent: 83
@@ -1907,7 +1907,7 @@ entities:
   - canCollide: False
     type: Physics
 - uid: 126
-  type: SalternAPC
+  type: APCBasic
   components:
   - pos: 2.5,10.5
     parent: 83
